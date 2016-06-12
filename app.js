@@ -29,12 +29,12 @@ app.use(app.router);
 // development only
 if (app.get('env') === 'development') {
    app.use(express.errorHandler());
-};
+}
 
 // production only
 if (app.get('env') === 'production') {
   // TODO
-}; 
+}
 
 
 
@@ -44,6 +44,7 @@ app.get('/partial/:name', routes.partial);
 
 // JSON API
 app.get('/api/name', api.name);
+app.get('/api/descriptors/zonalDominance', api.descriptors);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
