@@ -8,7 +8,7 @@ block body
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.navbar-brand(href="#") Brand
+            a.navbar-brand(href="#") Structured Reporting Form
 
         .collapse.navbar-collapse.navbar-ex1-collapse
             ul.nav.navbar-nav
@@ -19,7 +19,13 @@ block body
     .container
         div(ng-controller='AppCtrl')
             .jumbotron
-                h1  {{descriptors.zonalDominance[0]['cranio-caudalInvolvment'][0].name}}
+                p(id="topic")   {{ data }}
+                br
+                p(id="name")
+                br
+                p(id="present")
+                br
+                p(id="significant") {{data[0].parenchymalDescriptors[3]['peribronchovascularComponent'][0].significant}}
             div(ng-view)
         hr
         div

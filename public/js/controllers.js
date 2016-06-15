@@ -2,18 +2,29 @@
 
 /* Controllers */
 
-function AppCtrl($scope, $http) {
-    $http({method: 'GET', url: '/api/name'}).success(function (data, status, headers, config) {
-        $scope.name = data.name;
-    }).error(function (data, status, headers, config) {
-        $scope.name = 'Error!'
-    });
+function AppCtrl($scope, $http, $log) {
 
     $http({method: 'GET', url: '/api/descriptors/zonalDominance'}).success(function (data, status, headers, config){
-        $scope.descriptors = data.descriptors;
+
+        $log.log(data);
+
+        /*var dataString = JSON.stringify(data);
+
+
+
+        $scope.name = function(dataString){
+            return dataString.substr(dataString.indexOf("descriptors"), (dataString.lastIndexOf("descriptors") + ));
+        };
+
+        $log.log($scope.name(dataString));*/
+
+
+
+        $scope.data = data;
 
     }).error(function (data, status, headers, config){
-        $scope.name = 'Error!'
+        $log.log(status);
+        $scope.descriptors = 'Error!'
     });
 }
 
