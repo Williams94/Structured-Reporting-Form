@@ -241,7 +241,64 @@ exports.diagnoses = function (req, res) {
                         "extra-pulmonaryDisease": false
                     },
                     {
-
+                        "name": "Hypersensitivity Pneumonitis (HP)",
+                        "notConsidered/typical": false,
+                        "known": false,
+                        "actueHP": false,
+                        "subacuteHP": false,
+                        "chronicHP": false,
+                        "clinicalRefToSuspectAntigen": "none"
+                    },
+                    {
+                        "name": "Asbestos-related disease",
+                        "notConsidered/typical": false,
+                        "known": false,
+                        "pleuralPlaques": false,
+                        "pleuralThickening": false,
+                        "asbestosis": false,
+                        "severity": "mild/moderate/severe"
+                    },
+                    {
+                        "name": "Other ILD",
+                        "notConsidered/typical": false,
+                        "aip": {
+                            "name": "Acute Interstitial Pneumonia (AIP)",
+                            "known": false,
+                            "comparison": false,
+                            "newDiagnosis": false
+                        },
+                        "lch": {
+                            "name": "Langerhans CellHistocytosis (LCH)",
+                            "known": false,
+                            "comparison": false,
+                            "newDiagnosis": false
+                        },
+                        "lam": {
+                            "name": "Lymphangioleiomyomatosis (LAM)",
+                            "known": false,
+                            "comparison": false,
+                            "newDiagnosis": false
+                        },
+                        "other": "consider Eosinophilic pneumonia",
+                        "comment": "none"
+                    },
+                    {
+                        "name": "Cardiovascular Findings",
+                        "normal": false,
+                        "dilatedRightHeart": false,
+                        "abnormalLeftHeart": false,
+                        "coronaryCalcification": false
+                    },
+                    {
+                        "name": "Other/Incidental findings",
+                        "nilElse": false,
+                        "solitaryPulmonaryNodule": false,
+                        "other": false,
+                        "comment": "none"
+                    },
+                    {
+                        "name": "Other/Comment",
+                        "comment": "none"
                     }
 
 

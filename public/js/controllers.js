@@ -21,6 +21,7 @@ function AppCtrl($scope, $http, $log) {
 
 
         $scope.data = data;
+        $scope.questionNumber = 0;
 
     }).error(function (data, status, headers, config){
         $log.log(status);
