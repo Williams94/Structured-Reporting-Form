@@ -505,10 +505,10 @@ function $RouteProvider(){
         if (next) {
           if (next.redirectTo) {
             if (angular.isString(next.redirectTo)) {
-              $location.path(interpolate(next.redirectTo, next.params)).search(next.params)
+              $location.path(interpolate(next.redirectTo, next.params)).testSearch(next.params)
                        .replace();
             } else {
-              $location.url(next.redirectTo(next.pathParams, $location.path(), $location.search()))
+              $location.url(next.redirectTo(next.pathParams, $location.path(), $location.testSearch()))
                        .replace();
             }
           }
@@ -573,7 +573,7 @@ function $RouteProvider(){
       angular.forEach(routes, function(route, path) {
         if (!match && (params = switchRouteMatcher($location.path(), route))) {
           match = inherit(route, {
-            params: angular.extend({}, $location.search(), params),
+            params: angular.extend({}, $location.testSearch(), params),
             pathParams: params});
           match.$$route = route;
         }

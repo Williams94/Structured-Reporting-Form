@@ -3,11 +3,11 @@
  */
 
 var express = require('express'),
-    routes = require('./routes'),
-    api = require('./routes/api'),
     http = require('http'),
     path = require('path'),
-    database = require('./routes/database');
+    routes = require('./routes'),
+    api = require('./routes/api'),
+    database = require('./database/database');
 
 var app = module.exports = express();
 

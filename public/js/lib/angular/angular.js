@@ -8595,7 +8595,7 @@ function parseAppUrl(relativeUrl, locationObj, appBase) {
   var match = urlResolve(relativeUrl, appBase);
   locationObj.$$path = decodeURIComponent(prefixed && match.pathname.charAt(0) === '/' ?
       match.pathname.substring(1) : match.pathname);
-  locationObj.$$search = parseKeyValue(match.search);
+  locationObj.$$search = parseKeyValue(match.testSearch);
   locationObj.$$hash = decodeURIComponent(match.hash);
 
   // make sure path starts with '/';
@@ -8880,7 +8880,7 @@ LocationHashbangInHtml5Url.prototype =
 
     var match = PATH_MATCH.exec(url);
     if (match[1]) this.path(decodeURIComponent(match[1]));
-    if (match[2] || match[1]) this.search(match[3] || '');
+    if (match[2] || match[1]) this.testSearch(match[3] || '');
     this.hash(match[5] || '', replace);
 
     return this;
@@ -8972,7 +8972,7 @@ LocationHashbangInHtml5Url.prototype =
    *
    * @return {string} search
    */
-  search: function(search, paramValue) {
+  testSearch: function(search, paramValue) {
     switch (arguments.length) {
       case 0:
         return this.$$search;
@@ -13707,7 +13707,7 @@ function urlResolve(url, base) {
     href: urlParsingNode.href,
     protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
     host: urlParsingNode.host,
-    search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+    testSearch: urlParsingNode.testSearch ? urlParsingNode.testSearch.replace(/^\?/, '') : '',
     hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
     hostname: urlParsingNode.hostname,
     port: urlParsingNode.port,
