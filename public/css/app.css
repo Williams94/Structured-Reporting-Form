@@ -2,7 +2,20 @@
 
 body {
   padding-top:70px;
+  height: 100%;
 }
 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.jumbotron {
+  min-height: 100%;
+}
+
+.jumbotron h1 {
+  font-size: 35px;
+}
 
   

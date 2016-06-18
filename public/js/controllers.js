@@ -8,19 +8,10 @@ function AppCtrl($scope, $http, $log) {
 
         $log.log(data);
 
-        /*var dataString = JSON.stringify(data);
-
-
-
-        $scope.name = function(dataString){
-            return dataString.substr(dataString.indexOf("descriptors"), (dataString.lastIndexOf("descriptors") + ));
-        };
-
-        $log.log($scope.name(dataString));*/
-
-
-
         $scope.data = data;
+        $scope.questionNumber = 0;
+
+        //$log.log(doc.name);
 
     }).error(function (data, status, headers, config){
         $log.log(status);

@@ -13,19 +13,20 @@ block body
         .collapse.navbar-collapse.navbar-ex1-collapse
             ul.nav.navbar-nav
                 li
-                    a(href="view1") View1
+                    a(href="view1") Reports
                 li
-                    a(href="view2") View2
+                    a(href="login") Login
     .container
         div(ng-controller='AppCtrl')
             .jumbotron
-                p(id="topic")   {{ data }}
-                br
-                p(id="name")
-                br
-                p(id="present")
-                br
-                p(id="significant") {{data[0].parenchymalDescriptors[3]['peribronchovascularComponent'][0].significant}}
+                h1 List of reports:
+                .col-md-4
+                    p(id="topic")
+                    p(id="name")
+                .col-md-4
+                    p(id="present")
+                .col-md-4
+                    p(id="significant")
             div(ng-view)
         hr
         div
