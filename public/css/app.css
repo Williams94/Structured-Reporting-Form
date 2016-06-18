@@ -1,21 +1,35 @@
 /* app css stylesheet */
 
 body {
-  padding-top:70px;
-  height: 100%;
+    padding-top: 70px;
+    height: 100%;
 }
 
 .navbar {
-  margin-bottom: 0;
-  border-radius: 0;
+    margin-bottom: 0;
+    border-radius: 0;
 }
 
 .jumbotron {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 .jumbotron h1 {
-  font-size: 35px;
+    font-size: 35px;
+}
+
+table, th, td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff;
 }
 
   

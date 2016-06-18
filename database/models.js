@@ -4,4 +4,6 @@
 var mongoose = require('mongoose'),
     schemas = require('./schemas');
 
+exports.reportModel = mongoose.model('reportModel', schemas.reportSchema);
+
 exports.TestModel = mongoose.model('model', schemas.schema);

@@ -3,6 +3,17 @@
  */
 var mongoose = require('mongoose');
 
+var reportSchema = new mongoose.Schema({
+    author: { firstName: String, lastName: String},
+    created: { type: Date, default: Date.now },
+    level: String,
+    confidence: { type: Number, min: 0, max: 100 },
+    descriptors: Object
+});
+
+exports.reportSchema = reportSchema;
+
+
 var testSchema = new mongoose.Schema({
     name: String
 });

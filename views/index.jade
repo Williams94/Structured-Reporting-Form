@@ -19,15 +19,7 @@ block body
     .container
         div(ng-controller='AppCtrl')
             .jumbotron
-                h1 List of reports:
-                .col-md-4
-                    p(id="topic")
-                    p(id="name")
-                .col-md-4
-                    p(id="present")
-                .col-md-4
-                    p(id="significant")
-            div(ng-view)
+                div(ng-view)
         hr
         div
             | Angular seed app: v
@@ -35,6 +27,7 @@ block body
 
     script(src='js/lib/angular/angular.js')
     script(src='js/lib/angular/angular-route.js')
+    script(src="http://lorenzofox3.github.io/smart-table-website/bower_components/angular-smart-table/dist/smart-table.js")
     script(src='js/app.js')
     script(src='js/services.js')
     script(src='js/controllers.js')

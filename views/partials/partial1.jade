@@ -1,3 +1,16 @@
 .row
-	.col-lg-12
-		p This is the partial for view 1.
+    .col-lg-12
+        h1 List of reports:
+        table(st-table='collection', class='table')
+            thead
+                tr
+                    th Case Number
+                    th Last Modified
+                    th Report
+                    th Completed
+            tbody
+                tr(ng-repeat='row in collection')
+                    td {{row.case}}
+                    td {{row.lastModified}}
+                    td {{row.report}}
+                    td {{row.completed}}

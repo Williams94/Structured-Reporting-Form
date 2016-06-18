@@ -24,17 +24,31 @@ exports.startDatabase = function(){
     database.on('open', function(){
         console.log("Connection to database established.");
         connected = true;
+        testDB();
 
-        //console.log(schemas.testSchema);
-        //console.log(models.TestModel);
-        //console.log(documents.testDoc.speak());
+
     });
 };
 
-exports.testDB = function(){
+var testDB = function(){
     if (connected){
         //save.testDocSave();
-        search.testSearch();
+        //search.testSearch();
     }
 };
 
+var listCollections = function(){
+    mongoose.connection.db.listCollections().toArray(function(err, names) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            names.forEach(function(e,i,a) {
+                mongoose.connection.db.dropCollection(e.name);
+                console.log("--->>", e.name);
+            });
+        }
+    });
+};
+
+exports.connected = connected;

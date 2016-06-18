@@ -4,6 +4,10 @@
 var mongoose = require('mongoose'),
     models = require('./models');
 
+var reportDoc = new models.reportModel({
+
+});
+
 var testDoc = new models.TestModel({
     name: 'testing123'
 });

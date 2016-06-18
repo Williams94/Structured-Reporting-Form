@@ -3,7 +3,9 @@
  */
 var models = require('./models');
 
-exports.testSearch = models.TestModel.find(function (err, docs){
-    if (err) return console.error(err);
-    console.log(docs);
-});
+exports.testSearch = function (){
+    models.TestModel.find(function (err, docs){
+        if (err) return console.error(err);
+        console.log(docs);
+    });
+};

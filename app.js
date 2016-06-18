@@ -41,7 +41,7 @@ app.get('/', routes.index);
 app.get('/partial/:name', routes.partial);
 
 // JSON API
-app.get('/api/descriptors/zonalDominance', api.descriptors);
+app.get('/api/descriptors', api.descriptors);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
