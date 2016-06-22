@@ -32,4 +32,15 @@ table tr:nth-child(even) {
     background-color: #ffffff;
 }
 
+.label {
+    color: #2e2e2e;
+}
+
+.textInput {
+    padding: 5px 5px 5px 5px;
+}
+
+#ex1Slider .slider-selection {
+    background: #BABABA;
+}
   

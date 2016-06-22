@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ng-table" level="application" />
     <orderEntry type="library" name="smart-table" level="application" />
+    <orderEntry type="library" name="bootstrap-slider" level="application" />
   </component>
 </module>

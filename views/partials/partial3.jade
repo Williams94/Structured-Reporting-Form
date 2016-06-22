@@ -1,5 +1,21 @@
 .row
     .col-lg-12
-        h2 Please enter your details to start the report
+        h2 Please enter your details:
+        form(class="form-horizontal")
+            div(class="col-md-6 form-group")
+                label(class="label", for="firstName") First name:
+                input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
+                label(class="label", for="lastName") Last name:
+                input(type="name", ng-model="lastName", class="form-control", id="lastName", placeholder="Last name")
+                label(class="label", for="level") Experience level:
+                select(ng-model="level", class="form-control", id="level")
+                    option Expert
+                    option Intermediate
+                    option Novice
+                label(class="label", for="confidence") Confidence level:
+                input(type="number", ng-model="confidenceLevel", id="confidence", class="form-control", placeholder="Confidence of findings", min="0", max="100")
+
+                p {{ firstName }}
+                p {{ lastName }}
 
 

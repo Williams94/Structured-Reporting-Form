@@ -7,6 +7,7 @@
     "jade": "~0.31.2",
     "mongodb": "~2.1.18",
     "mongoose": "~4.5.0",
-    "angular-smart-table": "~2.1.8"
+    "angular-smart-table": "~2.1.8",
+    "bootstrap-slider": "~7.1.0"
   }
 }

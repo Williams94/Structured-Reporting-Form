@@ -13,6 +13,8 @@ var mongodb = require('mongodb'),
     database = '',
     connected = false;
 
+// Starts the database using mongoose with callbacks
+// when there is an error and when the connection is open
 exports.startDatabase = function(){
 
     mongoose.connect(url);
@@ -30,6 +32,7 @@ exports.startDatabase = function(){
     });
 };
 
+// Function used to test initial Mongoose functionality
 var testDB = function(){
     if (connected){
         //save.testDocSave();
@@ -37,6 +40,7 @@ var testDB = function(){
     }
 };
 
+// Logs to console the collections held in the mongodb
 var listCollections = function(){
     mongoose.connection.db.listCollections().toArray(function(err, names) {
         if (err) {
