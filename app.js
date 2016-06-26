@@ -7,7 +7,8 @@ var express = require('express'),
     path = require('path'),
     routes = require('./routes'),
     api = require('./routes/api'),
-    database = require('./database/database');
+    database = require('./database/database'),
+    documents = require('./database/documents');
 
 var app = module.exports = express();
 
@@ -42,6 +43,11 @@ app.get('/partial/:name', routes.partial);
 
 // JSON API
 app.get('/api/descriptors', api.descriptors);
+app.post('/database/documents', function(req, res){
+    documents.newReport(req, res);
+    //res.render('partials/partial4');
+    res.end();
+});
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

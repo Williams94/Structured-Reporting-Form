@@ -1,21 +1,48 @@
-.row
-    .col-lg-12
-        h2 Please enter your details:
-        form(class="form-horizontal")
-            div(class="col-md-6 form-group")
-                label(class="label", for="firstName") First name:
-                input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
-                label(class="label", for="lastName") Last name:
-                input(type="name", ng-model="lastName", class="form-control", id="lastName", placeholder="Last name")
-                label(class="label", for="level") Experience level:
-                select(ng-model="level", class="form-control", id="level")
-                    option Expert
-                    option Intermediate
-                    option Novice
-                label(class="label", for="confidence") Confidence level:
-                input(type="number", ng-model="confidenceLevel", id="confidence", class="form-control", placeholder="Confidence of findings", min="0", max="100")
+.jumbotron
+    .row
+        .col-lg-12
+            form(class="form-horizontal", ng-submit="submit()")
+                div(class="col-md-6 form-group")
+                    h2 Please enter your details:
+                    label(class="label", for="firstName") First name:
+                    input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
+                    label(class="label", for="lastName") Last name:
+                    input(type="name", ng-model="lastName", class="form-control", id="lastName", placeholder="Last name")
+                    label(class="label", for="level") Experience level:
+                    select(ng-model="level", class="form-control", id="level")
+                        option Expert
+                        option Intermediate
+                        option Novice
+                    label(class="label", for="dateCreated") Date created:
+                    input(ng-model="dateCreated", class="form-control", id="dateCreated", value="{{ dateCreated }}", readonly)
+                    label(class="label", for="referringPhysician") Referring Physician
+                    input(ng-model="referringPhysician", class="form-control", id="referringPhysician")
+                div(class="col-md-6")
+                    h2 Entered details:
+                    h3 First name:
+                        label(class="label") {{ firstName }}
+                    h3 Last name:
+                        label(class="label") {{ lastName }}
+                    h3 Level:
+                        label(class="label") {{ level }}
+                    h3 Date:
+                        label(class="label") {{ dateCreated }}
+                    h3 Referring Physician:
+                        label(class="label") {{ referringPhysician }}
+                div(class="col-md-4")
 
-                p {{ firstName }}
-                p {{ lastName }}
+                div(class="col-md-2")
+                    input(type="submit", class="form-control btn btn-success", id="submitDetails") Submit
+
+
+
+
+
+    //              label(class="label", for="confidence") Confidence level:
+    //              input(type="number", ng-model="confidenceLevel", id="confidence", class="form-control",
+    //                      placeholder="Confidence of findings", min="0", max="100") // Would use a slider plugin here to get number value
+
+                    p {{ firstName }}
+                    p {{ lastName }}
 
 

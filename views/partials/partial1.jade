@@ -1,16 +1,21 @@
 .row
     .col-lg-12
-        h1 List of reports:
+        h2 List of reports:
         table(st-table='collection', class='table')
             thead
                 tr
                     th Case Number
-                    th Last Modified
-                    th Report
-                    th Completed
+                    th Date
+                    th Patient
+                    th Status
+                    th Actions
             tbody
                 tr(ng-repeat='row in collection')
                     td {{row.case}}
-                    td {{row.lastModified}}
-                    td {{row.report}}
-                    td {{row.completed}}
+                    td {{row.date}}
+                    td {{row.patient}}
+                    td {{row.status}}
+                    td
+                        a(href="/new", class="newReportLink", title="Create new report", data-toggle="tooltip", data-placement="top", tooltip)
+                            span(class="glyphicon-plus")
+

@@ -4,6 +4,10 @@
 var mongoose = require('mongoose'),
     models = require('./models');
 
+exports.newReport = function (req, res){
+    console.log(req.body);
+};
+
 var reportDoc = new models.reportModel({
 
 });
