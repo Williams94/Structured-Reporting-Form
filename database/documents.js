@@ -8,6 +8,10 @@ exports.newReport = function (req, res){
     console.log(req.body);
 };
 
+exports.descriptors = function (req, res){
+    console.log(req.body.descriptors[0].zonalDominance);
+};
+
 var reportDoc = new models.reportModel({
 
 });

@@ -100,4 +100,12 @@ tr td:hover {
     margin-top: 20px;
 }
 
-  
+
+/* partial4.jade css form html form */
+.comment {
+    margin-top: 5px;
+}
+
+#middleCol {
+    margin-right: 5px;
+}

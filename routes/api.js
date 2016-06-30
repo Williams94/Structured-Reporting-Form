@@ -23,7 +23,7 @@ exports.descriptors = function (req, res) {
                         {
                             "name": "Left-Right Predominance",
                             "symmetrical": false,
-                            "asymetrical": false
+                            "asymmetrical": false
                         },
                         {
                             "name": "Central vs Peripheral Dominance",
@@ -45,13 +45,13 @@ exports.descriptors = function (req, res) {
                             "name": "Ground-glass opacification (GGO)",
                             "present": false,
                             "significant": false,
-                            "comment": "none"
+                            "comment": ""
                         },
                         {
-                            "name": "Is there concordance of GGO & reticulation",
+                            "name": "Concordance of GGO & reticulation",
                             "present": false,
                             "significant": false,
-                            "comment": "none"
+                            "comment": ""
                         },
                         {
                             "peribronchovascularComponent": [
@@ -59,31 +59,31 @@ exports.descriptors = function (req, res) {
                                     "name": "Traction bronchiectasis",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 {
                                     "name": "Traction bronchiolectasis",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 {
                                     "name": "Airway plugging",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 {
                                     "name": "Mosaicism",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 {
                                     "name": "Evidence of consolidation",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 }
                             ],
                             "name": "Peribronchovascular component"
@@ -109,51 +109,51 @@ exports.descriptors = function (req, res) {
                                         "name": "Emphysema",
                                         "present": false,
                                         "significant": false,
-                                        "comment": "none"
+                                        "comment": ""
                                     },
                                     {
                                         "name": "Centrilobular",
                                         "present": false,
                                         "significant": false,
-                                        "comment": "none"
+                                        "comment": ""
 
                                     },
                                     {
                                         "name": "Panlobular",
                                         "present": false,
                                         "significant": false,
-                                        "comment": "none"
+                                        "comment": ""
                                     },
                                     {
                                         "name": "Panacinar",
                                         "present": false,
                                         "significant": false,
-                                        "comment": "none"
+                                        "comment": ""
                                     },
                                     {
                                         "name": "Predominantly basal",
                                         "present": false,
                                         "significant": false,
-                                        "comment": "none"
+                                        "comment": ""
                                     }
                                 ],
                                 "discreteLungCysts": {
                                     "name": "Discrete Lung Cysts",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 "microcysticHoneycombing": {
                                     "name": "Microcystic honeycombing",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 },
                                 "coarseHoneycombing": {
                                     "name": "Coarse honeycombing",
                                     "present": false,
                                     "significant": false,
-                                    "comment": "none"
+                                    "comment": ""
                                 }
 
                             },
@@ -184,10 +184,10 @@ exports.diagnoses = function (req, res) {
                         "evidenceOfCTD": {
                             "name": "Evidence of CTD",
                             "evidence": false,
-                            "comment": "none"
+                            "comment": ""
                         },
                         "everSmoker": false,
-                        "otherRelevantClinicalInfo": "none"
+                        "otherRelevantClinicalInfo": ""
                     },
                     {
                         "name": "UIP Classification",
@@ -208,7 +208,7 @@ exports.diagnoses = function (req, res) {
                         "suspectFibroticNSIP": false,
                         "previousCT": false,
                         "progression": false,
-                        "comment": "none"
+                        "comment": ""
                     },
                     {
                         "name": "Crypto Organising Pneumonia (COP)",
@@ -247,7 +247,7 @@ exports.diagnoses = function (req, res) {
                         "actueHP": false,
                         "subacuteHP": false,
                         "chronicHP": false,
-                        "clinicalRefToSuspectAntigen": "none"
+                        "clinicalRefToSuspectAntigen": ""
                     },
                     {
                         "name": "Asbestos-related disease",
@@ -280,7 +280,7 @@ exports.diagnoses = function (req, res) {
                             "newDiagnosis": false
                         },
                         "other": "consider Eosinophilic pneumonia",
-                        "comment": "none"
+                        "comment": ""
                     },
                     {
                         "name": "Cardiovascular Findings",
@@ -294,11 +294,11 @@ exports.diagnoses = function (req, res) {
                         "nilElse": false,
                         "solitaryPulmonaryNodule": false,
                         "other": false,
-                        "comment": "none"
+                        "comment": ""
                     },
                     {
                         "name": "Other/Comment",
-                        "comment": "none"
+                        "comment": ""
                     }
 
 

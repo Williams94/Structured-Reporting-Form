@@ -4,14 +4,16 @@
         table(st-table='collection', class='table')
             thead
                 tr
-                    th Case Number
+                    th Case ID
+                    th Referring Physician
                     th Date
                     th Patient
                     th Status
                     th Actions
             tbody
                 tr(ng-repeat='row in collection')
-                    td {{row.case}}
+                    td {{row.caseID}}
+                    td {{row.referringPhysician}}
                     td {{row.date}}
                     td {{row.patient}}
                     td {{row.status}}

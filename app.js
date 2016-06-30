@@ -45,7 +45,11 @@ app.get('/partial/:name', routes.partial);
 app.get('/api/descriptors', api.descriptors);
 app.post('/database/documents', function(req, res){
     documents.newReport(req, res);
-    //res.render('partials/partial4');
+    res.end();
+});
+
+app.post('/database/documents/descriptors', function(req, res){
+    documents.descriptors(req, res);
     res.end();
 });
 

@@ -3,5 +3,82 @@
 .jumbotron
     .row
         .col-lg-12
+            h2(class="h2") Descriptors
+        .col-lg-12
             form(class="form-horizontal", ng-submit="submit()")
-                div(class="col-md-6 form-group")
+                div(class="col-lg-4 form-group")
+                    h3(class="h3") 1. Zonal Dominance
+                    label(class="label", for="ccInvolvement") {{ zonalDominance[0].name }}:
+                    br
+                    div(class="btn-group", role="group", id="ccInvolvement")
+                        button(type="button", class="btn btn-default", ng-model="basal", ng-click="basal = !basal",
+                                title="{{ basal }}", data-original-titel="{{ basal }}", data-toggle="tooltip", data-placement="top", tooltip) {{ ccName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="upper", ng-click="upper = !upper") {{ ccName[2] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="middle", ng-click="middle") {{ ccName[3] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="ccNone", ng-click="ccNone") {{ ccName[4] | capitalize}}
+                    br
+                    label(class="label", for="ccInvolvement") {{ zonalDominance[1].name }}:
+                    br
+                    div(class="btn-group", role="group", id="apDistribution")
+                        button(type="button", class="btn btn-default", ng-model="posterior", ng-click="posterior") {{ apName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="anterior", ng-click="anterior") {{ apName[2] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="apNone", ng-click="apNone") {{ apName[3] | capitalize}}
+                    br
+                    label(class="label", for="lrPredominance") {{ zonalDominance[2].name }}:
+                    br
+                    div(class="btn-group", role="group", id="lrPredominance")
+                        button(type="button", class="btn btn-default", ng-model="symmetrical", ng-click="symmetrical") {{ lrName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="asymmetrical", ng-click="asymmetrical") {{ lrName[2] | capitalize}}
+                    br
+                    label(class="label", for="cpDominance") {{ zonalDominance[3].name }}:
+                    br
+                    div(class="btn-group", role="group", id="cpDominance")
+                        button(type="button", class="btn btn-default", ng-model="central", ng-click="central") {{ cpName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="peripheral", ng-click="peripheral") {{ cpName[2] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="cpNone", , ng-click="cpNone") {{ cpName[3] | capitalize}}
+
+
+                div(class="col-lg-4 form-group", id="middleCol")
+                    h3(class="h3") 2. Parenchymal Descriptors
+                    label(class="label", for="predominantAbnormality") {{ parenchymalDescriptors[0].name }}:
+                    br
+                    select(ng-model="predominantAbnormality", class="form-control", id="predominantAbnormality")
+                        option {{ paName[1] | capitalize }}
+                        option {{ paName[2] | capitalize }}
+                        option {{ paName[3] | capitalize }}
+                    label(class="label", for="ggo") {{ parenchymalDescriptors[1].name }}:
+                    br
+                    select(ng-model="ggo", class="form-control", id="ggo")
+                        option {{ ggoName[1] | capitalize }}
+                        option {{ ggoName[2] | capitalize }}
+                    textarea(class="form-control comment", ng-model="ggoComment", placeholder="Comment...")
+                    label(class="label", for="ggoReticulation") {{ parenchymalDescriptors[2].name }}:
+                    br
+                    select(ng-model="ggoReticulation", class="form-control", id="ggoReticulation")
+                        option {{ ggorName[1] | capitalize }}
+                        option {{ ggorName[2] | capitalize }}
+                    textarea(class="form-control comment", ng-model="ggoReticulationComment", placeholder="Comment...", id="ggoReticulationComment")
+
+                div(class="col-lg-4 form-group")
+                    br
+                    h4(class="h4") {{ pcName.name }}
+                    label(class="label", for="tb") {{ pcName.peribronchovascularComponent[0].name }}:
+                    br
+                    select(ng-model="tb", class="form-control", id="tb")
+                        option {{ tbName[1] | capitalize }}
+                        option {{ tbName[2] | capitalize }}
+                    textarea(class="form-control comment", ng-model="tbComment", placeholder="Comment...", id="tbComment")
+                    label(class="label", for="tb2") {{ pcName.peribronchovascularComponent[1].name }}:
+                    br
+                    select(ng-model="tb2", class="form-control", id="tb2")
+                        option {{ tb2Name[1] | capitalize }}
+                        option {{ tb2Name[2] | capitalize }}
+                    textarea(class="form-control comment", ng-model="tbComment", placeholder="Comment...", id="tb2Comment")
+
+
+                    input(type="submit", class="form-control btn btn-success", id="submitDetails") Submit
+
+        .col-lg-12
+            .col-lg-10
+
+            .col-lg-2
