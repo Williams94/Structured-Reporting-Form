@@ -40,8 +40,14 @@ h3 {
     background-color: #F0F0F0;
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-right: 0;
 }
 
+@media screen and (min-width: 768px) {
+    .container .jumbotron {
+        padding-right: 0;
+    }
+}
 /*  partial1.jade table css     */
 
 table, th, td {
@@ -100,7 +106,6 @@ tr td:hover {
     margin-top: 20px;
 }
 
-
 /* partial4.jade css form html form */
 .comment {
     margin-top: 5px;
@@ -108,4 +113,14 @@ tr td:hover {
 
 #middleCol {
     margin-right: 5px;
+}
+
+#pcName {
+    font-size: 16px;
+    margin-top: 43px;
+}
+
+#submitFirstDescriptors {
+    margin-left: 5px;
+    margin-top: 355px;
 }

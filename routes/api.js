@@ -39,18 +39,21 @@ exports.descriptors = function (req, res) {
                             "name": "Predominant Abnormality",
                             "reticular": false,
                             "nodular": false,
-                            "both": false
+                            "both": false,
+                            "none": false
                         },
                         {
                             "name": "Ground-glass opacification (GGO)",
                             "present": false,
                             "significant": false,
+                            "none": false,
                             "comment": ""
                         },
                         {
                             "name": "Concordance of GGO & reticulation",
                             "present": false,
                             "significant": false,
+                            "none": false,
                             "comment": ""
                         },
                         {
@@ -59,30 +62,35 @@ exports.descriptors = function (req, res) {
                                     "name": "Traction bronchiectasis",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 {
                                     "name": "Traction bronchiolectasis",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 {
                                     "name": "Airway plugging",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 {
                                     "name": "Mosaicism",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 {
                                     "name": "Evidence of consolidation",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 }
                             ],
