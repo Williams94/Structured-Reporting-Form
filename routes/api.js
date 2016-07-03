@@ -104,7 +104,7 @@ exports.descriptors = function (req, res) {
                                     "extensive/limited": false,
                                     "perilymphatic": false,
                                     "centrilobular": false,
-                                    "tree-in-bud": false,
+                                    "treeInBud": false,
                                     "fissural": false,
                                     "random": false
                                 }

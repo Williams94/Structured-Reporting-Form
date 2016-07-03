@@ -103,7 +103,7 @@ tr td:hover {
 }
 
 #submitDetails {
-    margin-top: 20px;
+    margin-top: 70px;
 }
 
 /* partial4.jade css form html form */
@@ -120,7 +120,29 @@ tr td:hover {
     margin-top: 43px;
 }
 
+#pcName2 {
+    font-size: 16px;
+}
+
 #submitFirstDescriptors {
     margin-left: 5px;
     margin-top: 355px;
+}
+
+/* partial5.jade css for html form */
+#middleCol2 {
+    margin-top: 37px;
+    margin-left: 5px;
+}
+
+#naButton {
+    margin-left: 30px;
+}
+
+#endCol2 {
+    margin-left: 10px;
+}
+
+#submitSecondDescriptors {
+    margin-left: -25px;
 }

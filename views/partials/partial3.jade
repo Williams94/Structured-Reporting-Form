@@ -2,7 +2,7 @@
     .row
         .col-lg-12
             form(class="form-horizontal", ng-submit="submit()")
-                div(class="col-md-6 form-group")
+                div(class="col-md-4 form-group")
                     h2 Please enter your details:
                     label(class="label", for="firstName") First name:
                     input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
@@ -17,7 +17,7 @@
                     input(ng-model="dateCreated", class="form-control", id="dateCreated", value="{{ dateCreated }}", readonly)
                     label(class="label", for="referringPhysician") Referring Physician
                     input(ng-model="referringPhysician", class="form-control", id="referringPhysician")
-                div(class="col-md-6")
+                div(class="col-md-4")
                     h2 Entered details:
                     h3 First name:
                         label(class="label") {{ firstName }}
@@ -29,10 +29,11 @@
                         label(class="label") {{ dateCreated }}
                     h3 Referring Physician:
                         label(class="label") {{ referringPhysician }}
-                div(class="col-md-4")
+                div(class="col-md-2")
 
                 div(class="col-md-2")
-                    button(type="submit", class="form-control btn btn-success", id="submitDetails") Start Descriptors
+                    button(type="submit", class="form-control btn btn-success", id="submitDetails")
+                        span(class="glyphicon glyphicon-circle-arrow-right")
 
 
 

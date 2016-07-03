@@ -14,15 +14,19 @@
                         button(type="button", class="btn btn-default", ng-model="basal", ng-click="basal = !basal",
                                 title="{{ basal }}", data-original-titel="{{ basal }}", data-toggle="tooltip",
                                     data-placement="top", tooltip) {{ ccName[1] | capitalize}}
+
                         button(type="button", class="btn btn-default", ng-model="upper", ng-click="upper = !upper",
                                 title="{{ upper }}", data-original-titel="{{ upper }}", data-toggle="tooltip",
                                     data-placement="top", tooltip) {{ ccName[2] | capitalize}}
+
                         button(type="button", class="btn btn-default", ng-model="middle", ng-click="middle = !middle",
                                 title="{{ middle }}", data-original-titel="{{ middle }}", data-toggle="tooltip",
                                     data-placement="top", tooltip) {{ ccName[3] | capitalize}}
+
                         button(type="button", class="btn btn-default", ng-model="ccNone", ng-click="ccNone = !ccNone",
                                 title="{{ ccNone }}", data-original-titel="{{ ccNone }}", data-toggle="tooltip",
                                     data-placement="top", tooltip) {{ ccName[4] | capitalize}}
+
                     br
                     div(class="btn-group", role="group")
                         label(class="label", for="ccInvolvement") {{ zonalDominance[1].name }}:
@@ -31,10 +35,12 @@
                             option {{ apName[1] | capitalize }}
                             option {{ apName[2] | capitalize }}
                             option {{ apName[3] | capitalize }}
+
                         label(class="label", for="lrPredominance") {{ zonalDominance[2].name }}:
                         select(ng-model="apDistribution", class="form-control", id="lrPredominance")
                             option {{ lrName[1] | capitalize }}
                             option {{ lrName[2] | capitalize }}
+
                         label(class="label", for="cpDominance") {{ zonalDominance[3].name }}:
                         br
                         select(ng-model="cpDominance", class="form-control", id="cpDominance")
@@ -51,6 +57,7 @@
                         option {{ paName[2] | capitalize }}
                         option {{ paName[3] | capitalize }}
                         option {{ paName[4] | capitalize }}
+
                     label(class="label", for="ggo") {{ parenchymalDescriptors[1].name }}:
                     br
                     select(ng-model="ggo", class="form-control", id="ggo")
@@ -58,6 +65,7 @@
                         option {{ ggoName[2] | capitalize }}
                         option {{ ggoName[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="ggoComment", placeholder="Comment...")
+
                     label(class="label", for="ggoReticulation") {{ parenchymalDescriptors[2].name }}:
                     br
                     select(ng-model="ggoReticulation", class="form-control", id="ggoReticulation")
@@ -69,6 +77,7 @@
                 div(class="col-lg-3 form-group")
                     br
                     h4(class="h4", id="pcName") {{ pcName.name }}
+
                     label(class="label", for="tb") {{ pcName.peribronchovascularComponent[0].name }}:
                     br
                     select(ng-model="tb", class="form-control", id="tb")
@@ -76,6 +85,7 @@
                         option {{ tbName[2] | capitalize }}
                         option {{ tbName[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="tbComment", placeholder="Comment...", id="tbComment")
+
                     label(class="label", for="tb2") {{ pcName.peribronchovascularComponent[1].name }}:
                     br
                     select(ng-model="tb2", class="form-control", id="tb2")
@@ -85,7 +95,7 @@
                     textarea(class="form-control comment", ng-model="tb2Comment", placeholder="Comment...", id="tb2Comment")
 
                 div(class="col-lg-1 form-group")
-                    a(href="/descriptors2", class="form-control btn btn-success", id="submitFirstDescriptors")
+                    a(href="/descriptors2", class="form-control btn btn-success")
                         span(class="glyphicon glyphicon-circle-arrow-right")
 
         .col-lg-12

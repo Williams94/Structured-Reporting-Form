@@ -105,9 +105,18 @@ function descriptorsController($scope, $http, $log, $location) {
         $scope.paName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[0]);
         $scope.ggoName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[1]);
         $scope.ggorName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[2]);
+
+        // Peribronchovascular Component
         $scope.pcName = data.descriptors[1].parenchymalDescriptors[3];
         $scope.tbName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0]);
         $scope.tb2Name = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1]);
+        $scope.airwayPluggingName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[2]);
+        $scope.mosaicismName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[3]);
+        $scope.consolidationName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[4]);
+
+        // Nodular Abnormalities
+        $scope.naName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities);
+        $scope.ifPresentNames = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities.ifPresent);
 
         /************ Bound variables ***************/
         /**** Zonal Dominance ******/
@@ -148,6 +157,10 @@ function descriptorsController($scope, $http, $log, $location) {
         $scope.ggoReticulationComment = $scope.parenchymalDescriptors[2].comment;
 
         // Peribronchovascular Component
+
+
+        // Nodular Abnormalities
+        $scope.nodularAbnormalities = data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities;
 
 
     }).error(function (data, status, headers, config) {
