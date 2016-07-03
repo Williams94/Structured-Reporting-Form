@@ -1,4 +1,11 @@
 'use strict';
+/* Global Variables */
+var caseID;
+var config = {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+    }
+};
 
 /* Controllers */
 
@@ -11,7 +18,7 @@ function AppCtrl($scope, $http, $log) {
 }
 
 // Controller for partial1.jade
-function MyCtrl1($scope, $http, $log) {
+function MyCtrl1($scope, $http, $log, $location) {
     // Provides case data but could use http for external case data
     $scope.collection = [{
         caseID: 1,
@@ -33,10 +40,22 @@ function MyCtrl1($scope, $http, $log) {
         status: "waiting"
     }];
 
+    $scope.startNewReport = function (caseId) {
+        caseID = caseId;
+    };
+
+    $http.post("/database/search/reports").success(function (data, status) {
+        console.log(data);
+        $scope.reports = data;
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+    });
+
 
     //$scope.person = [{name: "bob", age: 40}];
 }
-MyCtrl1.$inject = ['$scope', '$http', '$log'];
+MyCtrl1.$inject = ['$scope', '$http', '$log', '$location'];
 
 
 function MyCtrl2() {
@@ -53,6 +72,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
     $scope.level = "";
     $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
     $scope.referringPhysician = "";
+    $scope.caseID = 1;
 
     // Code to save details to mongoDB goes here....
     $scope.submit = function () {
@@ -63,7 +83,8 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             lastName: $scope.lastName,
             created: $scope.dateCreated,
             level: $scope.level,
-            referringPhysician: $scope.referringPhysician
+            referringPhysician: $scope.referringPhysician,
+            caseID: caseID
         });
 
         var config = {
@@ -88,12 +109,12 @@ function descriptorsController($scope, $http, $log, $location) {
     // Gets descriptors from /routes/api/descriptors for questions
     $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
 
-        $log.log(data);
+        //$log.log(data);
 
         $scope.data = data;
 
         /********* Names and data for descriptors questions ************/
-        // Zonal Dominance data needed for questions
+            // Zonal Dominance data needed for questions
         $scope.zonalDominance = data.descriptors[0].zonalDominance;
         $scope.ccName = Object.getOwnPropertyNames($scope.zonalDominance[0]);
         $scope.apName = Object.getOwnPropertyNames($scope.zonalDominance[1]);
@@ -118,9 +139,15 @@ function descriptorsController($scope, $http, $log, $location) {
         $scope.naName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities);
         $scope.ifPresentNames = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities.ifPresent);
 
+        // Honeycombing vs Emphysema
+        $scope.honeycombing = data.descriptors[1].parenchymalDescriptors[5];
+        $scope.emphysema = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema;
+        $scope.listOptions = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema[0]);
+
+
         /************ Bound variables ***************/
         /**** Zonal Dominance ******/
-        // Cranio-caudal Involvement bound variables
+            // Cranio-caudal Involvement bound variables
         $scope.basal = $scope.zonalDominance[0].basal;
         $scope.upper = $scope.zonalDominance[0].upper;
         $scope.middle = $scope.zonalDominance[0].middle;
@@ -141,10 +168,11 @@ function descriptorsController($scope, $http, $log, $location) {
         $scope.cpNone = $scope.zonalDominance[3].none;
 
         /**** Parenchymal Descriptors ****/
-        // Predominant Abnormality
-        $scope.predominantAbnormality = $scope.parenchymalDescriptors[0].reticular;
-        $scope.predominantAbnormality = $scope.parenchymalDescriptors[0].nodular;
-        $scope.predominantAbnormality = $scope.parenchymalDescriptors[0].both;
+            // Predominant Abnormality
+        $scope.predominantAbnormalityReticular = $scope.parenchymalDescriptors[0].reticular;
+        $scope.predominantAbnormalityNodular = $scope.parenchymalDescriptors[0].nodular;
+        $scope.predominantAbnormalityBoth = $scope.parenchymalDescriptors[0].both;
+        $scope.predominantAbnormalityNone = $scope.parenchymalDescriptors[0].none;
 
         // Ground-glass opacification (GGO)
         $scope.ggo = $scope.parenchymalDescriptors[1].present;
@@ -171,6 +199,8 @@ function descriptorsController($scope, $http, $log, $location) {
 
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
+
+        console.log($scope.basal + " " + $scope.anterior);
 
         var data = $.param({
             descriptors: [
@@ -201,18 +231,36 @@ function descriptorsController($scope, $http, $log, $location) {
                             none: $scope.cpNone
                         }
                     ]
+                }, {
+                    parenchymalDescriptors: [
+                        {
+                            "name": "Predominant Abnormality",
+                            "reticular": false,
+                            "nodular": false,
+                            "both": false,
+                            "none": false
+                        },
+                        {
+                            "name": "Ground-glass opacification (GGO)",
+                            "present": false,
+                            "significant": false,
+                            "none": false,
+                            "comment": ""
+                        },
+                        {
+                            "name": "Concordance of GGO & reticulation",
+                            "present": false,
+                            "significant": false,
+                            "none": false,
+                            "comment": ""
+                        }
+                    ]
                 }]
         });
 
-        var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        };
-
         $http.post("/database/documents/descriptors", data, config).success(function (data, status) {
 
-            $location.path('/descriptors2');
+            $location.path('/diagnoses');
 
         }).error(function (data, status, headers, config) {
             $log.log(status);

@@ -146,3 +146,9 @@ tr td:hover {
 #submitSecondDescriptors {
     margin-left: -25px;
 }
+
+/* partial6.jade css for html form */
+#endCol3 {
+    margin-left: 10px;
+    margin-top: 37px;
+}

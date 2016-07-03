@@ -6,3 +6,75 @@
             h2(class="h2") Descriptors
         .col-lg-12
             form(class="form-horizontal", ng-submit="submit()")
+                div(class="col-lg-4 form-group")
+                    h4(class="h4") {{ honeycombing.name }}
+
+                    label(class="label", for="emphysema") {{ emphysema[0].name }}:
+                    br
+                    select(ng-model="emphysema", class="form-control", id="emphysema")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="emphysemaComment", placeholder="Comment...", id="emphysemaComment")
+
+                    label(class="label", for="centrilobular") {{ emphysema[1].name }}:
+                    br
+                    select(ng-model="centrilobular", class="form-control", id="centrilobular")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="centrilobularComment", placeholder="Comment...", id="centrilobularComment")
+
+                    label(class="label", for="panlobular") {{ emphysema[2].name }}:
+                    br
+                    select(ng-model="panlobular", class="form-control", id="panlobular")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="panlobularComment", placeholder="Comment...", id="panlobularComment")
+
+                div(class="col-lg-3 form-group", id="middleCol2")
+                    label(class="label", for="panacinar") {{ emphysema[3].name }}:
+                    br
+                    select(ng-model="panacinar", class="form-control", id="panacinar")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="panacinarComment", placeholder="Comment...", id="panacinarComment")
+
+                    label(class="label", for="predominantlyBasal") {{ emphysema[4].name }}:
+                    br
+                    select(ng-model="predominantlyBasal", class="form-control", id="predominantlyBasal")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="predominantlyBasalComment", placeholder="Comment...", id="predominantlyBasalComment")
+
+                div(class="col-lg-4 form-group", id="endCol3")
+                    label(class="label", for="discreteLungCysts") {{ honeycombing.honeycombingVSemphysema.discreteLungCysts.name }}
+                    br
+                    select(ng-model="discreteLungCysts", class="form-control", id="discreteLungCysts")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="discreteLungCystsComment", placeholder="Comment...", id="discreteLungCystsComment")
+
+                    label(class="label", for="microcysticHoneycombing") {{ honeycombing.honeycombingVSemphysema.microcysticHoneycombing.name }}
+                    br
+                    select(ng-model="microcysticHoneycombing", class="form-control", id="microcysticHoneycombing")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="microcysticHoneycombingComment", placeholder="Comment...", id="microcysticHoneycombingComment")
+
+                    label(class="label", for="coarseHoneycombing") {{ honeycombing.honeycombingVSemphysema.coarseHoneycombing.name }}
+                    br
+                    select(ng-model="coarseHoneycombing", class="form-control", id="coarseHoneycombing")
+                        option {{ listOptions[1] | capitalize }}
+                        option {{ listOptions[2] | capitalize }}
+                        option {{ listOptions[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="coarseHoneycombingComment", placeholder="Comment...", id="coarseHoneycombingComment")
+
+                div(class="col-lg-1 form-group")
+                    button(type="submit", class="form-control btn btn-success", id="submitSecondDescriptors")
+                        span(class="glyphicon glyphicon-circle-arrow-right")

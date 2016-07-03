@@ -26,8 +26,8 @@ exports.startDatabase = function(){
     database.on('open', function(){
         console.log("Connection to database established.");
         connected = true;
-        testDB();
-
+        //testDB();
+        //listCollections();
 
     });
 };
@@ -36,7 +36,7 @@ exports.startDatabase = function(){
 var testDB = function(){
     if (connected){
         //save.testDocSave();
-        //search.testSearch();
+        search.testSearch();
     }
 };
 

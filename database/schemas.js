@@ -7,8 +7,8 @@ var reportSchema = new mongoose.Schema({
     author: { firstName: String, lastName: String},
     created: { type: Date, default: Date.now },
     level: String,
-    referringPhysician: String/*,
-    descriptors: Object*/
+    referringPhysician: String,
+    caseID: Number
 });
 
 exports.reportSchema = reportSchema;

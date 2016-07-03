@@ -117,12 +117,14 @@ exports.descriptors = function (req, res) {
                                         "name": "Emphysema",
                                         "present": false,
                                         "significant": false,
+                                        "none": false,
                                         "comment": ""
                                     },
                                     {
                                         "name": "Centrilobular",
                                         "present": false,
                                         "significant": false,
+                                        "none": false,
                                         "comment": ""
 
                                     },
@@ -130,18 +132,21 @@ exports.descriptors = function (req, res) {
                                         "name": "Panlobular",
                                         "present": false,
                                         "significant": false,
+                                        "none": false,
                                         "comment": ""
                                     },
                                     {
                                         "name": "Panacinar",
                                         "present": false,
                                         "significant": false,
+                                        "none": false,
                                         "comment": ""
                                     },
                                     {
                                         "name": "Predominantly basal",
                                         "present": false,
                                         "significant": false,
+                                        "none": false,
                                         "comment": ""
                                     }
                                 ],
@@ -149,18 +154,21 @@ exports.descriptors = function (req, res) {
                                     "name": "Discrete Lung Cysts",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 "microcysticHoneycombing": {
                                     "name": "Microcystic honeycombing",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 },
                                 "coarseHoneycombing": {
                                     "name": "Coarse honeycombing",
                                     "present": false,
                                     "significant": false,
+                                    "none": false,
                                     "comment": ""
                                 }
 

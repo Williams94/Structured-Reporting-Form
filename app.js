@@ -8,7 +8,9 @@ var express = require('express'),
     routes = require('./routes'),
     api = require('./routes/api'),
     database = require('./database/database'),
-    documents = require('./database/documents');
+    documents = require('./database/documents'),
+    search = require('./database/search'),
+    models = require('./database/models');
 
 var app = module.exports = express();
 
@@ -43,16 +45,27 @@ app.get('/partial/:name', routes.partial);
 
 // JSON API
 app.get('/api/descriptors', api.descriptors);
-app.post('/database/documents', function(req, res){
+app.post('/database/documents', function (req, res) {
     documents.newReport(req, res);
     res.end();
 });
 
-app.post('/database/documents/descriptors', function(req, res){
+app.post('/database/documents/descriptors', function (req, res) {
     documents.descriptors(req, res);
     res.end();
 });
 
+app.post('/database/search/reports', function (req, res) {
+    models.reportModel.find({}, function (err, docs){
+        if (err) return console.log(err + " search.findReports");
+        console.log(docs);
+        callback(docs);
+    });
+
+    var callback = function(docs){
+        res.send(docs);
+    }
+});
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
