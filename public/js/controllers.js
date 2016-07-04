@@ -21,6 +21,7 @@ function AppCtrl($scope, $http, $log) {
 
 // Controller for partial1.jade
 function MyCtrl1($scope, $http, $log, $location) {
+    editing = false;
     // Provides case data but could use http for external case data
     $scope.collection = [{
         caseID: 1,
@@ -47,7 +48,7 @@ function MyCtrl1($scope, $http, $log, $location) {
     };
 
     $http.post("/database/search/reports").success(function (data, status) {
-        console.log(data);
+        console.log("Reports successfully retrieved " + data);
         $scope.reports = data;
 
     }).error(function (data, status, headers, config) {
@@ -60,7 +61,7 @@ function MyCtrl1($scope, $http, $log, $location) {
         });
 
         $http.post("/database/search/report", data, config).success(function (data, status) {
-            console.log(data);
+            console.log("Successfully retrieved report for editing " + data);
             currentReport = data;
             editing = true;
             $location.path('/existing');
@@ -68,17 +69,19 @@ function MyCtrl1($scope, $http, $log, $location) {
             $log.log(status)
         });
     };
-
-    //$scope.person = [{name: "bob", age: 40}];
 }
 MyCtrl1.$inject = ['$scope', '$http', '$log', '$location'];
 
 
+// Controller for partial2.jade
 function MyCtrl2() {
 }
 MyCtrl2.$inject = [];
 
+// Controller for partial3.jade
 function newReportCtrl($scope, $http, $log, $timeout, $location) {
+
+    $scope.editing = editing;
 
     var date = new Date();
 
@@ -98,10 +101,11 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.caseID = caseID;
     }
 
-    // Code to save details to mongoDB goes here....
+    // Submits the users details to the database
     $scope.submit = function () {
         document.getElementById('submitDetails').value = "Submitting...";
 
+        // data to send to database from user input
         var data = $.param({
             firstName: $scope.firstName,
             lastName: $scope.lastName,
@@ -112,32 +116,63 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         });
 
         var config;
-
         if (editing) {
+            console.log("Updating");
             config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                    'Update': true,
+                    'Update': editing,
                     '_id': currentReport._id
                 }
             };
+            // User details are sent to server side in app.js using http POST request to update the user details
+            $http.post("/database/documents/update", data, config).success(function (data, status) {
+                $scope.questionNumber++;
+                $location.path('/descriptors');
+            }).error(function (data, status, headers, config) {
+                $log.log(status);
+            });
         } else {
+            console.log("Saving");
             config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                    'Update': false
+                    'Update': editing
                 }
             };
+
+            // User details are sent to server side in app.js using http POST request
+            $http.post("/database/documents/saveNew", data, config).success(function (data, status) {
+                $scope.questionNumber++;
+                $location.path('/descriptors');
+            }).error(function (data, status, headers, config) {
+                $log.log(status);
+            });
         }
+    };
+
+    $scope.deleteButtonClass = "form-control btn btn-danger";
+    $scope.deleteButtonSpanClass = "glyphicon glyphicon-trash";
+    $scope.deleteButtonValue = "Delete ";
+
+    $scope.deleteReport = function () {
 
 
-        $http.post("/database/documents", data, config).success(function (data, status) {
-            $scope.questionNumber++;
-            $location.path('/descriptors');
-        }).error(function (data, status, headers, config) {
+        var data = $.param({
+            '_id': currentReport._id
+        });
+        $http.post("database/documents/deleteReport", data, config).success(function (data, status) {
+            $log.log(data);
+            $scope.deleteButtonClass = "form-control btn btn-success";
+            $scope.deleteButtonSpanClass = "glyphicon glyphicon-ok";
+            $scope.deleteButtonValue = "Deleted ";
+            $timeout(function () {
+                $location.path('/');
+
+            }, 1000);
+        }).error(function (data, status) {
             $log.log(status);
         });
-
     }
 }
 newReportCtrl.$inject = ['$scope', '$http', '$log', '$timeout', '$location'];
@@ -237,8 +272,6 @@ function descriptorsController($scope, $http, $log, $location) {
 
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
-
-        console.log($scope.basal + " " + $scope.anterior);
 
         var data = $.param({
             descriptors: [

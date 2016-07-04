@@ -106,6 +106,10 @@ tr td:hover {
     margin-top: 70px;
 }
 
+#deleteButton {
+    margin-top: 300px;
+}
+
 /* partial4.jade css form html form */
 .comment {
     margin-top: 5px;

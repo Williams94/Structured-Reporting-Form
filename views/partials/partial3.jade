@@ -34,7 +34,8 @@
                 div(class="col-md-2")
                     button(type="submit", class="form-control btn btn-success", id="submitDetails")
                         span(class="glyphicon glyphicon-circle-arrow-right")
-
+                    a(ng-click="deleteReport()", ng-if="editing", class="{{ deleteButtonClass }}", id="deleteButton") {{ deleteButtonValue }}
+                        span(class="{{ deleteButtonSpanClass }}", id="deleteButtonSpan")
 
 
 

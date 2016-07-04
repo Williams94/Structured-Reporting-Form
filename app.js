@@ -47,12 +47,13 @@ app.get('/partial/:name', routes.partial);
 app.get('/api/descriptors', api.descriptors);
 
 // Post requests to database from client-side
-app.post('/database/documents', function (req, res) {
-    if (req.headers.update) {
-        documents.updateReport(req, res);
-    } else {
-        documents.newReport(req, res);
-    }
+app.post('/database/documents/update', function (req, res) {
+    documents.updateReport(req, res);
+    res.end();
+});
+
+app.post('/database/documents/saveNew', function (req, res) {
+    documents.newReport(req, res);
     res.end();
 });
 
@@ -62,28 +63,41 @@ app.post('/database/documents/descriptors', function (req, res) {
 });
 
 app.post('/database/search/reports', function (req, res) {
-    models.reportModel.find({}, function (err, docs){
+    models.reportModel.find({}, function (err, docs) {
         if (err) return console.log(err + " search.findReports");
-        console.log(docs);
+        //console.log(docs);
         callback(docs);
     });
 
-    var callback = function(docs){
+    var callback = function (docs) {
         res.send(docs);
     }
 });
 
-app.post('/database/search/report', function(req, res){
-   models.reportModel.findById(req.body._id, function(err, doc){
-       if (err) return console.log(err + " search.findReport");
-       console.log(doc);
-       callback(doc);
-   });
+app.post('/database/search/report', function (req, res) {
+    models.reportModel.findById(req.body._id, function (err, doc) {
+        if (err) return console.log(err + " search.findReport");
+        //console.log(doc);
+        callback(doc);
+    });
 
-    var callback = function(doc){
+    var callback = function (doc) {
         res.send(doc);
     }
 });
+
+app.post('/database/documents/deleteReport', function (req, res) {
+    models.reportModel.findById(req.body._id, function (err, doc) {
+        if (err) return console.log(err + " error finding report to update");
+
+        doc.remove(callback());
+    });
+
+    var callback = function () {
+        res.send("Deleted");
+    }
+});
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

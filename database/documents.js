@@ -29,12 +29,19 @@ exports.updateReport = function (req, res) {
         doc.level = req.body.level;
         doc.referringPhysician = req.body.referringPhysician;
 
-        doc.save(function (err){
+        doc.save(function (err) {
             if (err) return console.log(err + " error saving updated doc");
             console.log("report updated");
         })
     });
+};
 
+exports.deleteReport = function (req, res) {
+    models.reportModel.findById(req.body._id, function (err, doc) {
+        if (err) return console.log(err + " error finding report to update");
+
+        doc.remove();
+    })
 };
 
 exports.descriptors = function (req, res) {
