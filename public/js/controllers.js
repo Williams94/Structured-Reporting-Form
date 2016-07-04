@@ -6,6 +6,8 @@ var config = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
     }
 };
+var currentReport;
+var editing = false;
 
 /* Controllers */
 
@@ -23,19 +25,19 @@ function MyCtrl1($scope, $http, $log, $location) {
     $scope.collection = [{
         caseID: 1,
         referringPhysician: "Dr. Jones",
-        date: new Date(),
+        date: "20/06/2016 15:30",
         patient: "xxxxx xxxxx",
         status: "waiting"
     }, {
         caseID: 2,
         referringPhysician: "Dr. Stephenson",
-        date: new Date(),
+        date: "24/06/2016 11:20",
         patient: "xxxxx xxxxx",
         status: "wiating"
     }, {
         caseID: 3,
         referringPhysician: "Dr. Davies",
-        date: new Date(),
+        date: "26/06/2016 12:55",
         patient: "xxxxx xxxxx",
         status: "waiting"
     }];
@@ -52,6 +54,20 @@ function MyCtrl1($scope, $http, $log, $location) {
         $log.log(status);
     });
 
+    $scope.editReport = function (reportID) {
+        var data = $.param({
+            _id: reportID
+        });
+
+        $http.post("/database/search/report", data, config).success(function (data, status){
+            console.log(data);
+            currentReport = data;
+            editing = true;
+            $location.path('/existing');
+        }).error(function (data, status){
+            $log.log(status)
+        });
+    };
 
     //$scope.person = [{name: "bob", age: 40}];
 }
@@ -66,13 +82,21 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
     var date = new Date();
 
-    // Would use http to get radiologists details from mongoDB including case info
-    $scope.firstName = "";
-    $scope.lastName = "";
-    $scope.level = "";
-    $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
-    $scope.referringPhysician = "";
-    $scope.caseID = 1;
+    if (editing){
+        $scope.firstName = currentReport.author.firstName;
+        $scope.lastName = currentReport.author.lastName;
+        $scope.level = currentReport.level;
+        $scope.dateCreated = currentReport.created;
+        $scope.referringPhysician = currentReport.referringPhysician;
+        $scope.caseID = currentReport.caseID;
+    } else {
+        $scope.firstName = "";
+        $scope.lastName = "";
+        $scope.level = "";
+        $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        $scope.referringPhysician = "";
+        $scope.caseID = caseID;
+    }
 
     // Code to save details to mongoDB goes here....
     $scope.submit = function () {
@@ -89,7 +113,9 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
         var config = {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'Update': 'true',
+                '_id': currentReport._id
             }
         };
 

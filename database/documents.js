@@ -5,24 +5,41 @@ var mongoose = require('mongoose'),
     models = require('./models'),
     save = require('./save');
 
-exports.newReport = function (req, res){
+exports.newReport = function (req, res) {
     var reportDoc = new models.reportModel({
-        author: { firstName: req.body.firstName, lastName: req.body.lastName},
+        author: {firstName: req.body.firstName, lastName: req.body.lastName},
         created: req.body.created,
         level: req.body.level,
         referringPhysician: req.body.referringPhysician,
         caseID: req.body.caseID
     });
 
-    save.newReportDocSave(reportDoc, function(){
+    save.newReportDocSave(reportDoc, function () {
         console.log("Saved");
     });
 };
 
-exports.descriptors = function (req, res){
-    console.log(req.body.descriptors[0].zonalDominance);
+exports.updateReport = function (req, res) {
+    models.reportModel.findById(req.headers._id, function (err, doc) {
+        if (err) return console.log(err + " error findings doc to update");
+
+        doc.author.firstName = req.body.firstName;
+        doc.author.lastName = req.body.lastName;
+        doc.created = req.body.created;
+        doc.level = req.body.level;
+        doc.referringPhysician = req.body.referringPhysician;
+
+        doc.save(function (err){
+            if (err) return console.log(err + " error saving updated doc");
+            console.log("report updated");
+        })
+    });
+
 };
 
+exports.descriptors = function (req, res) {
+    console.log(req.body.descriptors[0].zonalDominance);
+};
 
 
 var testDoc = new models.TestModel({
