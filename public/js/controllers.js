@@ -59,12 +59,12 @@ function MyCtrl1($scope, $http, $log, $location) {
             _id: reportID
         });
 
-        $http.post("/database/search/report", data, config).success(function (data, status){
+        $http.post("/database/search/report", data, config).success(function (data, status) {
             console.log(data);
             currentReport = data;
             editing = true;
             $location.path('/existing');
-        }).error(function (data, status){
+        }).error(function (data, status) {
             $log.log(status)
         });
     };
@@ -82,7 +82,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
     var date = new Date();
 
-    if (editing){
+    if (editing) {
         $scope.firstName = currentReport.author.firstName;
         $scope.lastName = currentReport.author.lastName;
         $scope.level = currentReport.level;
@@ -111,13 +111,25 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             caseID: caseID
         });
 
-        var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                'Update': 'true',
-                '_id': currentReport._id
-            }
-        };
+        var config;
+
+        if (editing) {
+            config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                    'Update': true,
+                    '_id': currentReport._id
+                }
+            };
+        } else {
+            config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                    'Update': false
+                }
+            };
+        }
+
 
         $http.post("/database/documents", data, config).success(function (data, status) {
             $scope.questionNumber++;

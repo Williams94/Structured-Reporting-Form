@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var reportSchema = new mongoose.Schema({
     author: { firstName: String, lastName: String},
-    created: { type: Date, default: Date.now },
+    created: String,
     level: String,
     referringPhysician: String,
     caseID: Number
