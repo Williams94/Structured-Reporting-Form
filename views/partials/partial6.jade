@@ -9,7 +9,7 @@
                 div(class="col-lg-4 form-group")
                     h4(class="h4") {{ honeycombing.name }}
 
-                    label(class="label", for="emphysema") {{ emphysema[0].name }}:
+                    label(class="label", for="emphysema") {{ emphysemaName[0].name }}:
                     br
                     select(ng-model="emphysema", class="form-control", id="emphysema")
                         option {{ listOptions[1] | capitalize }}
@@ -17,7 +17,7 @@
                         option {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="emphysemaComment", placeholder="Comment...", id="emphysemaComment")
 
-                    label(class="label", for="centrilobular") {{ emphysema[1].name }}:
+                    label(class="label", for="centrilobular") {{ emphysemaName[1].name }}:
                     br
                     select(ng-model="centrilobular", class="form-control", id="centrilobular")
                         option {{ listOptions[1] | capitalize }}
@@ -25,7 +25,7 @@
                         option {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="centrilobularComment", placeholder="Comment...", id="centrilobularComment")
 
-                    label(class="label", for="panlobular") {{ emphysema[2].name }}:
+                    label(class="label", for="panlobular") {{ emphysemaName[2].name }}:
                     br
                     select(ng-model="panlobular", class="form-control", id="panlobular")
                         option {{ listOptions[1] | capitalize }}
@@ -34,7 +34,7 @@
                     textarea(class="form-control comment", ng-model="panlobularComment", placeholder="Comment...", id="panlobularComment")
 
                 div(class="col-lg-3 form-group", id="middleCol2")
-                    label(class="label", for="panacinar") {{ emphysema[3].name }}:
+                    label(class="label", for="panacinar") {{ emphysemaName[3].name }}:
                     br
                     select(ng-model="panacinar", class="form-control", id="panacinar")
                         option {{ listOptions[1] | capitalize }}
@@ -42,7 +42,7 @@
                         option {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="panacinarComment", placeholder="Comment...", id="panacinarComment")
 
-                    label(class="label", for="predominantlyBasal") {{ emphysema[4].name }}:
+                    label(class="label", for="predominantlyBasal") {{ emphysemaName[4].name }}:
                     br
                     select(ng-model="predominantlyBasal", class="form-control", id="predominantlyBasal")
                         option {{ listOptions[1] | capitalize }}

@@ -34,7 +34,7 @@ function MyCtrl1($scope, $http, $log, $location) {
         referringPhysician: "Dr. Stephenson",
         date: "24/06/2016 11:20",
         patient: "xxxxx xxxxx",
-        status: "wiating"
+        status: "waiting"
     }, {
         caseID: 3,
         referringPhysician: "Dr. Davies",
@@ -48,7 +48,7 @@ function MyCtrl1($scope, $http, $log, $location) {
     };
 
     $http.post("/database/search/reports").success(function (data, status) {
-        console.log("Reports successfully retrieved " + data);
+        console.log("Reports successfully retrieved " + JSON.stringify(data));
         $scope.reports = data;
 
     }).error(function (data, status, headers, config) {
@@ -81,6 +81,19 @@ MyCtrl2.$inject = [];
 // Controller for partial3.jade
 function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
+    var zonalDominance;
+
+    // Gets descriptors from /routes/api/descriptors for question names used on the client-side
+    $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
+
+        zonalDominance = data.descriptors[0].zonalDominance;
+
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
     $scope.editing = editing;
 
     var date = new Date();
@@ -105,18 +118,24 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
     $scope.submit = function () {
         document.getElementById('submitDetails').value = "Submitting...";
 
-        // data to send to database from user input
-        var data = $.param({
-            firstName: $scope.firstName,
-            lastName: $scope.lastName,
-            created: $scope.dateCreated,
-            level: $scope.level,
-            referringPhysician: $scope.referringPhysician,
-            caseID: caseID
-        });
+        // Sends a different POST request depending on whether the user is creating a new report
+        // or updating an old report
+        var config,
+            data;
 
-        var config;
         if (editing) {
+
+
+            // data to send to database from user input
+            data = $.param({
+                firstName: $scope.firstName,
+                lastName: $scope.lastName,
+                created: $scope.dateCreated,
+                level: $scope.level,
+                referringPhysician: $scope.referringPhysician,
+                caseID: caseID
+            });
+
             console.log("Updating");
             config = {
                 headers: {
@@ -125,6 +144,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                     '_id': currentReport._id
                 }
             };
+
             // User details are sent to server side in app.js using http POST request to update the user details
             $http.post("/database/documents/update", data, config).success(function (data, status) {
                 $scope.questionNumber++;
@@ -132,8 +152,51 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             }).error(function (data, status, headers, config) {
                 $log.log(status);
             });
+
+
         } else {
-            console.log("Saving");
+
+
+            // data to send to database from user input and empty report
+            data = $.param({
+                firstName: $scope.firstName,
+                lastName: $scope.lastName,
+                created: $scope.dateCreated,
+                level: $scope.level,
+                referringPhysician: $scope.referringPhysician,
+                caseID: caseID,
+                descriptors: [
+                    {
+                        zonalDominance:[
+                            {
+                                name: zonalDominance[0].name,
+                                basal: zonalDominance[0].basal,
+                                upper: zonalDominance[0].upper,
+                                middle: zonalDominance[0].middle,
+                                none: zonalDominance[0].none
+                            },
+                            {
+                                name: zonalDominance[1].name,
+                                posterior: zonalDominance[1].posterior,
+                                anterior: zonalDominance[1].anterior,
+                                none: zonalDominance[1].none
+                            },
+                            {
+                                name: zonalDominance[2].name,
+                                symmetrical: zonalDominance[2].symmetrical,
+                                asymmetrical: zonalDominance[2].asymmetrical
+                            },
+                            {
+                                name: zonalDominance[3].name,
+                                central: zonalDominance[3].central,
+                                peripheral: zonalDominance[3].peripheral,
+                                none: zonalDominance[3].none
+                            }
+                        ]
+                    }
+            ]
+            });
+
             config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
@@ -143,7 +206,8 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
             // User details are sent to server side in app.js using http POST request
             $http.post("/database/documents/saveNew", data, config).success(function (data, status) {
-                $scope.questionNumber++;
+                currentReport = data;
+                console.log("Saved report: " + JSON.stringify(data));
                 $location.path('/descriptors');
             }).error(function (data, status, headers, config) {
                 $log.log(status);
@@ -151,13 +215,13 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         }
     };
 
+    // Delete Button code that changes the button and span class to indicate to the user
+    // that the deletion has been successful
     $scope.deleteButtonClass = "form-control btn btn-danger";
     $scope.deleteButtonSpanClass = "glyphicon glyphicon-trash";
     $scope.deleteButtonValue = "Delete ";
 
     $scope.deleteReport = function () {
-
-
         var data = $.param({
             '_id': currentReport._id
         });
@@ -167,7 +231,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             $scope.deleteButtonSpanClass = "glyphicon glyphicon-ok";
             $scope.deleteButtonValue = "Deleted ";
             $timeout(function () {
-                $location.path('/');
+                $location.path('/');        // Need to change this when implementing the login system
 
             }, 1000);
         }).error(function (data, status) {
@@ -177,6 +241,126 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 }
 newReportCtrl.$inject = ['$scope', '$http', '$log', '$timeout', '$location'];
 
+function descriptorsController1($scope, $http, $log, $location) {
+
+    console.log("Current report: " + JSON.stringify(currentReport));
+
+    // Gets descriptors from /routes/api/descriptors for question names used on the client-side
+    $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
+
+        //$log.log(data);
+
+        $scope.data = data;
+
+        /********* Names and data for descriptors questions ************/
+            // Zonal Dominance data needed for questions
+        $scope.zonalDominance = data.descriptors[0].zonalDominance;
+        $scope.ccName = Object.getOwnPropertyNames($scope.zonalDominance[0]);
+        $scope.apName = Object.getOwnPropertyNames($scope.zonalDominance[1]);
+        $scope.lrName = Object.getOwnPropertyNames($scope.zonalDominance[2]);
+        $scope.cpName = Object.getOwnPropertyNames($scope.zonalDominance[3]);
+
+        // Parenchymal Descriptors data needed for questions
+        $scope.parenchymalDescriptors = data.descriptors[1].parenchymalDescriptors;
+        $scope.paName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[0]);
+        $scope.ggoName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[1]);
+        $scope.ggorName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[2]);
+
+        // Peribronchovascular Component
+        $scope.pcName = data.descriptors[1].parenchymalDescriptors[3];
+        $scope.tbName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0]);
+        $scope.tb2Name = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1]);
+
+
+        /************ Bound variables ***************/
+        /**** Zonal Dominance ******/
+        // Cranio-caudal Involvement bound variables
+        $scope.basal = currentReport.descriptors[0].zonalDominance[0].basal;
+        $scope.upper = currentReport.descriptors[0].zonalDominance[0].upper;
+        $scope.middle = currentReport.descriptors[0].zonalDominance[0].middle;
+        $scope.ccNone = currentReport.descriptors[0].zonalDominance[0].none;
+
+            // Antero-Posterior Distribution bound variables
+        $scope.anterior = currentReport.descriptors[0].zonalDominance[1].anterior;
+        $scope.posterior = currentReport.descriptors[0].zonalDominance[1].posterior;
+        $scope.apNone = currentReport.descriptors[0].zonalDominance[1].none;
+
+        // Left-Right Predominance bound variables
+        $scope.symmetrical = currentReport.descriptors[0].zonalDominance[2].symmetrical;
+        $scope.asymmetrical = currentReport.descriptors[0].zonalDominance[2].asymmetrical;
+
+        // Central vs Peripheral Dominance
+        $scope.central = currentReport.descriptors[0].zonalDominance[3].central;
+        $scope.peripheral = currentReport.descriptors[0].zonalDominance[3].peripheral;
+        $scope.cpNone = currentReport.descriptors[0].zonalDominance[3].none;
+
+        /**** Parenchymal Descriptors ****/
+            // Predominant Abnormality
+        $scope.predominantAbnormalityReticular = $scope.parenchymalDescriptors[0].reticular;
+        $scope.predominantAbnormalityNodular = $scope.parenchymalDescriptors[0].nodular;
+        $scope.predominantAbnormalityBoth = $scope.parenchymalDescriptors[0].both;
+        $scope.predominantAbnormalityNone = $scope.parenchymalDescriptors[0].none;
+
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
+
+    $scope.submit = function () {
+        //document.getElementById('submitDetails').value = "Submitting...";
+
+        var data = $.param({
+            descriptors: [
+                {
+                    zonalDominance: [
+                        {
+                            name: "Cranio-caudal Involvement",
+                            basal: $scope.basal,
+                            upper: $scope.upper,
+                            middle: $scope.middle,
+                            none: $scope.ccNone
+                        },
+                        {
+                            name: "Antero-Posterior Distribution",
+                            posterior: $scope.posterior,
+                            anterior: $scope.anterior,
+                            none: $scope.apNone
+                        },
+                        {
+                            name: "Left-Right Predominance",
+                            symmetrical: $scope.symmetrical,
+                            asymmetrical: $scope.asymmetrical
+                        },
+                        {
+                            name: "Central vs Peripheral Dominance",
+                            central: $scope.central,
+                            peripheral: $scope.peripheral,
+                            none: $scope.cpNone
+                        }
+                    ]
+                }]
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'Update': editing,
+                '_id': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
+            console.log(data);
+            $location.path('/descriptors2');
+        }).error(function (data, status, headers, config) {
+            $log.log(status);
+        });
+    }
+}
+
+descriptorsController1.$inject = ['$scope', '$http', '$log', '$location'];
 
 function descriptorsController($scope, $http, $log, $location) {
     // Gets descriptors from /routes/api/descriptors for questions
@@ -214,7 +398,7 @@ function descriptorsController($scope, $http, $log, $location) {
 
         // Honeycombing vs Emphysema
         $scope.honeycombing = data.descriptors[1].parenchymalDescriptors[5];
-        $scope.emphysema = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema;
+        $scope.emphysemaName = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema;
         $scope.listOptions = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema[0]);
 
 
@@ -331,8 +515,8 @@ function descriptorsController($scope, $http, $log, $location) {
 
         $http.post("/database/documents/descriptors", data, config).success(function (data, status) {
 
-            $location.path('/diagnoses');
 
+            $location.path('/diagnoses');
         }).error(function (data, status, headers, config) {
             $log.log(status);
         });

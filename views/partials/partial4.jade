@@ -37,8 +37,8 @@
                             option {{ apName[3] | capitalize }}
 
                         label(class="label", for="lrPredominance") {{ zonalDominance[2].name }}:
-                        select(ng-model="apDistribution", class="form-control", id="lrPredominance")
-                            option(ng-model="anterior") {{ lrName[1] | capitalize }}
+                        select(ng-model="lrPredominance", class="form-control", id="lrPredominance")
+                            option {{ lrName[1] | capitalize }}
                             option {{ lrName[2] | capitalize }}
 
                         label(class="label", for="cpDominance") {{ zonalDominance[3].name }}:
@@ -95,7 +95,7 @@
                     textarea(class="form-control comment", ng-model="tb2Comment", placeholder="Comment...", id="tb2Comment")
 
                 div(class="col-lg-1 form-group")
-                    a(href="/descriptors2", class="form-control btn btn-success")
+                    button(type="submit", class="form-control btn btn-success")
                         span(class="glyphicon glyphicon-circle-arrow-right")
 
         .col-lg-12

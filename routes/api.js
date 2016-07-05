@@ -4,104 +4,104 @@
 exports.descriptors = function (req, res) {
     res.json(
         {
-            "descriptors": [
+            descriptors: [
                 {
-                    "zonalDominance": [
+                    zonalDominance: [
                         {
-                            "name": "Cranio-caudal Involvement",
-                            "basal": false,
-                            "upper": false,
-                            "middle": false,
-                            "none": false
+                            name: "Cranio-caudal Involvement",
+                            basal: false,
+                            upper: false,
+                            middle: false,
+                            none: false
                         },
                         {
-                            "name": "Antero-Posterior Distribution",
-                            "posterior": false,
-                            "anterior": false,
-                            "none": false
+                            name: "Antero-Posterior Distribution",
+                            posterior: false,
+                            anterior: false,
+                            none: false
                         },
                         {
-                            "name": "Left-Right Predominance",
-                            "symmetrical": false,
-                            "asymmetrical": false
+                            name: "Left-Right Predominance",
+                            symmetrical: false,
+                            asymmetrical: false
                         },
                         {
-                            "name": "Central vs Peripheral Dominance",
-                            "central": false,
-                            "peripheral": false,
-                            "none": false
+                            name: "Central vs Peripheral Dominance",
+                            central: false,
+                            peripheral: false,
+                            none: false
                         }
                     ]
                 },
                 {
-                    "parenchymalDescriptors": [
+                    parenchymalDescriptors: [
                         {
-                            "name": "Predominant Abnormality",
-                            "reticular": false,
-                            "nodular": false,
-                            "both": false,
-                            "none": false
+                            name: "Predominant Abnormality",
+                            reticular: false,
+                            nodular: false,
+                            both: false,
+                            none: false
                         },
                         {
-                            "name": "Ground-glass opacification (GGO)",
-                            "present": false,
-                            "significant": false,
-                            "none": false,
-                            "comment": ""
+                            name: "Ground-glass opacification (GGO)",
+                            present: false,
+                            significant: false,
+                            none: false,
+                            comment: ""
                         },
                         {
-                            "name": "Concordance of GGO & reticulation",
-                            "present": false,
-                            "significant": false,
-                            "none": false,
-                            "comment": ""
+                            name: "Concordance of GGO & reticulation",
+                            present: false,
+                            significant: false,
+                            none: false,
+                            comment: ""
                         },
                         {
-                            "peribronchovascularComponent": [
+                            peribronchovascularComponent: [
                                 {
-                                    "name": "Traction bronchiectasis",
-                                    "present": false,
-                                    "significant": false,
-                                    "none": false,
-                                    "comment": ""
+                                    name: "Traction bronchiectasis",
+                                    present: false,
+                                    significant: false,
+                                    none: false,
+                                    comment: ""
                                 },
                                 {
-                                    "name": "Traction bronchiolectasis",
-                                    "present": false,
-                                    "significant": false,
-                                    "none": false,
-                                    "comment": ""
+                                    name: "Traction bronchiolectasis",
+                                    present: false,
+                                    significant: false,
+                                    none: false,
+                                    comment: ""
                                 },
                                 {
-                                    "name": "Airway plugging",
-                                    "present": false,
-                                    "significant": false,
-                                    "none": false,
-                                    "comment": ""
+                                    name: "Airway plugging",
+                                    present: false,
+                                    significant: false,
+                                    none: false,
+                                    comment: ""
                                 },
                                 {
-                                    "name": "Mosaicism",
-                                    "present": false,
-                                    "significant": false,
-                                    "none": false,
-                                    "comment": ""
+                                    name: "Mosaicism",
+                                    present: false,
+                                    significant: false,
+                                    none: false,
+                                    comment: ""
                                 },
                                 {
-                                    "name": "Evidence of consolidation",
-                                    "present": false,
-                                    "significant": false,
-                                    "none": false,
-                                    "comment": ""
+                                    name: "Evidence of consolidation",
+                                    present: false,
+                                    significant: false,
+                                    none: false,
+                                    comment: ""
                                 }
                             ],
-                            "name": "Peribronchovascular component"
+                            name: "Peribronchovascular component"
                         },
                         {
-                            "nodularAbnormalities": {
-                                "name": "Nodular Abnormalities",
-                                "present": false,
-                                "ifPresent": {
-                                    "extensive/limited": false,
+                            nodularAbnormalities: {
+                                name: "Nodular Abnormalities",
+                                present: false,
+                                ifPresent: {
+                                    "extensive-limited": false,
                                     "perilymphatic": false,
                                     "centrilobular": false,
                                     "treeInBud": false,
