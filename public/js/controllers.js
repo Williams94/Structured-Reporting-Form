@@ -81,12 +81,20 @@ MyCtrl2.$inject = [];
 // Controller for partial3.jade
 function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
-    var zonalDominance;
+    var zonalDominance,
+        parenchymalDescriptors,
+        peribronchovascularComponent,
+        nodularAbnormalities,
+        honeycombingVSemphysema;
 
     // Gets descriptors from /routes/api/descriptors for question names used on the client-side
     $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
 
         zonalDominance = data.descriptors[0].zonalDominance;
+        parenchymalDescriptors = data.descriptors[1].parenchymalDescriptors;
+        peribronchovascularComponent = data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent;
+        nodularAbnormalities = data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities;
+        honeycombingVSemphysema = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema;
 
 
     }).error(function (data, status, headers, config) {
@@ -98,6 +106,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
     var date = new Date();
 
+    // If the user is editing the report then their details will be loaded into the input otherwise leave it blank
     if (editing) {
         $scope.firstName = currentReport.author.firstName;
         $scope.lastName = currentReport.author.lastName;
@@ -193,6 +202,150 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                                 none: zonalDominance[3].none
                             }
                         ]
+                    },
+                    {
+                        parenchymalDescriptors: [
+                            {
+                                name: parenchymalDescriptors[0].name,
+                                reticular: parenchymalDescriptors[0].reticular,
+                                nodular: parenchymalDescriptors[0].nodular,
+                                both: parenchymalDescriptors[0].both,
+                                none: parenchymalDescriptors[0].none
+                            },
+                            {
+                                name: parenchymalDescriptors[1].name,
+                                present: parenchymalDescriptors[1].present,
+                                significant: parenchymalDescriptors[1].significant,
+                                none: parenchymalDescriptors[1].none,
+                                comment: parenchymalDescriptors[1].comment
+                            },
+                            {
+                                name: parenchymalDescriptors[2].name,
+                                present: parenchymalDescriptors[2].present,
+                                significant: parenchymalDescriptors[2].significant,
+                                none: parenchymalDescriptors[2].none,
+                                comment: parenchymalDescriptors[2].comment
+                            },
+                            {
+                                peribronchovascularComponent: [
+                                    {
+                                        name: peribronchovascularComponent[0].name,
+                                        present: peribronchovascularComponent[0].present,
+                                        significant: peribronchovascularComponent[0].significant,
+                                        none: peribronchovascularComponent[0].none,
+                                        comment: peribronchovascularComponent[0].comment
+                                    },
+                                    {
+                                        name: peribronchovascularComponent[1].name,
+                                        present: peribronchovascularComponent[1].present,
+                                        significant: peribronchovascularComponent[1].significant,
+                                        none: peribronchovascularComponent[1].none,
+                                        comment: peribronchovascularComponent[1].comment
+                                    },
+                                    {
+                                        name: peribronchovascularComponent[2].name,
+                                        present: peribronchovascularComponent[2].present,
+                                        significant: peribronchovascularComponent[2].significant,
+                                        none: peribronchovascularComponent[2].none,
+                                        comment: peribronchovascularComponent[2].comment
+                                    },
+                                    {
+                                        name: peribronchovascularComponent[3].name,
+                                        present: peribronchovascularComponent[3].present,
+                                        significant: peribronchovascularComponent[3].significant,
+                                        none: peribronchovascularComponent[3].none,
+                                        comment: peribronchovascularComponent[3].comment
+                                    },
+                                    {
+                                        name: peribronchovascularComponent[4].name,
+                                        present: peribronchovascularComponent[4].present,
+                                        significant: peribronchovascularComponent[4].significant,
+                                        none: peribronchovascularComponent[4].none,
+                                        comment: peribronchovascularComponent[4].comment
+                                    }
+                                ],
+                                name: "Peribronchovascular component"
+                            },
+                            {
+                                nodularAbnormalities: {
+                                    name: nodularAbnormalities.name,
+                                    present: nodularAbnormalities.present,
+                                    ifPresent: {
+                                        "extensive-limited": nodularAbnormalities.ifPresent.extensive,
+                                        "perilymphatic": nodularAbnormalities.ifPresent.perilymphatic,
+                                        "centrilobular": nodularAbnormalities.ifPresent.centrilobular,
+                                        "treeInBud": nodularAbnormalities.ifPresent.treeInBud,
+                                        "fissural": nodularAbnormalities.ifPresent.fissural,
+                                        "random": nodularAbnormalities.ifPresent.random
+                                    }
+                                }
+                            },
+                            {
+                                "honeycombingVSemphysema": {
+                                    "emphysema": [
+                                        {
+                                            "name": honeycombingVSemphysema.emphysema[0].name,
+                                            "present": honeycombingVSemphysema.emphysema[0].present,
+                                            "significant": honeycombingVSemphysema.emphysema[0].significant,
+                                            "none": honeycombingVSemphysema.emphysema[0].none,
+                                            "comment": honeycombingVSemphysema.emphysema[0].comment
+                                        },
+                                        {
+                                            "name": honeycombingVSemphysema.emphysema[1].name,
+                                            "present": honeycombingVSemphysema.emphysema[1].present,
+                                            "significant": honeycombingVSemphysema.emphysema[1].significant,
+                                            "none": honeycombingVSemphysema.emphysema[1].none,
+                                            "comment": honeycombingVSemphysema.emphysema[1].comment
+
+                                        },
+                                        {
+                                            "name": honeycombingVSemphysema.emphysema[2].name,
+                                            "present": honeycombingVSemphysema.emphysema[2].present,
+                                            "significant": honeycombingVSemphysema.emphysema[2].significant,
+                                            "none": honeycombingVSemphysema.emphysema[2].none,
+                                            "comment": honeycombingVSemphysema.emphysema[2].comment
+                                        },
+                                        {
+                                            "name": honeycombingVSemphysema.emphysema[3].name,
+                                            "present": honeycombingVSemphysema.emphysema[3].present,
+                                            "significant": honeycombingVSemphysema.emphysema[3].significant,
+                                            "none": honeycombingVSemphysema.emphysema[3].none,
+                                            "comment": honeycombingVSemphysema.emphysema[3].comment
+                                        },
+                                        {
+                                            "name": honeycombingVSemphysema.emphysema[4].name,
+                                            "present": honeycombingVSemphysema.emphysema[4].present,
+                                            "significant": honeycombingVSemphysema.emphysema[4].significant,
+                                            "none": honeycombingVSemphysema.emphysema[4].none,
+                                            "comment": honeycombingVSemphysema.emphysema[4].comment
+                                        }
+                                    ],
+                                    "discreteLungCysts": {
+                                        "name": honeycombingVSemphysema.discreteLungCysts.name,
+                                        "present": honeycombingVSemphysema.discreteLungCysts.present,
+                                        "significant": honeycombingVSemphysema.discreteLungCysts.significant,
+                                        "none": honeycombingVSemphysema.discreteLungCysts.none,
+                                        "comment": honeycombingVSemphysema.discreteLungCysts.comment
+                                    },
+                                    "microcysticHoneycombing": {
+                                        "name": honeycombingVSemphysema.microcysticHoneycombing.name,
+                                        "present": honeycombingVSemphysema.microcysticHoneycombing.present,
+                                        "significant": honeycombingVSemphysema.microcysticHoneycombing.significant,
+                                        "none": honeycombingVSemphysema.microcysticHoneycombing.none,
+                                        "comment": honeycombingVSemphysema.microcysticHoneycombing.comment
+                                    },
+                                    "coarseHoneycombing": {
+                                        "name": honeycombingVSemphysema.coarseHoneycombing.name,
+                                        "present": honeycombingVSemphysema.coarseHoneycombing.present,
+                                        "significant": honeycombingVSemphysema.coarseHoneycombing.significant,
+                                        "none": honeycombingVSemphysema.coarseHoneycombing.none,
+                                        "comment": honeycombingVSemphysema.coarseHoneycombing.comment
+                                    }
+
+                                },
+                                "name": "Honeycombing vs emphysema"
+                            }
+                        ]
                     }
             ]
             });
@@ -231,7 +384,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             $scope.deleteButtonSpanClass = "glyphicon glyphicon-ok";
             $scope.deleteButtonValue = "Deleted ";
             $timeout(function () {
-                $location.path('/');        // Need to change this when implementing the login system
+                $location.path('/view1');        // Need to change this when implementing the login system
 
             }, 1000);
         }).error(function (data, status) {
@@ -248,12 +401,10 @@ function descriptorsController1($scope, $http, $log, $location) {
     // Gets descriptors from /routes/api/descriptors for question names used on the client-side
     $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
 
-        //$log.log(data);
-
         $scope.data = data;
 
-        /********* Names and data for descriptors questions ************/
-            // Zonal Dominance data needed for questions
+    /********* Names and data for descriptors questions ************/
+        // Zonal Dominance data needed for questions
         $scope.zonalDominance = data.descriptors[0].zonalDominance;
         $scope.ccName = Object.getOwnPropertyNames($scope.zonalDominance[0]);
         $scope.apName = Object.getOwnPropertyNames($scope.zonalDominance[1]);
@@ -271,76 +422,127 @@ function descriptorsController1($scope, $http, $log, $location) {
         $scope.tbName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0]);
         $scope.tb2Name = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1]);
 
-
-        /************ Bound variables ***************/
-        /**** Zonal Dominance ******/
-        // Cranio-caudal Involvement bound variables
-        $scope.basal = currentReport.descriptors[0].zonalDominance[0].basal;
-        $scope.upper = currentReport.descriptors[0].zonalDominance[0].upper;
-        $scope.middle = currentReport.descriptors[0].zonalDominance[0].middle;
-        $scope.ccNone = currentReport.descriptors[0].zonalDominance[0].none;
-
-            // Antero-Posterior Distribution bound variables
-        $scope.anterior = currentReport.descriptors[0].zonalDominance[1].anterior;
-        $scope.posterior = currentReport.descriptors[0].zonalDominance[1].posterior;
-        $scope.apNone = currentReport.descriptors[0].zonalDominance[1].none;
-
-        // Left-Right Predominance bound variables
-        $scope.symmetrical = currentReport.descriptors[0].zonalDominance[2].symmetrical;
-        $scope.asymmetrical = currentReport.descriptors[0].zonalDominance[2].asymmetrical;
-
-        // Central vs Peripheral Dominance
-        $scope.central = currentReport.descriptors[0].zonalDominance[3].central;
-        $scope.peripheral = currentReport.descriptors[0].zonalDominance[3].peripheral;
-        $scope.cpNone = currentReport.descriptors[0].zonalDominance[3].none;
-
-        /**** Parenchymal Descriptors ****/
-            // Predominant Abnormality
-        $scope.predominantAbnormalityReticular = $scope.parenchymalDescriptors[0].reticular;
-        $scope.predominantAbnormalityNodular = $scope.parenchymalDescriptors[0].nodular;
-        $scope.predominantAbnormalityBoth = $scope.parenchymalDescriptors[0].both;
-        $scope.predominantAbnormalityNone = $scope.parenchymalDescriptors[0].none;
-
-
     }).error(function (data, status, headers, config) {
         $log.log(status);
         $scope.descriptors = 'Error!'
     });
 
+    /************ Bound variables ***************/
+    /**** Zonal Dominance ******/
+    // Cranio-caudal Involvement bound variables
+    $scope.basal = currentReport.descriptors.zonalDominance.ccInvolvement.basal;
+    $scope.upper = currentReport.descriptors.zonalDominance.ccInvolvement.upper;
+    $scope.middle = currentReport.descriptors.zonalDominance.ccInvolvement.middle;
+    $scope.ccNone = currentReport.descriptors.zonalDominance.ccInvolvement.none;
+
+    // Antero-Posterior Distribution bound variables
+    $scope.anterior = currentReport.descriptors.zonalDominance.apDistribution.anterior;
+    $scope.posterior = currentReport.descriptors.zonalDominance.apDistribution.posterior;
+    $scope.apNone = currentReport.descriptors.zonalDominance.apDistribution.none;
+
+    // Left-Right Predominance bound variables
+    $scope.symmetrical = currentReport.descriptors.zonalDominance.lrPredominance.symmetrical;
+    $scope.asymmetrical = currentReport.descriptors.zonalDominance.lrPredominance.asymmetrical;
+
+    // Central vs Peripheral Dominance
+    $scope.central = currentReport.descriptors.zonalDominance.cpDominance.central;
+    $scope.peripheral = currentReport.descriptors.zonalDominance.cpDominance.peripheral;
+    $scope.cpNone = currentReport.descriptors.zonalDominance.cpDominance.none;
+
+    /**** Parenchymal Descriptors ****/
+    // Predominant Abnormality
+    $scope.predominantAbnormalityReticular = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.reticular;
+    $scope.predominantAbnormalityNodular = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.nodular;
+    $scope.predominantAbnormalityBoth = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.both;
+    $scope.predominantAbnormalityNone = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.none;
+
+    // Ground-Glass Opacification
+    $scope.ggoPresent = currentReport.descriptors.parenchymalDescriptors.ggo.present;
+    $scope.ggoSignificant = currentReport.descriptors.parenchymalDescriptors.ggo.significant;
+    $scope.ggoNone = currentReport.descriptors.parenchymalDescriptors.ggo.none;
+    $scope.ggoComment = currentReport.descriptors.parenchymalDescriptors.ggo.comment;
+
+    // Concordance of GGO & reticulation
+    $scope.ggorPresent = currentReport.descriptors.parenchymalDescriptors.ggoReticulation.present;
+    $scope.ggorSignificant = currentReport.descriptors.parenchymalDescriptors.ggoReticulation.significant;
+    $scope.ggorNone = currentReport.descriptors.parenchymalDescriptors.ggoReticulation.none;
+    $scope.ggorComment = currentReport.descriptors.parenchymalDescriptors.ggoReticulation.comment;
+
+    // Peribronchovascular Component
+    // Traction bronchiectasis
+    $scope.tbPresent = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiectasis.present;
+    $scope.tbSignificant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiectasis.significant;
+    $scope.tbNone = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiectasis.none;
+    $scope.tbComment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiectasis.comment;
+
+    // Traction bronchiolectasis
+    $scope.tb2Present = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.present;
+    $scope.tb2Significant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.significant;
+    $scope.tb2None = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.none;
+    $scope.tb2Comment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
 
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
 
         var data = $.param({
-            descriptors: [
-                {
-                    zonalDominance: [
-                        {
-                            name: "Cranio-caudal Involvement",
-                            basal: $scope.basal,
-                            upper: $scope.upper,
-                            middle: $scope.middle,
-                            none: $scope.ccNone
+            descriptors: {
+                zonalDominance: {
+                    ccInvolvement: {
+                        basal: $scope.basal,
+                        upper: $scope.upper,
+                        middle: $scope.middle,
+                        none: $scope.ccNone
+                    },
+                    apDistribution: {
+                        posterior: $scope.posterior,
+                        anterior: $scope.anterior,
+                        none: $scope.apNone
+                    },
+                    lrPredominance: {
+                        symmetrical: $scope.symmetrical,
+                        asymmetrical: $scope.asymmetrical
+                    },
+                    cpDominance: {
+                        central: $scope.basal,
+                        peripheral: $scope.basal,
+                        none: $scope.cpNone
+                    }
+                },
+                parenchymalDescriptors: {
+                    predominantAbnormality: {
+                        reticular: $scope.predominantAbnormalityReticular,
+                        nodular: $scope.predominantAbnormalityNodular,
+                        both: $scope.predominantAbnormalityBoth,
+                        none: $scope.predominantAbnormalityNone
+                    },
+                    ggo: {
+                        present: $scope.ggoPresent,
+                        significant: $scope.ggoSignificant,
+                        none: $scope.ggoNone,
+                        comment: $scope.ggoComment
+                    },
+                    ggoReticulation: {
+                        present: $scope.ggorPresent,
+                        significant: $scope.ggorSignificant,
+                        none: $scope.ggorNone,
+                        comment: $scope.ggorComment
+                    },
+                    peribronchovascularComponent: {
+                        tractionBronchiectasis: {
+                            present: $scope.tbPresent,
+                            significant: $scope.tbSignificant,
+                            none: $scope.tbNone,
+                            comment: $scope.tbComment
                         },
-                        {
-                            name: "Antero-Posterior Distribution",
-                            posterior: $scope.posterior,
-                            anterior: $scope.anterior,
-                            none: $scope.apNone
-                        },
-                        {
-                            name: "Left-Right Predominance",
-                            symmetrical: $scope.symmetrical,
-                            asymmetrical: $scope.asymmetrical
-                        },
-                        {
-                            name: "Central vs Peripheral Dominance",
-                            central: $scope.central,
-                            peripheral: $scope.peripheral,
-                            none: $scope.cpNone
+                        tractionBronchiolectasis: {
+                            present: $scope.tb2Present,
+                            significant: $scope.tb2Significant,
+                            none: $scope.tb2None,
+                            comment: $scope.tb2Comment
                         }
-                    ]
-                }]
+                    }
+                }
+            }
         });
 
         config = {
@@ -358,6 +560,8 @@ function descriptorsController1($scope, $http, $log, $location) {
             $log.log(status);
         });
     }
+
+
 }
 
 descriptorsController1.$inject = ['$scope', '$http', '$log', '$location'];

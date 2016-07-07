@@ -133,6 +133,14 @@ tr td:hover {
     margin-top: 355px;
 }
 
+.checkboxLabel {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-left: 5px;
+}
 /* partial5.jade css for html form */
 #middleCol2 {
     margin-top: 37px;

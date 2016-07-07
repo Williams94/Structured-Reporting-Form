@@ -176,7 +176,8 @@ exports.descriptors = function (req, res) {
                             "name": "Honeycombing vs emphysema"
                         }
                     ]
-                }]
+                }
+            ]
         }
     )
 };
