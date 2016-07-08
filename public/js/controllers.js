@@ -486,6 +486,8 @@ function descriptorsController1($scope, $http, $log, $location) {
     $scope.tb2Significant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.significant;
     $scope.tb2None = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.none;
     $scope.tb2Comment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
+	
+	console.log(currentReport._id);
 
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
@@ -555,10 +557,13 @@ function descriptorsController1($scope, $http, $log, $location) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
                 'Update': editing,
-                '_id': currentReport._id
+                '_id': currentReport._id,
+		'reportID': currentReport._id
             }
         };
-
+	
+	console.log(config.headers._id);
+	
         $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
             console.log(data);
             $location.path('/descriptors2');

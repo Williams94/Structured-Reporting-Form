@@ -245,9 +245,10 @@ app.post('/database/documents/descriptors', function (req, res) {
 });
 
 app.post('/database/documents/descriptors1', function (req, res) {
-    models.reportModel.findById(req.headers._id, function (err, doc) {
+	console.log(req.headers);
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " searching report for descriptors1");
-
+	
         console.log(doc);
         doc.descriptors.zonalDominance.ccInvolvement.basal = req.body.descriptors.zonalDominance.ccInvolvement.basal;
         doc.descriptors.zonalDominance.ccInvolvement.upper = req.body.descriptors.zonalDominance.ccInvolvement.upper;
