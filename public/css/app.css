@@ -110,6 +110,14 @@ tr td:hover {
     margin-top: 300px;
 }
 
+.level2 {
+    margin-left: 10px;
+}
+
+.level3 {
+    margin-left: 15px;
+}
+
 /* partial4.jade css form html form */
 .comment {
     margin-top: 5px;
@@ -117,11 +125,12 @@ tr td:hover {
 
 #middleCol {
     margin-right: 5px;
+    margin-left: 15px;
 }
 
 #pcName {
     font-size: 16px;
-    margin-top: 43px;
+    margin-top: 47px;
 }
 
 #pcName2 {

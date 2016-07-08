@@ -111,6 +111,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.firstName = currentReport.author.firstName;
         $scope.lastName = currentReport.author.lastName;
         $scope.level = currentReport.level;
+        $scope.mdt = currentReport.mdt;
         $scope.dateCreated = currentReport.created;
         $scope.referringPhysician = currentReport.referringPhysician;
         $scope.caseID = currentReport.caseID;
@@ -118,6 +119,9 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.firstName = "";
         $scope.lastName = "";
         $scope.level = "";
+        $scope.mdt = {
+            regular: false
+        };
         $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
         $scope.referringPhysician = "";
         $scope.caseID = caseID;
@@ -141,6 +145,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                 lastName: $scope.lastName,
                 created: $scope.dateCreated,
                 level: $scope.level,
+                mdt: $scope.mdt,
                 referringPhysician: $scope.referringPhysician,
                 caseID: caseID
             });
@@ -172,6 +177,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                 lastName: $scope.lastName,
                 created: $scope.dateCreated,
                 level: $scope.level,
+                mdt: $scope.mdt,
                 referringPhysician: $scope.referringPhysician,
                 caseID: caseID,
                 descriptors: [

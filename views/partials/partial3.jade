@@ -2,7 +2,7 @@
     .row
         .col-lg-12
             form(class="form-horizontal", ng-submit="submit()")
-                div(class="col-md-4 form-group")
+                div(class="col-md-3 form-group")
                     h2 Please enter your details:
                     label(class="label", for="firstName") First name:
                     input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
@@ -10,9 +10,19 @@
                     input(type="name", ng-model="lastName", class="form-control", id="lastName", placeholder="Last name")
                     label(class="label", for="level") Experience level:
                     select(ng-model="level", class="form-control", id="level")
-                        option Expert
-                        option Intermediate
-                        option Novice
+                        option Radiologist
+                            option(class="level2") -----Consultant
+                                option(class="level3") ----------Thoracic
+                                option(class="level3") ----------Other
+                            option(class="level2") -----Other
+                        option Other
+                    label(class="label", for="mdt") Are you regularly part of lung MDT meetings?
+                    input(type="checkbox", ng-model="mdt.regular", id="mdt", ng-checked="mdt.regular", value="true")
+                    | Yes
+                    br
+                    input(type="checkbox", ng-model="mdt.regular", ng-checked="!mdt.regular", value="false")
+                    | No
+                    br
                     label(class="label", for="dateCreated") Date created:
                     input(ng-model="dateCreated", class="form-control", id="dateCreated", value="{{ dateCreated }}", readonly)
                     label(class="label", for="referringPhysician") Referring Physician

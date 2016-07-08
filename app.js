@@ -59,6 +59,7 @@ app.post('/database/documents/saveNew', function (req, res) {
         author: {firstName: req.body.firstName, lastName: req.body.lastName},
         created: req.body.created,
         level: req.body.level,
+        mdt: req.body.mdt,
         referringPhysician: req.body.referringPhysician,
         caseID: req.body.caseID,
         descriptors: {
