@@ -22,26 +22,36 @@ function AppCtrl($scope, $http, $log) {
 // Controller for partial1.jade
 function MyCtrl1($scope, $http, $log, $location) {
     editing = false;
+
     // Provides case data but could use http for external case data
     $scope.collection = [{
         caseID: 1,
         referringPhysician: "Dr. Jones",
         date: "20/06/2016 15:30",
-        patient: "xxxxx xxxxx",
-        status: "waiting"
+        patient: "xxxxx xxxxx"
     }, {
         caseID: 2,
         referringPhysician: "Dr. Stephenson",
         date: "24/06/2016 11:20",
-        patient: "xxxxx xxxxx",
-        status: "waiting"
+        patient: "xxxxx xxxxx"
     }, {
         caseID: 3,
         referringPhysician: "Dr. Davies",
         date: "26/06/2016 12:55",
-        patient: "xxxxx xxxxx",
-        status: "waiting"
+        patient: "xxxxx xxxxx"
     }];
+
+    $scope.status = function (caseID, reports) {
+        if (reports != undefined) {
+            var status = "waiting";
+            for (var i = 0; i < reports.length; i++) {
+                if (reports[i].caseID == caseID) {
+                    status = "reported";
+                }
+            }
+            return status
+        }
+    };
 
     $scope.startNewReport = function (caseId) {
         caseID = caseId;
@@ -50,7 +60,6 @@ function MyCtrl1($scope, $http, $log, $location) {
     $http.post("/database/search/reports").success(function (data, status) {
         console.log("Reports successfully retrieved " + data);
         $scope.reports = data;
-
     }).error(function (data, status, headers, config) {
         $log.log(status);
     });
@@ -820,166 +829,3 @@ function descriptorsController3($scope, $http, $log, $location) {
     }
 }
 descriptorsController3.$inject = ['$scope', '$http', '$log', '$location'];
-
-function descriptorsController($scope, $http, $log, $location) {
-    // Gets descriptors from /routes/api/descriptors for questions
-    $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
-
-        //$log.log(data);
-
-        $scope.data = data;
-
-        /********* Names and data for descriptors questions ************/
-            // Zonal Dominance data needed for questions
-        $scope.zonalDominance = data.descriptors[0].zonalDominance;
-        $scope.ccName = Object.getOwnPropertyNames($scope.zonalDominance[0]);
-        $scope.apName = Object.getOwnPropertyNames($scope.zonalDominance[1]);
-        $scope.lrName = Object.getOwnPropertyNames($scope.zonalDominance[2]);
-        $scope.cpName = Object.getOwnPropertyNames($scope.zonalDominance[3]);
-
-        // Parenchymal Descriptors data needed for questions
-        $scope.parenchymalDescriptors = data.descriptors[1].parenchymalDescriptors;
-        $scope.paName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[0]);
-        $scope.ggoName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[1]);
-        $scope.ggorName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[2]);
-
-        // Peribronchovascular Component
-        $scope.pcName = data.descriptors[1].parenchymalDescriptors[3];
-        $scope.tbName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0]);
-        $scope.tb2Name = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1]);
-        $scope.airwayPluggingName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[2]);
-        $scope.mosaicismName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[3]);
-        $scope.consolidationName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[4]);
-
-        // Nodular Abnormalities
-        $scope.naName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities);
-        $scope.ifPresentNames = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities.ifPresent);
-
-        // Honeycombing vs Emphysema
-        $scope.honeycombing = data.descriptors[1].parenchymalDescriptors[5];
-        $scope.emphysemaName = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema;
-        $scope.listOptions = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema[0]);
-
-
-        /************ Bound variables ***************/
-        /**** Zonal Dominance ******/
-            // Cranio-caudal Involvement bound variables
-        $scope.basal = $scope.zonalDominance[0].basal;
-        $scope.upper = $scope.zonalDominance[0].upper;
-        $scope.middle = $scope.zonalDominance[0].middle;
-        $scope.ccNone = $scope.zonalDominance[0].none;
-
-        // Antero-Posterior Distribution bound variables
-        $scope.anterior = $scope.zonalDominance[1].anterior;
-        $scope.posterior = $scope.zonalDominance[1].posterior;
-        $scope.apNone = $scope.zonalDominance[1].none;
-
-        // Left-Right Predominance bound variables
-        $scope.symmetrical = $scope.zonalDominance[2].symmetrical;
-        $scope.asymmetrical = $scope.zonalDominance[2].asymmetrical;
-
-        // Central vs Peripheral Dominance
-        $scope.central = $scope.zonalDominance[3].central;
-        $scope.peripheral = $scope.zonalDominance[3].peripheral;
-        $scope.cpNone = $scope.zonalDominance[3].none;
-
-        /**** Parenchymal Descriptors ****/
-            // Predominant Abnormality
-        $scope.predominantAbnormalityReticular = $scope.parenchymalDescriptors[0].reticular;
-        $scope.predominantAbnormalityNodular = $scope.parenchymalDescriptors[0].nodular;
-        $scope.predominantAbnormalityBoth = $scope.parenchymalDescriptors[0].both;
-        $scope.predominantAbnormalityNone = $scope.parenchymalDescriptors[0].none;
-
-        // Ground-glass opacification (GGO)
-        $scope.ggo = $scope.parenchymalDescriptors[1].present;
-        $scope.ggo = $scope.parenchymalDescriptors[1].significant;
-        $scope.ggoComment = $scope.parenchymalDescriptors[1].comment;
-
-        // GGO Reticulation
-        $scope.ggoReticulation = $scope.parenchymalDescriptors[2].present;
-        $scope.ggoReticulation = $scope.parenchymalDescriptors[2].significant;
-        $scope.ggoReticulationComment = $scope.parenchymalDescriptors[2].comment;
-
-        // Peribronchovascular Component
-
-
-        // Nodular Abnormalities
-        $scope.nodularAbnormalities = data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities;
-
-
-    }).error(function (data, status, headers, config) {
-        $log.log(status);
-        $scope.descriptors = 'Error!'
-    });
-
-
-    $scope.submit = function () {
-        //document.getElementById('submitDetails').value = "Submitting...";
-
-        var data = $.param({
-            descriptors: [
-                {
-                    zonalDominance: [
-                        {
-                            name: "Cranio-caudal Involvement",
-                            basal: $scope.basal,
-                            upper: $scope.upper,
-                            middle: $scope.middle,
-                            none: $scope.ccNone
-                        },
-                        {
-                            name: "Antero-Posterior Distribution",
-                            posterior: $scope.posterior,
-                            anterior: $scope.anterior,
-                            none: $scope.apNone
-                        },
-                        {
-                            name: "Left-Right Predominance",
-                            symmetrical: $scope.symmetrical,
-                            asymmetrical: $scope.asymmetrical
-                        },
-                        {
-                            name: "Central vs Peripheral Dominance",
-                            central: $scope.central,
-                            peripheral: $scope.peripheral,
-                            none: $scope.cpNone
-                        }
-                    ]
-                }, {
-                    parenchymalDescriptors: [
-                        {
-                            "name": "Predominant Abnormality",
-                            "reticular": false,
-                            "nodular": false,
-                            "both": false,
-                            "none": false
-                        },
-                        {
-                            "name": "Ground-glass opacification (GGO)",
-                            "present": false,
-                            "significant": false,
-                            "none": false,
-                            "comment": ""
-                        },
-                        {
-                            "name": "Concordance of GGO & reticulation",
-                            "present": false,
-                            "significant": false,
-                            "none": false,
-                            "comment": ""
-                        }
-                    ]
-                }]
-        });
-
-        $http.post("/database/documents/descriptors", data, config).success(function (data, status) {
-
-
-            $location.path('/diagnoses');
-        }).error(function (data, status, headers, config) {
-            $log.log(status);
-        });
-    };
-}
-
-descriptorsController.$inject = ['$scope', '$http', '$log', '$location'];

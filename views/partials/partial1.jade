@@ -16,11 +16,12 @@
                     td {{row.referringPhysician}}
                     td {{row.date}}
                     td {{row.patient}}
-                    td {{row.status}}
+                    td {{status(row.caseID, reports)}}
                     td
                         a(href="/new",class="newReportLink", title="Create new report", data-toggle="tooltip",
                             data-placement="top", ng-click="startNewReport(row.caseID)", tooltip)
                             span(class="glyphicon-plus")
+
                         a(href="/existing", ng-repeat="report in reports", ng-if="report.caseID == row.caseID",
                             title="Edit report created by: {{ report.author.firstName }} {{ report.author.lastName }} on {{ report.created }}",
                             data-toggle="tooltip", data-placement="top", ng-click="editReport(report._id)", tooltip)
