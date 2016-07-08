@@ -10,69 +10,85 @@
                     h4(class="h4") {{ honeycombing.name }}
 
                     label(class="label", for="emphysema") {{ emphysemaName[0].name }}:
-                    br
-                    select(ng-model="emphysema", class="form-control", id="emphysema")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="emphysema")
+                        input(type="checkbox", ng-model="emphysemaPresent", id="emphysemaPresent", ng-checked="emphysemaPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="emphysemaSignificant", id="emphysemaSignificant", ng-checked="emphysemaSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="emphysemaNone", id="emphysemaNone", ng-checked="emphysemaNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="emphysemaComment", placeholder="Comment...", id="emphysemaComment")
 
                     label(class="label", for="centrilobular") {{ emphysemaName[1].name }}:
-                    br
-                    select(ng-model="centrilobular", class="form-control", id="centrilobular")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="centrilobular")
+                        input(type="checkbox", ng-model="centrilobularPresent", id="centrilobularPresent", ng-checked="centrilobularPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="centrilobularSignificant", id="centrilobularSignificant", ng-checked="centrilobularSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="centrilobularNone", id="centrilobularNone", ng-checked="centrilobularNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="centrilobularComment", placeholder="Comment...", id="centrilobularComment")
 
                     label(class="label", for="panlobular") {{ emphysemaName[2].name }}:
-                    br
-                    select(ng-model="panlobular", class="form-control", id="panlobular")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="panlobular")
+                        input(type="checkbox", ng-model="panlobularPresent", id="panlobularPresent", ng-checked="panlobularPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="panlobularSignificant", id="panlobularSignificant", ng-checked="panlobularSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="panlobularNone", id="panlobularNone", ng-checked="panlobularNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="panlobularComment", placeholder="Comment...", id="panlobularComment")
 
                 div(class="col-lg-3 form-group", id="middleCol2")
                     label(class="label", for="panacinar") {{ emphysemaName[3].name }}:
-                    br
-                    select(ng-model="panacinar", class="form-control", id="panacinar")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="panacinar")
+                        input(type="checkbox", ng-model="panacinarPresent", id="panacinarPresent", ng-checked="panacinarPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="panacinarSignificant", id="panacinarSignificant", ng-checked="panacinarSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="panacinarNone", id="panacinarNone", ng-checked="panacinarNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="panacinarComment", placeholder="Comment...", id="panacinarComment")
 
                     label(class="label", for="predominantlyBasal") {{ emphysemaName[4].name }}:
-                    br
-                    select(ng-model="predominantlyBasal", class="form-control", id="predominantlyBasal")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="predominantlyBasal")
+                        input(type="checkbox", ng-model="predominantlyBasalPresent", id="predominantlyBasalPresent", ng-checked="predominantlyBasalPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="predominantlyBasalSignificant", id="predominantlyBasalSignificant", ng-checked="predominantlyBasalSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="predominantlyBasalNone", id="predominantlyBasalNone", ng-checked="predominantlyBasalNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="predominantlyBasalComment", placeholder="Comment...", id="predominantlyBasalComment")
 
                 div(class="col-lg-4 form-group", id="endCol3")
                     label(class="label", for="discreteLungCysts") {{ honeycombing.honeycombingVSemphysema.discreteLungCysts.name }}
-                    br
-                    select(ng-model="discreteLungCysts", class="form-control", id="discreteLungCysts")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="discreteLungCysts")
+                        input(type="checkbox", ng-model="discreteLungCystsPresent", id="discreteLungCystsPresent", ng-checked="discreteLungCystsPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="discreteLungCystsSignificant", id="discreteLungCystsSignificant", ng-checked="discreteLungCystsSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="discreteLungCystsNone", id="discreteLungCystsNone", ng-checked="discreteLungCystsNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="discreteLungCystsComment", placeholder="Comment...", id="discreteLungCystsComment")
 
                     label(class="label", for="microcysticHoneycombing") {{ honeycombing.honeycombingVSemphysema.microcysticHoneycombing.name }}
-                    br
-                    select(ng-model="microcysticHoneycombing", class="form-control", id="microcysticHoneycombing")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="microcysticHoneycombing")
+                        input(type="checkbox", ng-model="microcysticHoneycombingPresent", id="microcysticHoneycombingPresent", ng-checked="microcysticHoneycombingPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="microcysticHoneycombingSignificant", id="microcysticHoneycombingSignificant", ng-checked="microcysticHoneycombingSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="microcysticHoneycombingNone", id="microcysticHoneycombingNone", ng-checked="microcysticHoneycombingNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="microcysticHoneycombingComment", placeholder="Comment...", id="microcysticHoneycombingComment")
 
                     label(class="label", for="coarseHoneycombing") {{ honeycombing.honeycombingVSemphysema.coarseHoneycombing.name }}
-                    br
-                    select(ng-model="coarseHoneycombing", class="form-control", id="coarseHoneycombing")
-                        option {{ listOptions[1] | capitalize }}
-                        option {{ listOptions[2] | capitalize }}
-                        option {{ listOptions[3] | capitalize }}
+                    div(class="checkboxLabel", id="coarseHoneycombing")
+                        input(type="checkbox", ng-model="coarseHoneycombingPresent", id="coarseHoneycombingPresent", ng-checked="coarseHoneycombingPresent")
+                        | {{ listOptions[1] | capitalize }}
+                        input(type="checkbox", ng-model="coarseHoneycombingSignificant", id="coarseHoneycombingSignificant", ng-checked="coarseHoneycombingSignificant")
+                        | {{ listOptions[2] | capitalize }}
+                        input(type="checkbox", ng-model="coarseHoneycombingNone", id="coarseHoneycombingNone", ng-checked="coarseHoneycombingNone")
+                        | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="coarseHoneycombingComment", placeholder="Comment...", id="coarseHoneycombingComment")
 
                 div(class="col-lg-1 form-group")

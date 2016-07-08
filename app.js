@@ -111,7 +111,7 @@ app.post('/database/documents/saveNew', function (req, res) {
                     none: req.body.descriptors[1].parenchymalDescriptors[2].none,
                     comment: req.body.descriptors[1].parenchymalDescriptors[2].comment
                 },
-                peribronchovascularComponent:{
+                peribronchovascularComponent: {
                     name: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent.name,
                     tractionBronchiectasis: {
                         name: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0].name,
@@ -120,7 +120,7 @@ app.post('/database/documents/saveNew', function (req, res) {
                         none: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0].none,
                         comment: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[0].comment
                     },
-                    tractionBronchiolectasis:{
+                    tractionBronchiolectasis: {
                         name: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1].name,
                         present: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1].present,
                         significant: req.body.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[1].significant,
@@ -245,7 +245,6 @@ app.post('/database/documents/descriptors', function (req, res) {
 });
 
 app.post('/database/documents/descriptors1', function (req, res) {
-	console.log(req.headers);
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " searching report for descriptors1");
 	
@@ -301,8 +300,6 @@ app.post('/database/documents/descriptors1', function (req, res) {
 
         doc.save(function (err) {
             if (err) return console.log(err + " error saving updated doc");
-            /*console.log("report descriptors1 updated");
-            console.log(JSON.stringify(doc.descriptors[0].zonalDominance));*/
             callback(doc);
         });
 
@@ -313,6 +310,163 @@ app.post('/database/documents/descriptors1', function (req, res) {
     }
 });
 
+app.post('/database/documents/descriptors2', function (req, res) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
+        if (err) return console.log(err + " searching report for descriptors2");
+
+        // Airway Plugging
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.present
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.present;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.significant
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.significant;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.none
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.none;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.comment
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.comment;
+
+        // Mosaicism
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.present
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.present;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.significant
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.significant;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.none
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.none;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.comment
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.comment;
+
+        // Evidence of consolidation
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.present
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.present;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.significant
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.significant;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.none
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.none;
+        doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.comment
+            = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.comment;
+
+        // Nodular Abnormalities
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.present
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.present;
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent['extensive-limited']
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent['extensive-limited'];
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.perilymphatic
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.perilymphatic;
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.centrilobular
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.centrilobular;
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.treeInBud
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.treeInBud;
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.fissural
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.fissural;
+        doc.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.random
+            = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.random;
+
+        doc.save(function (err) {
+            if (err) return console.log(err + " error saving updated doc");
+            callback(doc);
+        });
+
+    });
+
+    var callback = function (doc) {
+        res.send(doc);
+    }
+});
+
+app.post('/database/documents/descriptors3', function (req, res) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
+        if (err) return console.log(err + " error finding report for descriptors3");
+
+        // Emphysema
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.comment;
+
+        // Centrilobular
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.comment;
+
+        // Panlobular
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.comment;
+
+        // Panacinar
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.comment;
+
+        // Predominantly Basal
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.comment;
+
+        // Discrete Lung Cysts
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.comment;
+
+        // Microcystic Honeycombing
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.comment;
+
+        // Coarse Honeycombing
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.present
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.present;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.significant
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.significant;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.none
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.none;
+        doc.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.comment
+            = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.comment;
+
+        doc.save(function (err) {
+            if (err) return console.log(err + " error saving updated doc");
+            callback(doc);
+        });
+    });
+
+    var callback = function (doc) {
+        res.send(doc);
+    }
+
+});
 app.post('/database/search/reports', function (req, res) {
     models.reportModel.find({}, function (err, docs) {
         if (err) return console.log(err + " search.findReports");

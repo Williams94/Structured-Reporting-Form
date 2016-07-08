@@ -48,7 +48,7 @@ function MyCtrl1($scope, $http, $log, $location) {
     };
 
     $http.post("/database/search/reports").success(function (data, status) {
-        console.log("Reports successfully retrieved " + JSON.stringify(data));
+        console.log("Reports successfully retrieved " + data);
         $scope.reports = data;
 
     }).error(function (data, status, headers, config) {
@@ -182,7 +182,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                 caseID: caseID,
                 descriptors: [
                     {
-                        zonalDominance:[
+                        zonalDominance: [
                             {
                                 name: zonalDominance[0].name,
                                 basal: zonalDominance[0].basal,
@@ -353,7 +353,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                             }
                         ]
                     }
-            ]
+                ]
             });
 
             config = {
@@ -366,7 +366,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             // User details are sent to server side in app.js using http POST request
             $http.post("/database/documents/saveNew", data, config).success(function (data, status) {
                 currentReport = data;
-                console.log("Saved report: " + JSON.stringify(data));
+                console.log("Saved report: " + data);
                 $location.path('/descriptors');
             }).error(function (data, status, headers, config) {
                 $log.log(status);
@@ -402,15 +402,15 @@ newReportCtrl.$inject = ['$scope', '$http', '$log', '$timeout', '$location'];
 
 function descriptorsController1($scope, $http, $log, $location) {
 
-    console.log("Current report: " + JSON.stringify(currentReport));
+    console.log("Current report: " + currentReport);
 
     // Gets descriptors from /routes/api/descriptors for question names used on the client-side
     $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
 
         $scope.data = data;
 
-    /********* Names and data for descriptors questions ************/
-        // Zonal Dominance data needed for questions
+        /********* Names and data for descriptors questions ************/
+            // Zonal Dominance data needed for questions
         $scope.zonalDominance = data.descriptors[0].zonalDominance;
         $scope.ccName = Object.getOwnPropertyNames($scope.zonalDominance[0]);
         $scope.apName = Object.getOwnPropertyNames($scope.zonalDominance[1]);
@@ -435,7 +435,7 @@ function descriptorsController1($scope, $http, $log, $location) {
 
     /************ Bound variables ***************/
     /**** Zonal Dominance ******/
-    // Cranio-caudal Involvement bound variables
+        // Cranio-caudal Involvement bound variables
     $scope.basal = currentReport.descriptors.zonalDominance.ccInvolvement.basal;
     $scope.upper = currentReport.descriptors.zonalDominance.ccInvolvement.upper;
     $scope.middle = currentReport.descriptors.zonalDominance.ccInvolvement.middle;
@@ -456,7 +456,7 @@ function descriptorsController1($scope, $http, $log, $location) {
     $scope.cpNone = currentReport.descriptors.zonalDominance.cpDominance.none;
 
     /**** Parenchymal Descriptors ****/
-    // Predominant Abnormality
+        // Predominant Abnormality
     $scope.predominantAbnormalityReticular = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.reticular;
     $scope.predominantAbnormalityNodular = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.nodular;
     $scope.predominantAbnormalityBoth = currentReport.descriptors.parenchymalDescriptors.predominantAbnormality.both;
@@ -557,8 +557,7 @@ function descriptorsController1($scope, $http, $log, $location) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
                 'Update': editing,
-                '_id': currentReport._id,
-		'reportID': currentReport._id
+                'reportid': currentReport._id
             }
         };
 	
@@ -571,11 +570,256 @@ function descriptorsController1($scope, $http, $log, $location) {
             $log.log(status);
         });
     }
+}
+descriptorsController1.$inject = ['$scope', '$http', '$log', '$location'];
 
+function descriptorsController2($scope, $http, $log, $location) {
 
+    $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
+
+        $scope.names = data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent;
+        $scope.data = data;
+
+        $scope.airwayPluggingName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[2]);
+        $scope.mosaicismName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[3]);
+        $scope.consolidationName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[3].peribronchovascularComponent[4]);
+
+        // Nodular Abnormalities
+        $scope.naName = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities);
+        $scope.ifPresentNames = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[4].nodularAbnormalities.ifPresent);
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
+    // Airway Plugging
+    $scope.airwayPluggingPresent = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.present;
+    $scope.airwayPluggingSignificant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.significant;
+    $scope.airwayPluggingNone = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.none;
+    $scope.airwayPluggingComment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.airwayPluging.comment;
+
+    // Mosaicism
+    $scope.mosaicismPresent = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.present;
+    $scope.mosaicismSignificant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.significant;
+    $scope.mosaicismNone = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.none;
+    $scope.mosaicismComment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.mosaicism.comment;
+
+    // Evidence Of Consolidation
+    $scope.evidenceOfConsolidationPresent = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.present;
+    $scope.evidenceOfConsolidationSignificant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.significant;
+    $scope.evidenceOfConsolidationNone = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.none;
+    $scope.evidenceOfConsolidationComment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.evidenceOfConsolidation.comment;
+
+    // Nodular Abnormalities
+    $scope.nodularAbnormalitiesPresent = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.present;
+    $scope.nodularAbnormalitiesIfPresentExtensive = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent['extensive-limited'];
+    $scope.nodularAbnormalitiesIfPresentPerilymphatic = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.perilymphatic;
+    $scope.nodularAbnormalitiesIfPresentCentrilobular = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.centrilobular;
+    $scope.nodularAbnormalitiesIfPresentTreeInBud = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.treeInBud;
+    $scope.nodularAbnormalitiesIfPresentFissural = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.fissural;
+    $scope.nodularAbnormalitiesIfPresentRandom = currentReport.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.random;
+
+    $scope.submit = function () {
+        //document.getElementById('submitDetails').value = "Submitting...";
+
+        var data = $.param({
+            descriptors: {
+                parenchymalDescriptors: {
+                    peribronchovascularComponent: {
+                        airwayPluging: {
+                            present: $scope.airwayPluggingPresent,
+                            significant: $scope.airwayPluggingSignificant,
+                            none: $scope.airwayPluggingNone,
+                            comment: $scope.airwayPluggingComment
+                        },
+                        mosaicism: {
+                            present: $scope.mosaicismPresent,
+                            significant: $scope.mosaicismSignificant,
+                            none: $scope.mosaicismNone,
+                            comment: $scope.mosaicismComment
+                        },
+                        evidenceOfConsolidation: {
+                            present: $scope.evidenceOfConsolidationPresent,
+                            significant: $scope.evidenceOfConsolidationSignificant,
+                            none: $scope.evidenceOfConsolidationNone,
+                            comment: $scope.evidenceOfConsolidationComment
+                        }
+                    },
+                    nodularAbnormalities: {
+                        present: $scope.nodularAbnormalitiesPresent,
+                        ifPresent: {
+                            "extensive-limited": $scope.nodularAbnormalitiesIfPresentExtensive,
+                            "perilymphatic": $scope.nodularAbnormalitiesIfPresentPerilymphatic,
+                            "centrilobular": $scope.nodularAbnormalitiesIfPresentCentrilobular,
+                            "treeInBud": $scope.nodularAbnormalitiesIfPresentTreeInBud,
+                            "fissural": $scope.nodularAbnormalitiesIfPresentFissural,
+                            "random": $scope.nodularAbnormalitiesIfPresentRandom
+                        }
+                    }
+                }
+            }
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'Update': editing,
+                'reportid': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/descriptors2", data, config).success(function (data, status) {
+            console.log(data);
+            $location.path('/descriptors3');
+        }).error(function (data, status, headers, config) {
+            $log.log(status);
+        });
+    }
 }
 
-descriptorsController1.$inject = ['$scope', '$http', '$log', '$location'];
+descriptorsController2.$inject = ['$scope', '$http', '$log', '$location'];
+
+function descriptorsController3($scope, $http, $log, $location) {
+    $http({method: 'GET', url: '/api/descriptors'}).success(function (data, status, headers, config) {
+
+        // Honeycombing vs Emphysema
+        $scope.honeycombing = data.descriptors[1].parenchymalDescriptors[5];
+        $scope.emphysemaName = data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema;
+        $scope.listOptions = Object.getOwnPropertyNames(data.descriptors[1].parenchymalDescriptors[5].honeycombingVSemphysema.emphysema[0]);
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
+    // Emphysema
+    $scope.emphysemaPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.present;
+    $scope.emphysemaSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.significant;
+    $scope.emphysemaNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.none;
+    $scope.emphysemaComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.emphysema.comment;
+
+    // Centrilobular
+    $scope.centrilobularPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.present;
+    $scope.centrilobularSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.significant;
+    $scope.centrilobularNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.none;
+    $scope.centrilobularComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.centrilobular.comment;
+
+    // Panlobular
+    $scope.panlobularPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.present;
+    $scope.panlobularSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.significant;
+    $scope.panlobularNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.none;
+    $scope.panlobularComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panlobular.comment;
+
+    // Panacinar
+    $scope.panacinarPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.present;
+    $scope.panacinarSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.significant;
+    $scope.panacinarNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.none;
+    $scope.panacinarComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.panacinar.comment;
+
+    // Predominantly basal
+    $scope.predominantlyBasalPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.present;
+    $scope.predominantlyBasalSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.significant;
+    $scope.predominantlyBasalNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.none;
+    $scope.predominantlyBasalComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.emphysema.predominantlyBasal.comment;
+
+    // Discrete Lung Cysts
+    $scope.discreteLungCystsPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.present;
+    $scope.discreteLungCystsSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.significant;
+    $scope.discreteLungCystsNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.none;
+    $scope.discreteLungCystsComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.discreteLungCysts.comment;
+
+    // Microcystic honeycombing
+    $scope.microcysticHoneycombingPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.present;
+    $scope.microcysticHoneycombingSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.significant;
+    $scope.microcysticHoneycombingNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.none;
+    $scope.microcysticHoneycombingComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.microcysticHoneycombing.comment;
+
+    // Coarse honeycombing
+    $scope.coarseHoneycombingPresent = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.present;
+    $scope.coarseHoneycombingSignificant = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.significant;
+    $scope.coarseHoneycombingNone = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.none;
+    $scope.coarseHoneycombingComment = currentReport.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.comment;
+
+    $scope.submit = function () {
+        //document.getElementById('submitDetails').value = "Submitting...";
+
+        var data = $.param({
+            descriptors: {
+                parenchymalDescriptors: {
+                    "honeycombingVSemphysema": {
+                        "emphysema": {
+                            emphysema: {
+                                "present": $scope.emphysemaPresent,
+                                "significant": $scope.emphysemaSignificant,
+                                "none": $scope.emphysemaNone,
+                                "comment": $scope.emphysemaComment
+                            },
+                            centrilobular: {
+                                "present": $scope.centrilobularPresent,
+                                "significant": $scope.centrilobularSignificant,
+                                "none": $scope.centrilobularNone,
+                                "comment": $scope.centrilobularComment
+                            },
+                            panlobular: {
+                                "present": $scope.panlobularPresent,
+                                "significant": $scope.panlobularSignificant,
+                                "none": $scope.panlobularNone,
+                                "comment": $scope.panlobularComment
+                            },
+                            panacinar: {
+                                "present": $scope.panacinarPresent,
+                                "significant": $scope.panacinarSignificant,
+                                "none": $scope.panacinarNone,
+                                "comment": $scope.panacinarComment
+                            },
+                            predominantlyBasal: {
+                                "present": $scope.predominantlyBasalPresent,
+                                "significant": $scope.predominantlyBasalSignificant,
+                                "none": $scope.predominantlyBasalNone,
+                                "comment": $scope.predominantlyBasalComment
+                            }
+                        },
+                        "discreteLungCysts": {
+                            "present": $scope.discreteLungCystsPresent,
+                            "significant": $scope.discreteLungCystsSignificant,
+                            "none": $scope.discreteLungCystsNone,
+                            "comment": $scope.discreteLungCystsComment
+                        },
+                        "microcysticHoneycombing": {
+                            "present": $scope.microcysticHoneycombingPresent,
+                            "significant": $scope.microcysticHoneycombingSignificant,
+                            "none": $scope.microcysticHoneycombingNone,
+                            "comment": $scope.microcysticHoneycombingComment
+                        },
+                        "coarseHoneycombing": {
+                            "present": $scope.coarseHoneycombingPresent,
+                            "significant": $scope.coarseHoneycombingSignificant,
+                            "none": $scope.coarseHoneycombingNone,
+                            "comment": $scope.coarseHoneycombingComment
+                        }
+                    }
+                }
+            }
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'Update': editing,
+                'reportid': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/descriptors3", data, config).success(function (data, status) {
+            console.log(data);
+            //$location.path('/print1');
+        }).error(function (data, status, headers, config) {
+            $log.log(status);
+        });
+    }
+}
+descriptorsController3.$inject = ['$scope', '$http', '$log', '$location'];
 
 function descriptorsController($scope, $http, $log, $location) {
     // Gets descriptors from /routes/api/descriptors for questions

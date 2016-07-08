@@ -7,73 +7,85 @@
         .col-lg-12
             form(class="form-horizontal", ng-submit="submit()")
                 div(class="col-lg-4 form-group")
-                    h4(class="h4", id="pcName2") {{ pcName.name }} continued...
-                    label(class="label", for="airwayPlugging") {{ pcName.peribronchovascularComponent[2].name }}:
-                    br
-                    select(ng-model="airwayPlugging", class="form-control", id="airwayPlugging")
-                        option {{ airwayPluggingName[1] | capitalize }}
-                        option {{ airwayPluggingName[2] | capitalize }}
-                        option {{ airwayPluggingName[3] | capitalize }}
+                    h4(class="h4", id="pcName2") {{ data.descriptors[1].parenchymalDescriptors[3].name }} continued...
+                    label(class="label") {{ names[2].name }}:
+                    div(class="checkboxLabel")
+                        input(type="checkbox", ng-model="airwayPluggingPresent", id="airwayPluggingPresent", ng-checked="airwayPluggingPresent")
+                        | {{ airwayPluggingName[1] | capitalize }}
+                        input(type="checkbox", ng-model="airwayPluggingSignificant", id="airwayPluggingSignificant", ng-checked="airwayPluggingSignificant")
+                        | {{ airwayPluggingName[2] | capitalize }}
+                        input(type="checkbox", ng-model="airwayPluggingNone", id="airwayPluggingNone", ng-checked="airwayPluggingNone")
+                        | {{ airwayPluggingName[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="airwayPluggingComment", placeholder="Comment...", id="airwayPluggingComment")
 
-                    label(class="label", for="mosaicism") {{ pcName.peribronchovascularComponent[3].name }}:
-                    br
-                    select(ng-model="mosaicism", class="form-control", id="mosaicism")
-                        option {{ mosaicismName[1] | capitalize }}
-                        option {{ mosaicismName[2] | capitalize }}
-                        option {{ mosaicismName[3] | capitalize }}
+                    label(class="label") {{ names[3].name }}:
+                    div(class="checkboxLabel")
+                        input(type="checkbox", ng-model="mosaicismPresent", id="mosaicismPresent", ng-checked="mosaicismPresent")
+                        | {{ mosaicismName[1] | capitalize }}
+                        input(type="checkbox", ng-model="mosaicismSignificant", id="mosaicismSignificant", ng-checked="mosaicismSignificant")
+                        | {{ mosaicismName[2] | capitalize }}
+                        input(type="checkbox", ng-model="mosaicismNone", id="mosaicismNone", ng-checked="mosaicismNone")
+                        | {{ mosaicismName[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="mosaicismComment", placeholder="Comment...", id="mosaicismComment")
 
                 div(class="col-lg-4 form-group", id="middleCol2")
-                    label(class="label", for="consolidation", id="consolidationLabel") {{ pcName.peribronchovascularComponent[4].name }}:
-                    br
-                    select(ng-model="consolidation", class="form-control", id="consolidation")
-                        option {{ consolidationName[1] | capitalize }}
-                        option {{ consolidationName[2] | capitalize }}
-                        option {{ consolidationName[3] | capitalize }}
-                    textarea(class="form-control comment", ng-model="consolidationComment", placeholder="Comment...", id="consolidationComment")
+                    label(class="label", id="consolidationLabel") {{ names[4].name }}:
+                    div(class="checkboxLabel")
+                        input(type="checkbox", ng-model="evidenceOfConsolidationPresent", id="evidenceOfConsolidationPresent", ng-checked="evidenceOfConsolidationPresent")
+                        | {{ consolidationName[1] | capitalize }}
+                        input(type="checkbox", ng-model="evidenceOfConsolidationSignificant", id="evidenceOfConsolidationSignificant", ng-checked="evidenceOfConsolidationSignificant")
+                        | {{ consolidationName[2] | capitalize }}
+                        input(type="checkbox", ng-model="evidenceOfConsolidationNone", id="evidenceOfConsolidationNone", ng-checked="evidenceOfConsolidationNone")
+                        | {{ consolidationName[3] | capitalize }}
+                    textarea(class="form-control comment", ng-model="evidenceOfConsolidationComment", placeholder="Comment...", id="evidenceOfConsolidationComment")
 
                 div(class="col-lg-3 form-group", id="endCol2")
 
                     h4(class="h4") {{ nodularAbnormalities.name }}
                     div(class="btn-group btn-group-lg")
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.present", ng-click="nodularAbnormalities.present = !nodularAbnormalities.present",
-                        title="{{ nodularAbnormalities.present }}", data-original-titel="{{ nodularAbnormalities.present }}", data-toggle="tooltip",
-                        data-placement="top", id="naButton", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesPresent", ng-click="nodularAbnormalitiesPresent = !nodularAbnormalitiesPresent",
+                                title="{{ nodularAbnormalitiesPresent }}", data-toggle="tooltip", data-placement="top", id="naButton",
+                                    tooltip) {{ naName[1] | capitalize}}
 
                     br
-                    div(class="form-group", ng-show="nodularAbnormalities.present")
+                    div(class="form-group", ng-show="nodularAbnormalitiesPresent")
                         label(class="label") {{ ifPresentNames[0] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.extensive", ng-click="nodularAbnormalities.ifPresent.extensive = !nodularAbnormalities.ifPresent.extensive",
-                                title="{{ nodularAbnormalities.ifPresent.extensive }}", data-original-titel="{{ nodularAbnormalities.ifPresent.extensive }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentExtensive",
+                                ng-click="nodularAbnormalitiesIfPresentExtensive = !nodularAbnormalitiesIfPresentExtensive",
+                                    title="{{ nodularAbnormalitiesIfPresentExtensive }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
                         br
                         label(class="label") {{ ifPresentNames[1] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.perilymphatic", ng-click="nodularAbnormalities.ifPresent.perilymphatic = !nodularAbnormalities.ifPresent.perilymphatic",
-                                title="{{ nodularAbnormalities.ifPresent.perilymphatic }}", data-original-titel="{{ nodularAbnormalities.ifPresent.perilymphatic }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentPerilymphatic",
+                                ng-click="nodularAbnormalitiesIfPresentPerilymphatic = !nodularAbnormalitiesIfPresentPerilymphatic",
+                                    title="{{ nodularAbnormalitiesIfPresentPerilymphatic }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
                         br
                         label(class="label") {{ ifPresentNames[2] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.centrilobular", ng-click="nodularAbnormalities.ifPresent.centrilobular = !nodularAbnormalities.ifPresent.centrilobular",
-                                title="{{ nodularAbnormalities.ifPresent.centrilobular }}", data-original-titel="{{ nodularAbnormalities.ifPresent.centrilobular }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentCentrilobular",
+                                ng-click="nodularAbnormalitiesIfPresentCentrilobular = !nodularAbnormalitiesIfPresentCentrilobular",
+                                    title="{{ nodularAbnormalitiesIfPresentCentrilobular }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
                         br
                         label(class="label") {{ ifPresentNames[3] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.treeInBud", ng-click="nodularAbnormalities.ifPresent.treeInBud = !nodularAbnormalities.ifPresent.treeInBud",
-                                title="{{ nodularAbnormalities.ifPresent.treeInBud }}", data-original-titel="{{ nodularAbnormalities.ifPresent.treeInBud }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentTreeInBud",
+                                ng-click="nodularAbnormalitiesIfPresentTreeInBud = !nodularAbnormalitiesIfPresentTreeInBud",
+                                    title="{{ nodularAbnormalitiesIfPresentTreeInBud }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
                         br
                         label(class="label") {{ ifPresentNames[4] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.fissural", ng-click="nodularAbnormalities.ifPresent.fissural = !nodularAbnormalities.ifPresent.fissural",
-                                title="{{ nodularAbnormalities.ifPresent.fissural }}", data-original-titel="{{ nodularAbnormalities.ifPresent.fissural }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentFissural",
+                                ng-click="nodularAbnormalitiesIfPresentFissural = !nodularAbnormalitiesIfPresentFissural",
+                                    title="{{ nodularAbnormalitiesIfPresentFissural }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
                         br
                         label(class="label") {{ ifPresentNames[3] | capitalize}}:
-                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalities.ifPresent.random", ng-click="nodularAbnormalities.ifPresent.random = !nodularAbnormalities.ifPresent.random",
-                                title="{{ nodularAbnormalities.ifPresent.random }}", data-original-titel="{{ nodularAbnormalities.ifPresent.random }}", data-toggle="tooltip",
-                                    data-placement="top", tooltip) {{ naName[1] | capitalize}}
+                        button(type="button", class="btn btn-default", ng-model="nodularAbnormalitiesIfPresentRandom",
+                                ng-click="nodularAbnormalitiesIfPresentRandom = !nodularAbnormalitiesIfPresentRandom",
+                                    title="{{ nodularAbnormalitiesIfPresentRandom }}", data-toggle="tooltip",
+                                        data-placement="top", tooltip) {{ naName[1] | capitalize}}
 
 
                 div(class="col-lg-1 form-group")
-                    a(href="/descriptors3", class="form-control btn btn-success", id="submitSecondDescriptors")
+                    button(type="submit", class="form-control btn btn-success", id="submitSecondDescriptors")
                         span(class="glyphicon glyphicon-circle-arrow-right")
