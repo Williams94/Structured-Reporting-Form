@@ -518,8 +518,8 @@ function descriptorsController1($scope, $http, $log, $location) {
                         asymmetrical: $scope.asymmetrical
                     },
                     cpDominance: {
-                        central: $scope.basal,
-                        peripheral: $scope.basal,
+                        central: $scope.central,
+                        peripheral: $scope.peripheral,
                         none: $scope.cpNone
                     }
                 },
@@ -818,10 +818,68 @@ function descriptorsController3($scope, $http, $log, $location) {
 
         $http.post("/database/documents/descriptors3", data, config).success(function (data, status) {
             console.log(data);
-            //$location.path('/print1');
+            $location.path('/print1');
         }).error(function (data, status, headers, config) {
             $log.log(status);
         });
     }
 }
 descriptorsController3.$inject = ['$scope', '$http', '$log', '$location'];
+
+function printController1($scope, $http, $log, $location){
+    $scope.data = "";
+    var data = $.param({
+        _id: currentReport._id
+    });
+    $http.post('/database/search/report', data, config).success(function(data, status){
+        callback(data);
+    }).error(function(data, status){
+        $log.log(status);
+    });
+    var callback = function(data){
+        $scope.data = data;
+        $scope.zonalDominance = $scope.data.descriptors.zonalDominance;
+        $scope.parenchymalDescriptors = $scope.data.descriptors.parenchymalDescriptors;
+        $scope.nodularAbnormalities = data.descriptors.parenchymalDescriptors.nodularAbnormalities;
+        $scope.ifPresent = data.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent;
+        $scope.peribronchovascularComponent = data.descriptors.parenchymalDescriptors.peribronchovascularComponent;
+        $scope.honeycombingVSemphysema = data.descriptors.parenchymalDescriptors.honeycombingVSemphysema;
+
+        console.log($scope.honeycombingVSemphysema);
+    };
+
+
+    $scope.showIf = function(obj){
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (obj[key] && obj.name != "Nodular Abnormalities" && key != 'name' && key != 'none' && obj[key] != '[object Object]'){
+                    return true;
+                } else if (obj[key] == '[object Object]'){
+                    
+                    console.log(key + ": " + JSON.stringify(obj[key]));
+                }
+            }
+        }
+    };
+
+    $scope.findTrueValues = function(obj){
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (obj[key] && key != 'name' && obj[key] != '[object Object]'
+                        && key != 'peribronchovascularComponent' && key != 'nodularAbnormalities' && isNaN(key)){
+                    //console.log(key + ": " + obj[key]);
+                    return key + ": " + obj[key];
+                } else if (obj[key] == '[object Object]'){
+                    for (var k in obj[key]){
+                        if(obj[key].hasOwnProperty(k)){
+                            console.log(k + ": " + obj[k]);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+}
+printController1.$inject = ['$scope', '$http', '$log', '$location'];

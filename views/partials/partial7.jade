@@ -1,0 +1,36 @@
+//
+   Created by rbwilliams on 08/07/2016.
+.jumbotron
+    .row
+        .col-lg-12
+            h2(class="h2") Descriptors Report
+        .col-lg-12
+            div(class="col-md-4")
+                h2(class="reportTitle") 1. Zonal Dominance
+                h4(class="reportSectionsH4", ng-repeat="item in zonalDominance", ng-show="showIf(item)") {{ item.name }}
+                    br
+                    label(class="reportLabel") {{ findTrueValues(item) | capitalize }}
+
+                h2(class="reportTitle") 2. Parenchymal Descriptors
+                h4(class="reportSectionsH4", ng-repeat="item in parenchymalDescriptors", ng-if="showIf(item)") {{ item.name }}
+                    br
+                    label(class="reportLabel") {{ findTrueValues(item) | capitalize }}
+
+
+            div(class="col-md-4 mdCol4")
+                h3(class="reportSectionsH3 ng-scope") Peribronchovascular Component:
+                h4(class="reportSectionsH4", ng-repeat="item in peribronchovascularComponent", ng-if="showIf(item)") {{ item.name }}
+                    br
+                    label(class="reportLabel") {{ findTrueValues(item) | capitalize }}
+
+                h3(class="reportSectionsH3", ng-if="nodularAbnormalities.present") Nodular Abnormalities:
+                    label(class="reportLabel2", ng-repeat="(key, value) in ifPresent", ng-if="value") {{ key | capitalize}}: {{ value }}
+
+
+
+
+            div(class="col-md-4 endCol4")
+                h3(class="reportSectionsH3") Honeycombing vs Emphysema
+                h4(class="reportSectionsH4", ng-repeat="(key, value) in honeycombingVSemphysema", ng-if="showIf(value)") {{ value.name }}
+                    br
+                    label(class="reportLabel") {{ findTrueValues(value) | capitalize }}

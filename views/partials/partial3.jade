@@ -1,6 +1,6 @@
 .jumbotron
     .row
-        .col-lg-12
+        .col-md-12
             form(class="form-horizontal", ng-submit="submit()")
                 div(class="col-md-3 form-group")
                     h2 Please enter your details:
@@ -16,10 +16,11 @@
                                 option(class="level3") ----------Other
                             option(class="level2") -----Other
                         option Other
-                    label(class="label", for="mdt") Are you regularly part of lung MDT meetings?
+
+                div(class="col-md-3", id="middleCol1")
+                    label(class="label", for="mdt") Part of regular lung MDT meetings?
                     input(type="checkbox", ng-model="mdt.regular", id="mdt", ng-checked="mdt.regular", value="true")
                     | Yes
-                    br
                     input(type="checkbox", ng-model="mdt.regular", ng-checked="!mdt.regular", value="false")
                     | No
                     br
@@ -27,7 +28,10 @@
                     input(ng-model="dateCreated", class="form-control", id="dateCreated", value="{{ dateCreated }}", readonly)
                     label(class="label", for="referringPhysician") Referring Physician
                     input(ng-model="referringPhysician", class="form-control", id="referringPhysician")
-                div(class="col-md-4")
+
+                div(class="col-md-3")
+                    br
+                    br
                     h2 Entered details:
                     h3 First name:
                         label(class="label") {{ firstName }}
@@ -35,13 +39,14 @@
                         label(class="label") {{ lastName }}
                     h3 Level:
                         label(class="label") {{ level }}
+                    h3 Lung MDT regular?
+                        label(class="label") {{ mdt.regular }}
                     h3 Date:
                         label(class="label") {{ dateCreated }}
                     h3 Referring Physician:
                         label(class="label") {{ referringPhysician }}
-                div(class="col-md-2")
 
-                div(class="col-md-2")
+                div(class="col-md-3")
                     button(type="submit", class="form-control btn btn-success", id="submitDetails")
                         span(class="glyphicon glyphicon-circle-arrow-right")
                     a(ng-click="deleteReport()", ng-if="editing", class="{{ deleteButtonClass }}", id="deleteButton") {{ deleteButtonValue }}
