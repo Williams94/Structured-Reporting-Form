@@ -88,8 +88,7 @@
                     textarea(class="form-control comment", ng-model="ggorComment", placeholder="Comment...", id="ggorComment")
 
                 div(class="col-lg-4 form-group")
-                    button(type="submit", class="form-control btn btn-success")
-                        span(class="glyphicon glyphicon-circle-arrow-right")
+
                     br
                     h4(class="h4", id="pcName") {{ pcName.name }}
 
@@ -114,7 +113,8 @@
                     textarea(class="form-control comment", ng-model="tb2Comment", placeholder="Comment...", id="tb2Comment")
 
                 div(class="col-lg-1 form-group")
-
+                    button(type="submit", class="form-control btn btn-success", id="submitSecondDescriptors")
+                        span(class="glyphicon glyphicon-circle-arrow-right")
 
         .col-lg-12
             .col-lg-10

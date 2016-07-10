@@ -22,7 +22,7 @@
                             data-placement="top", ng-click="startNewReport(row.caseID)", tooltip)
                             span(class="glyphicon-plus")
 
-                        a(href="/existing", ng-repeat="report in reports", ng-if="report.caseID == row.caseID",
+                        a(href="/existing", class="editReportLink", ng-repeat="report in reports", ng-if="report.caseID == row.caseID",
                             title="Edit report created by: {{ report.author.firstName }} {{ report.author.lastName }} on {{ report.created }}",
                             data-toggle="tooltip", data-placement="top", ng-click="editReport(report._id)", tooltip)
                             span(class="glyphicon-pencil")

@@ -14,6 +14,26 @@ h3 {
     margin: 5px 5px 5px 5px;
 }
 
+h4 {
+    font-size: 16px;
+    padding-bottom: 1px;
+}
+
+input[type="checkbox"]{
+    cursor: pointer;
+    border-radius: 1px;
+    position: relative;
+    box-sizing: content-box;
+    width: 15px;
+    height: 15px;
+    border-width: 0;
+    transition: all .3s linear;
+}
+input[type="checkbox"]:focus{
+    outline: 0 none;
+    box-shadow: none;
+}
+
 /*  Navbar  */
 
 .navbar {
@@ -97,6 +117,21 @@ tr td:hover {
     text-decoration: none;
 }
 
+.glyphicon-plus {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.glyphicon-pencil {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.editReportLink:hover {
+    color: #FFF;
+    text-decoration: none;
+}
+
 /* partial3.jade css for html form */
 #dateCreated {
     background-color: #F0F0F0;
@@ -107,7 +142,7 @@ tr td:hover {
 }
 
 #deleteButton {
-    margin-top: 300px;
+    margin-top: 150px;
 }
 
 .level2 {
@@ -116,6 +151,10 @@ tr td:hover {
 
 .level3 {
     margin-left: 15px;
+}
+
+#middleCol1 {
+    margin-top: 45px;
 }
 
 /* partial4.jade css form html form */
@@ -172,4 +211,48 @@ input[type="radio"], input[type="checkbox"] {
 #endCol3 {
     margin-left: 10px;
     margin-top: 37px;
+}
+
+/* partial7.jade css for descriptors report print out */
+.reportLabel {
+    font-size: 100%;
+    color: #2e2e2e;
+    margin-left: 20px;
+}
+
+.reportLabel2 {
+    margin-top: 5px;
+    font-size: 90%;
+    color: #2e2e2e;
+    margin-left: 20px;
+    display:block;
+    clear:both;
+}
+
+h3.reportSectionsH3.ng-scope {
+    margin-top: 10px;
+    margin-left: -10px;
+    font-size: 90%;
+    color: #2e2e2e;
+}
+
+h4.reportTitleH4.ng-scope {
+    font-size: 120%;
+}
+
+
+.reportSections {
+    margin-left: 10px;
+}
+
+h2.reportTitle {
+    margin-top: 10px;
+}
+
+.mdCol4 {
+    margin-top: 20px;
+}
+
+.endCol4 {
+    margin-top: 20px;
 }
