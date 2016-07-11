@@ -12,6 +12,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
         $routeProvider.when('/descriptors2', {templateUrl: 'partial/5', controller: descriptorsController2});
         $routeProvider.when('/descriptors3', {templateUrl: 'partial/6', controller: descriptorsController3});
         $routeProvider.when('/print1', {templateUrl: 'partial/7', controller: printController1});
+        $routeProvider.when('/diagnoses1', {templateUrl: 'partial/8', controller: diagnosesController1});
         $routeProvider.otherwise({redirectTo: '/view1'});
         $locationProvider.html5Mode(true);
     }]);

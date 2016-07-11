@@ -39,7 +39,7 @@
                         | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="panlobularComment", placeholder="Comment...", id="panlobularComment")
 
-                div(class="col-lg-3 form-group", id="middleCol2")
+                div(class="col-lg-4 form-group", id="middleCol2")
                     label(class="label", for="panacinar") {{ emphysemaName[3].name }}:
                     div(class="checkboxLabel", id="panacinar")
                         input(type="checkbox", ng-model="panacinarPresent", id="panacinarPresent", ng-checked="panacinarPresent")
@@ -61,6 +61,8 @@
                     textarea(class="form-control comment", ng-model="predominantlyBasalComment", placeholder="Comment...", id="predominantlyBasalComment")
 
                 div(class="col-lg-4 form-group", id="endCol3")
+                    button(type="submit", class="form-control btn btn-success", id="submitSecondDescriptors")
+                        span(class="glyphicon glyphicon-circle-arrow-right")
                     label(class="label", for="discreteLungCysts") {{ honeycombing.honeycombingVSemphysema.discreteLungCysts.name }}
                     div(class="checkboxLabel", id="discreteLungCysts")
                         input(type="checkbox", ng-model="discreteLungCystsPresent", id="discreteLungCystsPresent", ng-checked="discreteLungCystsPresent")
@@ -90,7 +92,3 @@
                         input(type="checkbox", ng-model="coarseHoneycombingNone", id="coarseHoneycombingNone", ng-checked="coarseHoneycombingNone")
                         | {{ listOptions[3] | capitalize }}
                     textarea(class="form-control comment", ng-model="coarseHoneycombingComment", placeholder="Comment...", id="coarseHoneycombingComment")
-
-                div(class="col-lg-1 form-group")
-                    button(type="submit", class="form-control btn btn-success", id="submitSecondDescriptors")
-                        span(class="glyphicon glyphicon-circle-arrow-right")

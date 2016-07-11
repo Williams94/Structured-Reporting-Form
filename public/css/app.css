@@ -169,7 +169,7 @@ tr td:hover {
 
 #pcName {
     font-size: 16px;
-    margin-top: 47px;
+    margin-top: 40px;
 }
 
 #pcName2 {
@@ -189,6 +189,10 @@ tr td:hover {
 input[type="radio"], input[type="checkbox"] {
     margin-left: 5px;
 }
+
+endCol1 {
+    margin-top: -8px;
+}
 /* partial5.jade css for html form */
 #middleCol2 {
     margin-top: 37px;
@@ -204,13 +208,13 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #submitSecondDescriptors {
-    margin-left: -25px;
+
 }
 
 /* partial6.jade css for html form */
 #endCol3 {
     margin-left: 10px;
-    margin-top: 37px;
+    margin-top: -8px;
 }
 
 /* partial7.jade css for descriptors report print out */
@@ -254,5 +258,10 @@ h2.reportTitle {
 }
 
 .endCol4 {
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+#descriptorsReportButton {
+    width: 95%;
+    margin-left: -10px;
 }

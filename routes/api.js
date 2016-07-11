@@ -185,140 +185,138 @@ exports.descriptors = function (req, res) {
 exports.diagnoses = function (req, res) {
     res.json(
         {
-            "diagnoses": {
-                "radiologist": "",
-                "gmc": "",
-                "date": "",
-                "questions": [
+            diagnoses: {
+                radiologist: "",
+                gmc: "",
+                date: "",
+                questions: [
                     {
-                        "name": "Is there evidence of Interstitial Lung Disease (ILD)?",
-                        "evidence": false
+                        name: "Is there evidence of Interstitial Lung Disease (ILD)?",
+                        evidence: false
                     },
                     {
-                        "name": "Clinical Information provided",
-                        "knownILD": false,
-                        "knownCTD": false,
-                        "evidenceOfCTD": {
-                            "name": "Evidence of CTD",
-                            "evidence": false,
-                            "comment": ""
+                        name: "Clinical Information provided",
+                        knownILD: false,
+                        knownCTD: false,
+                        evidenceOfCTD: {
+                            name: "Evidence of CTD",
+                            evidence: false,
+                            comment: ""
                         },
-                        "everSmoker": false,
-                        "otherRelevantClinicalInfo": ""
+                        everSmoker: false,
+                        otherRelevantClinicalInfo: ""
                     },
                     {
-                        "name": "UIP Classification",
-                        "fullName": "Usual Interstitial Pneumonia",
-                        "UIP": false,
-                        "possibleUIP": false,
-                        "inconsistentUIP": false
+                        name: "UIP Classification",
+                        fullName: "Usual Interstitial Pneumonia",
+                        UIP: false,
+                        possibleUIP: false,
+                        inconsistentUIP: false
                     },
                     {
-                        "name": "Non-specific IP",
-                        "fullName": "Non-Specific Interstitial Pneumonia (NSIP)",
-                        "notConsidered/typical": {
-                            "value": false,
-                            "iftrue": 5
+                        name: "Non-specific IP",
+                        fullName: "Non-Specific Interstitial Pneumonia (NSIP)",
+                        notConsideredORtypical: {
+                            value: false,
+                            iftrue: 5
                         },
-                        "yes": false,
-                        "possible": false,
-                        "suspectFibroticNSIP": false,
-                        "previousCT": false,
-                        "progression": false,
-                        "comment": ""
+                        yes: false,
+                        possible: false,
+                        suspectFibroticNSIP: false,
+                        previousCT: false,
+                        progression: false,
+                        comment: ""
                     },
                     {
-                        "name": "Crypto Organising Pneumonia (COP)",
-                        "notConsidered/typical": false,
-                        "yes": false,
-                        "known": false,
-                        "progressonFromBefore": false
+                        name: "Crypto Organising Pneumonia (COP)",
+                        notConsideredORtypical: false,
+                        yes: false,
+                        known: false,
+                        progressonFromBefore: false
                     },
                     {
-                        "name": "Respiratory Bronchioloitis ILD (RBILD)",
-                        "notConsidered/typical": false,
-                        "yes": false,
-                        "known": false,
-                        "newDiagnosis": false,
-                        "severity": "mild/moderate/severe",
-                        "suspectDIP": false
+                        name: "Respiratory Bronchioloitis ILD (RBILD)",
+                        notConsideredORtypical: false,
+                        yes: false,
+                        known: false,
+                        newDiagnosis: false,
+                        severity: "mild/moderate/severe",
+                        suspectDIP: false
                     },
                     {
-                        "name": "Sarcoidosis",
-                        "notConsidered/typical": false,
-                        "known": false,
-                        "probable": false,
-                        "possible": false,
-                        "staging": {
-                            "onlyLN": 1,
-                            "LN+parenchyma": 2,
-                            "onlyParenchyma": 3,
-                            "fibrosis": 4
+                        name: "Sarcoidosis",
+                        notConsideredORtypical: false,
+                        known: false,
+                        probable: false,
+                        possible: false,
+                        staging: {
+                            onlyLN: 1,
+                            LNparenchyma: 2,
+                            onlyParenchyma: 3,
+                            fibrosis: 4
                         },
-                        "extra-pulmonaryDisease": false
+                        extraPulmonaryDisease: false
                     },
                     {
-                        "name": "Hypersensitivity Pneumonitis (HP)",
-                        "notConsidered/typical": false,
-                        "known": false,
-                        "actueHP": false,
-                        "subacuteHP": false,
-                        "chronicHP": false,
-                        "clinicalRefToSuspectAntigen": ""
+                        name: "Hypersensitivity Pneumonitis (HP)",
+                        notConsideredORtypical: false,
+                        known: false,
+                        actueHP: false,
+                        subacuteHP: false,
+                        chronicHP: false,
+                        clinicalRefToSuspectAntigen: ""
                     },
                     {
-                        "name": "Asbestos-related disease",
-                        "notConsidered/typical": false,
-                        "known": false,
-                        "pleuralPlaques": false,
-                        "pleuralThickening": false,
-                        "asbestosis": false,
-                        "severity": "mild/moderate/severe"
+                        name: "Asbestos-related disease",
+                        notConsideredORtypical: false,
+                        known: false,
+                        pleuralPlaques: false,
+                        pleuralThickening: false,
+                        asbestosis: false,
+                        severity: "mild/moderate/severe"
                     },
                     {
-                        "name": "Other ILD",
-                        "notConsidered/typical": false,
-                        "aip": {
-                            "name": "Acute Interstitial Pneumonia (AIP)",
-                            "known": false,
-                            "comparison": false,
-                            "newDiagnosis": false
+                        name: "Other ILD",
+                        notConsideredORtypical: false,
+                        aip: {
+                            name: "Acute Interstitial Pneumonia (AIP)",
+                            known: false,
+                            comparison: false,
+                            newDiagnosis: false
                         },
-                        "lch": {
-                            "name": "Langerhans CellHistocytosis (LCH)",
-                            "known": false,
-                            "comparison": false,
-                            "newDiagnosis": false
+                        lch: {
+                            name: "Langerhans CellHistocytosis (LCH)",
+                            known: false,
+                            comparison: false,
+                            newDiagnosis: false
                         },
-                        "lam": {
-                            "name": "Lymphangioleiomyomatosis (LAM)",
-                            "known": false,
-                            "comparison": false,
-                            "newDiagnosis": false
+                        lam: {
+                            name: "Lymphangioleiomyomatosis (LAM)",
+                            known: false,
+                            comparison: false,
+                            newDiagnosis: false
                         },
-                        "other": "consider Eosinophilic pneumonia",
-                        "comment": ""
+                        other: "consider Eosinophilic pneumonia",
+                        comment: ""
                     },
                     {
-                        "name": "Cardiovascular Findings",
-                        "normal": false,
-                        "dilatedRightHeart": false,
-                        "abnormalLeftHeart": false,
-                        "coronaryCalcification": false
+                        name: "Cardiovascular Findings",
+                        normal: false,
+                        dilatedRightHeart: false,
+                        abnormalLeftHeart: false,
+                        coronaryCalcification: false
                     },
                     {
-                        "name": "Other/Incidental findings",
-                        "nilElse": false,
-                        "solitaryPulmonaryNodule": false,
-                        "other": false,
-                        "comment": ""
+                        name: "Other/Incidental findings",
+                        nilElse: false,
+                        solitaryPulmonaryNodule: false,
+                        other: false,
+                        comment: ""
                     },
                     {
-                        "name": "Other/Comment",
-                        "comment": ""
+                        name: "Other/Comment",
+                        comment: ""
                     }
-
-
                 ]
 
             }

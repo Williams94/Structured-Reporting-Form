@@ -826,17 +826,17 @@ function descriptorsController3($scope, $http, $log, $location) {
 }
 descriptorsController3.$inject = ['$scope', '$http', '$log', '$location'];
 
-function printController1($scope, $http, $log, $location){
+function printController1($scope, $http, $log, $location) {
     $scope.data = "";
     var data = $.param({
         _id: currentReport._id
     });
-    $http.post('/database/search/report', data, config).success(function(data, status){
+    $http.post('/database/search/report', data, config).success(function (data, status) {
         callback(data);
-    }).error(function(data, status){
+    }).error(function (data, status) {
         $log.log(status);
     });
-    var callback = function(data){
+    var callback = function (data) {
         $scope.data = data;
         $scope.zonalDominance = $scope.data.descriptors.zonalDominance;
         $scope.parenchymalDescriptors = $scope.data.descriptors.parenchymalDescriptors;
@@ -844,42 +844,85 @@ function printController1($scope, $http, $log, $location){
         $scope.ifPresent = data.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent;
         $scope.peribronchovascularComponent = data.descriptors.parenchymalDescriptors.peribronchovascularComponent;
         $scope.honeycombingVSemphysema = data.descriptors.parenchymalDescriptors.honeycombingVSemphysema;
-
-        console.log($scope.honeycombingVSemphysema);
     };
 
 
-    $scope.showIf = function(obj){
+    $scope.showIf = function (obj) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                if (obj[key] && obj.name != "Nodular Abnormalities" && key != 'name' && key != 'none' && obj[key] != '[object Object]'){
+                if (obj[key] && obj.name != "Nodular Abnormalities" && key != 'name' && key != 'none' && obj[key] != '[object Object]') {
                     return true;
-                } else if (obj[key] == '[object Object]'){
-                    
-                    console.log(key + ": " + JSON.stringify(obj[key]));
+                } else if (obj[key] == '[object Object]') {
+                    //console.log(key + ": " + JSON.stringify(obj[key]));
                 }
             }
         }
     };
 
-    $scope.findTrueValues = function(obj){
+    $scope.findTrueValues = function (obj) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (obj[key] && key != 'name' && obj[key] != '[object Object]'
-                        && key != 'peribronchovascularComponent' && key != 'nodularAbnormalities' && isNaN(key)){
+                    && key != 'peribronchovascularComponent' && key != 'nodularAbnormalities' && isNaN(key)) {
                     //console.log(key + ": " + obj[key]);
                     return key + ": " + obj[key];
-                } else if (obj[key] == '[object Object]'){
-                    for (var k in obj[key]){
-                        if(obj[key].hasOwnProperty(k)){
-                            console.log(k + ": " + obj[k]);
+                } else if (obj[key] == '[object Object]') {
+                    for (var k in obj[key]) {
+                        if (obj[key].hasOwnProperty(k)) {
+                            //console.log(k + ": " + obj[k]);
                         }
                     }
                 }
 
             }
         }
+    };
+
+    $scope.submit = function () {
+        $location.path('/diagnoses1');
     }
 
 }
 printController1.$inject = ['$scope', '$http', '$log', '$location'];
+
+function diagnosesController1($scope, $http, $log, $location) {
+
+    config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+            'reportid': currentReport._id
+        }
+    };
+
+    $http({method: 'GET', url: '/api/diagnoses'}).success(function (data, status, headers) {
+
+        $scope.data = data;
+        $scope.questions = data.diagnoses.questions;
+
+
+        // ILD
+        $scope.ild = {
+            evidence: false
+        };
+
+
+        var dataToSend = $.param(data);
+
+        $http.post('/database/documents/diagnoses', dataToSend, config).success(function (data, status) {
+            console.log(data);
+        }).error(function (data, status) {
+            $log.log(status);
+        });
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
+
+    $scope.submit = function () {
+        $location.path('/diagnoses2');
+    }
+
+}
+diagnosesController1.$inject = ['$scope', '$http', '$log', '$location'];

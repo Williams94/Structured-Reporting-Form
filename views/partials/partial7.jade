@@ -16,7 +16,6 @@
                     br
                     label(class="reportLabel") {{ findTrueValues(item) | capitalize }}
 
-
             div(class="col-md-4 mdCol4")
                 h3(class="reportSectionsH3 ng-scope") Peribronchovascular Component:
                 h4(class="reportSectionsH4", ng-repeat="item in peribronchovascularComponent", ng-if="showIf(item)") {{ item.name }}
@@ -26,10 +25,11 @@
                 h3(class="reportSectionsH3", ng-if="nodularAbnormalities.present") Nodular Abnormalities:
                     label(class="reportLabel2", ng-repeat="(key, value) in ifPresent", ng-if="value") {{ key | capitalize}}: {{ value }}
 
+            div(class="col-md-4")
+                button(ng-click="submit()", class="form-control btn btn-success", id="descriptorsReportButton")
+                    span(class="glyphicon glyphicon-circle-arrow-right")
 
-
-
-            div(class="col-md-4 endCol4")
+                div(class="endCol4")
                 h3(class="reportSectionsH3") Honeycombing vs Emphysema
                 h4(class="reportSectionsH4", ng-repeat="(key, value) in honeycombingVSemphysema", ng-if="showIf(value)") {{ value.name }}
                     br
