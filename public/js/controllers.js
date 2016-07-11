@@ -138,7 +138,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
     // Submits the users details to the database
     $scope.submit = function () {
-        document.getElementById('submitDetails').value = "Submitting...";
+        //document.getElementById('submitDetails').value = "Submitting...";
 
         // Sends a different POST request depending on whether the user is creating a new report
         // or updating an old report
@@ -495,7 +495,7 @@ function descriptorsController1($scope, $http, $log, $location) {
     $scope.tb2Significant = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.significant;
     $scope.tb2None = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.none;
     $scope.tb2Comment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
-	
+
 	console.log(currentReport._id);
 
     $scope.submit = function () {
@@ -569,9 +569,9 @@ function descriptorsController1($scope, $http, $log, $location) {
                 'reportid': currentReport._id
             }
         };
-	
+
 	console.log(config.headers.reportid);
-	
+
         $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
             console.log(data);
             $location.path('/descriptors2');
@@ -901,19 +901,45 @@ function diagnosesController1($scope, $http, $log, $location) {
     $http({method: 'GET', url: '/api/diagnoses'}).success(function (data, status, headers) {
 
         $scope.data = data;
+        console.log(data);
         $scope.questions = data.diagnoses.questions;
 
+        // Question Names
+        $scope.clinicalInfoNames = Object.getOwnPropertyNames(data.diagnoses.questions[1]);
 
-        // ILD
-        $scope.ild = {
-            evidence: false
-        };
+
+
 
 
         var dataToSend = $.param(data);
 
         $http.post('/database/documents/diagnoses', dataToSend, config).success(function (data, status) {
-            console.log(data);
+            currentReport = data;
+
+            // ILD
+            $scope.ild = {
+                evidence: currentReport.diagnoses.questions.ildEvidence.evidence
+            };
+
+            // Clinical Info
+            $scope.knownILD = currentReport.diagnoses.questions.clinicalInfo.knownILD;
+            $scope.knownCTD = currentReport.diagnoses.questions.clinicalInfo.knownCTD;
+            $scope.evidenceOfCTD = {
+                name: $scope.questions[1].evidenceOfCTD.name,
+                evidence:  currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
+                comment: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment
+            };
+            $scope.everSmoker = currentReport.diagnoses.questions.clinicalInfo.everSmoker;
+            $scope.otherRelevantClinicalInfo = currentReport.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo;
+
+            // UIP Classification
+
+            $scope.uip = currentReport.diagnoses.questions.uipClassification.UIP;
+            $scope.possibleUIP = currentReport.diagnoses.questions.uipClassification.possibleUIP;
+            $scope.inconsistentUIP = currentReport.diagnoses.questions.uipClassification.inconsistentUIP;
+
+
+
         }).error(function (data, status) {
             $log.log(status);
         });

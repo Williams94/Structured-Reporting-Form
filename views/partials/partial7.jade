@@ -5,7 +5,7 @@
         .col-lg-12
             h2(class="h2") Descriptors Report
         .col-lg-12
-            div(class="col-md-4")
+            div(class="col-lg-4")
                 h2(class="reportTitle") 1. Zonal Dominance
                 h4(class="reportSectionsH4", ng-repeat="item in zonalDominance", ng-show="showIf(item)") {{ item.name }}
                     br
@@ -16,7 +16,7 @@
                     br
                     label(class="reportLabel") {{ findTrueValues(item) | capitalize }}
 
-            div(class="col-md-4 mdCol4")
+            div(class="col-lg-4 mdCol4")
                 h3(class="reportSectionsH3 ng-scope") Peribronchovascular Component:
                 h4(class="reportSectionsH4", ng-repeat="item in peribronchovascularComponent", ng-if="showIf(item)") {{ item.name }}
                     br
@@ -25,8 +25,8 @@
                 h3(class="reportSectionsH3", ng-if="nodularAbnormalities.present") Nodular Abnormalities:
                     label(class="reportLabel2", ng-repeat="(key, value) in ifPresent", ng-if="value") {{ key | capitalize}}: {{ value }}
 
-            div(class="col-md-4")
-                button(ng-click="submit()", class="form-control btn btn-success", id="descriptorsReportButton")
+            div(class="col-lg-4", id="partial7EndCol")
+                button(ng-click="submit()", class="form-control btn btn-success")
                     span(class="glyphicon glyphicon-circle-arrow-right")
 
                 div(class="endCol4")

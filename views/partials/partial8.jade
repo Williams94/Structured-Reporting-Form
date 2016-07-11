@@ -6,13 +6,30 @@
             h2(class="h2") Diagnoses Questions
         .col-lg-12
             div(class="col-md-4")
-                label(class="label") {{ questions[0].name }}
+                label(class="label longName") {{ questions[0].name }}
+                    br
+                    input(type="radio", ng-model="ild.evidence", ng-value="true")
+                    | Yes
+                    input(type="radio", ng-model="ild.evidence", ng-value="false")
+                    | No
+                    br
+                label(class="label") {{ questions[1].name }}:
+                div(class="checkboxLabel")
+                    input(type="checkbox", ng-model="knownILD", id="knownILD", ng-checked="knownILD")
+                    | Known ILD
+                    input(type="checkbox", ng-model="knownCTD", id="knownCTD", ng-checked="knownCTD")
+                    | Known CTD
+                    input(type="checkbox", ng-model="everSmoker", id="everSmoker", ng-checked="everSmoker")
+                    | Ever Smoker?
 
+                    br
+                label(class="label") Other Relevant Clinical Info:
+                textarea(class="form-control comment", ng-model="otherRelevantClinicalInfo", id="otherRelevantClinicalInfo", ng-checked="otherRelevantClinicalInfo")
 
-                div(class="btn-group", role="group")
-                    button(type="button", class="btn btn-default", ng-model="ildEvidence", ng-click="basal = !basal",
-                            title="{{ basal }}", data-original-titel="{{ basal }}", data-toggle="tooltip",
-                                data-placement="top", tooltip) {{ ccName[1] | capitalize}}
+                label(class="label") {{ evidenceOfCTD.name }}:
+                    input(type="checkbox", ng-model="evidenceOfCTD.evidence", id="evidenceOfCTD.evidence", ng-checked="evidenceOfCTD.evidence")
+                textarea(class="form-control comment", ng-model="evidenceOfCTD.comment", placeholder="Comment...", id="evidenceOfCTD.comment")
+
 
 
             div(class="col-md-4")

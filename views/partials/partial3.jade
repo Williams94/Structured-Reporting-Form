@@ -2,7 +2,7 @@
     .row
         .col-md-12
             form(class="form-horizontal", ng-submit="submit()")
-                div(class="col-md-3 form-group")
+                div(class="col-lg-4 form-group")
                     h2 Please enter your details:
                     label(class="label", for="firstName") First name:
                     input(type="name", ng-model="firstName", class="form-control", id="firstName", placeholder="First name")
@@ -17,7 +17,7 @@
                             option(class="level2") -----Other
                         option Other
 
-                div(class="col-md-3", id="middleCol1")
+                div(class="col-lg-4", id="middleCol1")
                     label(class="label", for="mdt") Part of regular lung MDT meetings?
                     input(type="checkbox", ng-model="mdt.regular", id="mdt", ng-checked="mdt.regular", value="true")
                     | Yes
@@ -29,25 +29,9 @@
                     label(class="label", for="referringPhysician") Referring Physician
                     input(ng-model="referringPhysician", class="form-control", id="referringPhysician")
 
-                div(class="col-md-3")
-                    br
-                    br
-                    h2 Entered details:
-                    h3 First name:
-                        label(class="label") {{ firstName }}
-                    h3 Last name:
-                        label(class="label") {{ lastName }}
-                    h3 Level:
-                        label(class="label") {{ level }}
-                    h3 Lung MDT regular?
-                        label(class="label") {{ mdt.regular }}
-                    h3 Date:
-                        label(class="label") {{ dateCreated }}
-                    h3 Referring Physician:
-                        label(class="label") {{ referringPhysician }}
 
-                div(class="col-md-3")
-                    button(type="submit", class="form-control btn btn-success", id="submitDetails")
+                div(class="col-lg-4", id="endCol1")
+                    button(type="submit", class="form-control btn btn-success")
                         span(class="glyphicon glyphicon-circle-arrow-right")
                     a(ng-click="deleteReport()", ng-if="editing", class="{{ deleteButtonClass }}", id="deleteButton") {{ deleteButtonValue }}
                         span(class="{{ deleteButtonSpanClass }}", id="deleteButtonSpan")
@@ -60,5 +44,21 @@
 
                     p {{ firstName }}
                     p {{ lastName }}
+
+                    br
+                    br
+                    h2 Entered details:
+                    h3 First name:
+                    label(class="label") {{ firstName }}
+                    h3 Last name:
+                    label(class="label") {{ lastName }}
+                    h3 Level:
+                    label(class="label") {{ level }}
+                    h3 Lung MDT regular?
+                    label(class="label") {{ mdt.regular }}
+                    h3 Date:
+                    label(class="label") {{ dateCreated }}
+                    h3 Referring Physician:
+                    label(class="label") {{ referringPhysician }}
 
 

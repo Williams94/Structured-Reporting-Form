@@ -157,6 +157,11 @@ tr td:hover {
     margin-top: 45px;
 }
 
+#endCol1 {
+    margin-top: 68px;
+    margin-left: -2px;
+}
+
 /* partial4.jade css form html form */
 .comment {
     margin-top: 5px;
@@ -203,12 +208,12 @@ endCol1 {
     margin-left: 30px;
 }
 
-#endCol2 {
-    margin-left: 10px;
+#partial5and6EndCol {
+    margin-left: 15px;
 }
 
 #submitSecondDescriptors {
-
+margin-top: -5px;
 }
 
 /* partial6.jade css for html form */
@@ -257,11 +262,20 @@ h2.reportTitle {
     margin-top: 20px;
 }
 
-.endCol4 {
-    margin-top: 30px;
+#partial7EndCol {
+    margin-left: -25px;
 }
 
 #descriptorsReportButton {
     width: 95%;
     margin-left: -10px;
+}
+
+/* csss for partial8.jade with diagnoses first set of questions */
+input[type=radio] {
+    display: inline;
+}
+
+.label.longName {
+    margin-left: -30px;
 }
