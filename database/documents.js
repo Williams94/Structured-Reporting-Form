@@ -51,7 +51,7 @@ exports.newReport = function (req, res) {
 };
 
 exports.updateReport = function (req, res) {
-    models.reportModel.findById(req.headers._id, function (err, doc) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " error findings doc to update");
 
         doc.author.firstName = req.body.firstName;
@@ -68,7 +68,7 @@ exports.updateReport = function (req, res) {
 };
 
 exports.deleteReport = function (req, res) {
-    models.reportModel.findById(req.body._id, function (err, doc) {
+    models.reportModel.findById(req.body.reportid, function (err, doc) {
         if (err) return console.log(err + " error finding report to update");
 
         doc.remove();

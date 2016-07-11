@@ -66,7 +66,7 @@ function MyCtrl1($scope, $http, $log, $location) {
 
     $scope.editReport = function (reportID) {
         var data = $.param({
-            _id: reportID
+            reportid: reportID
         });
 
         $http.post("/database/search/report", data, config).success(function (data, status) {
@@ -164,7 +164,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
                     'Update': editing,
-                    '_id': currentReport._id
+                    'reportid': currentReport._id
                 }
             };
 
@@ -391,7 +391,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
 
     $scope.deleteReport = function () {
         var data = $.param({
-            '_id': currentReport._id
+            'reportid': currentReport._id
         });
         $http.post("database/documents/deleteReport", data, config).success(function (data, status) {
             $log.log(data);
@@ -570,7 +570,7 @@ function descriptorsController1($scope, $http, $log, $location) {
             }
         };
 	
-	console.log(config.headers._id);
+	console.log(config.headers.reportid);
 	
         $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
             console.log(data);
@@ -833,7 +833,7 @@ descriptorsController3.$inject = ['$scope', '$http', '$log', '$location'];
 function printController1($scope, $http, $log, $location){
     $scope.data = "";
     var data = $.param({
-        _id: currentReport._id
+        reportid: currentReport._id
     });
     $http.post('/database/search/report', data, config).success(function(data, status){
         callback(data);

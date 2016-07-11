@@ -480,7 +480,7 @@ app.post('/database/search/reports', function (req, res) {
 });
 
 app.post('/database/search/report', function (req, res) {
-    models.reportModel.findById(req.body._id, function (err, doc) {
+    models.reportModel.findById(req.body.reportid, function (err, doc) {
         if (err) return console.log(err + " search.findReport");
         //console.log(doc);
         callback(doc);
@@ -492,7 +492,7 @@ app.post('/database/search/report', function (req, res) {
 });
 
 app.post('/database/documents/deleteReport', function (req, res) {
-    models.reportModel.findById(req.body._id, function (err, doc) {
+    models.reportModel.findById(req.body.reportid, function (err, doc) {
         if (err) return console.log(err + " error finding report to update");
 
         doc.remove(callback());
