@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="384c7d0b-88e7-4260-b001-dc6ffbea1629" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/schemas.js" afterPath="$PROJECT_DIR$/database/schemas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/app.css" afterPath="$PROJECT_DIR$/public/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/documents.js" afterPath="$PROJECT_DIR$/database/documents.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers.js" afterPath="$PROJECT_DIR$/public/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.js" afterPath="$PROJECT_DIR$/routes/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/partial4.jade" afterPath="$PROJECT_DIR$/views/partials/partial4.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/partial5.jade" afterPath="$PROJECT_DIR$/views/partials/partial5.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/partial6.jade" afterPath="$PROJECT_DIR$/views/partials/partial6.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/partial7.jade" afterPath="$PROJECT_DIR$/views/partials/partial7.jade" />
     </list>
     <ignored path="angular-express-bootstrap-seed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,18 +33,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="911" column="12" selection-start-line="911" selection-start-column="12" selection-end-line="911" selection-end-column="12" />
-              <folding>
-                <element signature="e#5784#17878#0" expanded="false" />
-                <element signature="e#19949#21320#0" expanded="false" />
-                <element signature="e#25458#28007#0" expanded="false" />
-                <element signature="e#32672#34632#0" expanded="false" />
-                <element signature="e#40714#43880#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.8384075">
+              <caret line="931" column="72" selection-start-line="931" selection-start-column="72" selection-end-line="931" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,17 +67,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43442622">
+            <state vertical-scroll-proportion="0.0">
               <caret line="574" column="97" selection-start-line="574" selection-start-column="97" selection-end-line="574" selection-end-column="97" />
               <folding>
                 <element signature="e#1455#15539#0" expanded="false" />
-                <element signature="e#16083#21560#0" expanded="false" />
-                <element signature="e#21775#26008#0" expanded="false" />
-                <element signature="e#26223#33547#0" expanded="false" />
-                <element signature="e#43154#43272#0" expanded="false" />
+                <element signature="e#16083#21561#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -185,8 +168,8 @@
         <option value="$PROJECT_DIR$/routes/api.js" />
         <option value="$PROJECT_DIR$/views/partials/partial8.jade" />
         <option value="$PROJECT_DIR$/database/schemas.js" />
-        <option value="$PROJECT_DIR$/public/js/controllers.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/public/js/controllers.js" />
       </list>
     </option>
   </component>
@@ -860,20 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="911" column="12" selection-start-line="911" selection-start-column="12" selection-end-line="911" selection-end-column="12" />
-          <folding>
-            <element signature="e#5784#17878#0" expanded="false" />
-            <element signature="e#19949#21320#0" expanded="false" />
-            <element signature="e#25458#28007#0" expanded="false" />
-            <element signature="e#32672#34632#0" expanded="false" />
-            <element signature="e#40714#43880#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/schemas.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -886,15 +855,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43442622">
+        <state vertical-scroll-proportion="0.0">
           <caret line="574" column="97" selection-start-line="574" selection-start-column="97" selection-end-line="574" selection-end-column="97" />
           <folding>
             <element signature="e#1455#15539#0" expanded="false" />
-            <element signature="e#16083#21560#0" expanded="false" />
-            <element signature="e#21775#26008#0" expanded="false" />
-            <element signature="e#26223#33547#0" expanded="false" />
-            <element signature="e#43154#43272#0" expanded="false" />
+            <element signature="e#16083#21561#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8384075">
+          <caret line="931" column="72" selection-start-line="931" selection-start-column="72" selection-end-line="931" selection-end-column="72" />
+          <folding />
         </state>
       </provider>
     </entry>

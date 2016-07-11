@@ -248,7 +248,7 @@ app.post('/database/documents/descriptors', function (req, res) {
 app.post('/database/documents/descriptors1', function (req, res) {
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " searching report for descriptors1");
-
+	
         console.log(doc);
         doc.descriptors.zonalDominance.ccInvolvement.basal = req.body.descriptors.zonalDominance.ccInvolvement.basal;
         doc.descriptors.zonalDominance.ccInvolvement.upper = req.body.descriptors.zonalDominance.ccInvolvement.upper;
@@ -599,7 +599,7 @@ app.post('/database/search/reports', function (req, res) {
 });
 
 app.post('/database/search/report', function (req, res) {
-    models.reportModel.findById(req.body._id, function (err, doc) {
+    models.reportModel.findById(req.body.reportid, function (err, doc) {
         if (err) return console.log(err + " search.findReport");
         //console.log(doc);
         callback(doc);
@@ -611,7 +611,7 @@ app.post('/database/search/report', function (req, res) {
 });
 
 app.post('/database/documents/deleteReport', function (req, res) {
-    models.reportModel.findById(req.body._id, function (err, doc) {
+    models.reportModel.findById(req.body.reportid, function (err, doc) {
         if (err) return console.log(err + " error finding report to update");
 
         doc.remove(callback());
