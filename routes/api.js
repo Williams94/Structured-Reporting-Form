@@ -249,12 +249,7 @@ exports.diagnoses = function (req, res) {
                         known: false,
                         probable: false,
                         possible: false,
-                        staging: {
-                            onlyLN: 1,
-                            LNparenchyma: 2,
-                            onlyParenchyma: 3,
-                            fibrosis: 4
-                        },
+                        staging: 1,
                         extraPulmonaryDisease: false
                     },
                     {

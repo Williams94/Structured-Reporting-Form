@@ -529,10 +529,7 @@ app.post('/database/documents/diagnoses', function (req, res) {
             doc.diagnoses.questions.sarcoidosis.known = req.body.diagnoses.questions[6].known;
             doc.diagnoses.questions.sarcoidosis.probable = req.body.diagnoses.questions[6].probable;
             doc.diagnoses.questions.sarcoidosis.possible = req.body.diagnoses.questions[6].possible;
-            doc.diagnoses.questions.sarcoidosis.staging.onlyLN = req.body.diagnoses.questions[6].staging.onlyLN;
-            doc.diagnoses.questions.sarcoidosis.staging.LNparenchyma = req.body.diagnoses.questions[6].staging.LNparenchyma;
-            doc.diagnoses.questions.sarcoidosis.staging.onlyParenchyma = req.body.diagnoses.questions[6].staging.onlyParenchyma;
-            doc.diagnoses.questions.sarcoidosis.staging.fibrosis = req.body.diagnoses.questions[6].staging.fibrosis;
+            doc.diagnoses.questions.sarcoidosis.staging = req.body.diagnoses.questions[6].staging;
             doc.diagnoses.questions.sarcoidosis.extraPulmonaryDisease = req.body.diagnoses.questions[6].extraPulmonaryDisease;
 
             // Hypersensitivity Pneumonitis
