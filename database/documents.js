@@ -61,7 +61,7 @@ exports.updateReport = function (req, res) {
         doc.referringPhysician = req.body.referringPhysician;
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc in database/documents.js updateReport");
             console.log("report updated");
         })
     });

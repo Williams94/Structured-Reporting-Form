@@ -246,6 +246,7 @@ app.post('/database/documents/descriptors', function (req, res) {
 });
 
 app.post('/database/documents/descriptors1', function (req, res) {
+console.log(req.body);
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " searching report for descriptors1");
 
@@ -300,7 +301,7 @@ app.post('/database/documents/descriptors1', function (req, res) {
         doc.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment = req.body.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc for descriptors1");
             callback(doc);
         });
 
@@ -362,7 +363,7 @@ app.post('/database/documents/descriptors2', function (req, res) {
             = req.body.descriptors.parenchymalDescriptors.nodularAbnormalities.ifPresent.random;
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc for descriptors2");
             callback(doc);
         });
 
@@ -458,7 +459,7 @@ app.post('/database/documents/descriptors3', function (req, res) {
             = req.body.descriptors.parenchymalDescriptors.honeycombingVSemphysema.coarseHoneycombing.comment;
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc for descriptors3");
             callback(doc);
         });
     });
@@ -469,20 +470,19 @@ app.post('/database/documents/descriptors3', function (req, res) {
 });
 
 app.post('/database/documents/diagnoses', function (req, res) {
-    console.log(req.headers);
     if (req.headers.update) {
         models.reportModel.findById(req.headers.reportid, function (err, doc) {
             if (err) return console.log(err + " Error searching for doc to update diagnoses");
 
             doc.save(function (err) {
-                if (err) return console.log(err + " error saving updated doc");
+                if (err) return console.log(err + " error saving updated doc for diagnoses if updating");
                 callback(doc);
             });
         })
 
     } else {
         models.reportModel.findById(req.headers.reportid, function (err, doc) {
-            if (err) return console.log(err + " error finding report for descriptors3");
+            if (err) return console.log(err + " error finding report for diagnoses");
 
             // Diagnoses Questions
             // ILD question
@@ -585,7 +585,7 @@ app.post('/database/documents/diagnoses', function (req, res) {
 
 
             doc.save(function (err) {
-                if (err) return console.log(err + " error saving updated doc");
+                if (err) return console.log(err + " error saving updated doc for diagnoses");
                 callback(doc);
             });
         });
@@ -598,8 +598,9 @@ app.post('/database/documents/diagnoses', function (req, res) {
 });
 
 app.post('/database/documents/diagnoses1', function (req, res) {
+console.log(req.body);
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
-        if (err) return console.log(err + " error finding report for descriptors3");
+        if (err) return console.log(err + " error finding report for diagnoses1");
 
         // Diagnoses Questions
         // ILD question
@@ -643,7 +644,7 @@ app.post('/database/documents/diagnoses1', function (req, res) {
 
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc for diagnoses1");
             callback(doc);
         });
     });
@@ -655,7 +656,7 @@ app.post('/database/documents/diagnoses1', function (req, res) {
 
 app.post('/database/documents/diagnoses2', function (req, res) {
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
-        if (err) return console.log(err + " error finding report for descriptors3");
+        if (err) return console.log(err + " error finding report for diagnoses2");
 
         // Diagnoses Questions
         // Sarcoidosis
@@ -684,7 +685,7 @@ app.post('/database/documents/diagnoses2', function (req, res) {
         doc.diagnoses.questions.asbestosRelatedDisease.severity = req.body.questions.asbestosRelatedDisease.severity;
 
         doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
+            if (err) return console.log(err + " error saving updated doc for diagnoses2");
             callback(doc);
         });
     });
