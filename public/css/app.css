@@ -273,10 +273,20 @@ input[type=radio] {
     display: inline;
 }
 
-.label.longName {
-    margin-left: -40px;
-}
-
-#uip {
+.longName {
     margin-left: -5px;
 }
+
+.firstInList.ng-pristine.ng-valid {
+    margin-left: -5px;
+}
+
+.firstInList.ng-valid.ng-dirty {
+    margin-left: -5px;
+}
+
+.ildCheckboxes {
+    margin: 5px 5px 5px 5px;
+    margin-bottom: 10px;
+}
+

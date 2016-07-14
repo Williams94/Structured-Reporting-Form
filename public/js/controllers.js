@@ -496,7 +496,7 @@ function descriptorsController1($scope, $http, $log, $location) {
     $scope.tb2None = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.none;
     $scope.tb2Comment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
 
-	console.log(currentReport._id);
+    console.log(currentReport._id);
 
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
@@ -570,7 +570,7 @@ function descriptorsController1($scope, $http, $log, $location) {
             }
         };
 
-	console.log(config.headers.reportid);
+        console.log(config.headers.reportid);
 
         $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
             console.log(data);
@@ -898,23 +898,18 @@ function diagnosesController1($scope, $http, $log, $location) {
         }
     };
 
-    $http({method: 'GET', url: '/api/diagnoses'}).success(function (data, status, headers) {
-
-        $scope.data = data;
-        console.log(data);
-        $scope.questions = data.diagnoses.questions;
+    $http({method: 'GET', url: '/api/diagnoses'}).success(function (questions, status, headers) {
+        //console.log(data);
+        $scope.questions = questions.diagnoses.questions;
 
         // Question Names
-        $scope.clinicalInfoNames = Object.getOwnPropertyNames(data.diagnoses.questions[1]);
+        $scope.clinicalInfoNames = Object.getOwnPropertyNames(questions.diagnoses.questions[1]);
 
-
-
-
-
-        var dataToSend = $.param(data);
+        var dataToSend = $.param(questions);
 
         $http.post('/database/documents/diagnoses', dataToSend, config).success(function (data, status) {
-            currentReport = data;
+            console.log(data);
+            //currentReport = data;
 
             // ILD
             $scope.ild = {
@@ -926,18 +921,45 @@ function diagnosesController1($scope, $http, $log, $location) {
             $scope.knownCTD = currentReport.diagnoses.questions.clinicalInfo.knownCTD;
             $scope.evidenceOfCTD = {
                 name: $scope.questions[1].evidenceOfCTD.name,
-                evidence:  currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
+                evidence: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
                 comment: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment
             };
             $scope.everSmoker = currentReport.diagnoses.questions.clinicalInfo.everSmoker;
             $scope.otherRelevantClinicalInfo = currentReport.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo;
 
             // UIP Classification
-
             $scope.uip = currentReport.diagnoses.questions.uipClassification.UIP;
             $scope.possibleUIP = currentReport.diagnoses.questions.uipClassification.possibleUIP;
             $scope.inconsistentUIP = currentReport.diagnoses.questions.uipClassification.inconsistentUIP;
 
+            // NSIP
+            $scope.nsip = {
+                notConsideredORtypical: currentReport.diagnoses.questions.nsipClassification.notConsideredORtypical.value,
+                yes: currentReport.diagnoses.questions.nsipClassification.yes,
+                possible: currentReport.diagnoses.questions.nsipClassification.possible,
+                suspectFibroticNSIP: currentReport.diagnoses.questions.nsipClassification.suspectFibroticNSIP,
+                previousCT: currentReport.diagnoses.questions.nsipClassification.previousCT,
+                progression: currentReport.diagnoses.questions.nsipClassification.progression,
+                comment: currentReport.diagnoses.questions.nsipClassification.comment
+            };
+
+            // COP
+            $scope.cop = {
+                notConsideredORtypical: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical,
+                yes: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.yes,
+                known: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.known,
+                progressonFromBefore: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore
+            };
+
+            //RBILD
+            $scope.rbild = {
+                notConsideredORtypical: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical.notConsideredORtypical,
+                yes: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.yes,
+                known: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.known,
+                newDiagnosis: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis,
+                severity: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.severity,
+                suspectDIP: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP
+            };
 
 
         }).error(function (data, status) {
@@ -951,8 +973,77 @@ function diagnosesController1($scope, $http, $log, $location) {
 
 
     $scope.submit = function () {
-        $location.path('/diagnoses2');
+
+        var data = $.param({
+            questions: {
+                ildEvidence: {
+                    evidence: $scope.ild.evidence
+                },
+                clinicalInfo: {
+                    knownILD: $scope.knownILD,
+                    knownCTD: $scope.knownCTD,
+                    evidenceOfCTD: {
+                        name: $scope.evidenceOfCTD.name,
+                        evidence: $scope.evidenceOfCTD.evidence,
+                        comment: $scope.evidenceOfCTD.comment
+                    },
+                    everSmoker: $scope.everSmoker,
+                    otherRelevantClinicalInfo: $scope.otherRelevantClinicalInfo
+                },
+                uipClassification: {
+                    UIP: $scope.uip,
+                    possibleUIP: $scope.possibleUIP,
+                    inconsistentUIP: $scope.inconsistentUIP
+                },
+                nsipClassification: {
+                    notConsideredORtypical: {
+                        value: $scope.nsip.notConsideredORtypical
+                    },
+                    yes: $scope.nsip.yes,
+                    possible: $scope.nsip.possible,
+                    suspectFibroticNSIP: $scope.nsip.suspectFibroticNSIP,
+                    previousCT: $scope.nsip.previousCT,
+                    progression: $scope.nsip.progression,
+                    comment: $scope.nsip.comment
+                },
+                cryptoOrganisingPneumonia: {
+                    notConsideredORtypical: $scope.rbild.notConsideredORtypical,
+                    yes: $scope.rbild.yes,
+                    known: $scope.rbild.known,
+                    progressonFromBefore: $scope.rbild.progressonFromBefore
+                },
+                respiratoryBronchioloitisILD: {
+                    notConsideredORtypical: $scope.rbild.notConsideredORtypical,
+                    yes: $scope.rbild.yes,
+                    known: $scope.rbild.known,
+                    newDiagnosis: $scope.rbild.newDiagnosis,
+                    severity: $scope.rbild.severity,
+                    suspectDIP: $scope.rbild.suspectDIP
+                }
+            }
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'reportid': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/diagnoses1", data, config).success(function (data, status) {
+            console.log(data);
+            currentReport = data;
+            $location.path('/diagnoses2');
+        }).error(function (data, status) {
+            $log.log(status)
+        });
     }
 
 }
 diagnosesController1.$inject = ['$scope', '$http', '$log', '$location'];
+
+function diagnosesController2($scope, $http, $log, $location) {
+
+    
+}
+diagnosesController2.$inject = ['$scope', '$http', '$log', '$location'];

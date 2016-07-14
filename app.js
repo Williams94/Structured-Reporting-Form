@@ -586,6 +586,62 @@ app.post('/database/documents/diagnoses', function (req, res) {
     }
 });
 
+app.post('/database/documents/diagnoses1', function (req, res) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
+        if (err) return console.log(err + " error finding report for descriptors3");
+
+        // Diagnoses Questions
+        // ILD question
+        doc.diagnoses.questions.ildEvidence.evidence = req.body.questions.ildEvidence.evidence;
+
+        // Clinical Info
+        doc.diagnoses.questions.clinicalInfo.knownILD = req.body.questions.clinicalInfo.knownILD;
+        doc.diagnoses.questions.clinicalInfo.knownCTD = req.body.questions.clinicalInfo.knownCTD;
+        doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence = req.body.questions.clinicalInfo.evidenceOfCTD.evidence;
+        doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment = req.body.questions.clinicalInfo.evidenceOfCTD.comment;
+        doc.diagnoses.questions.clinicalInfo.everSmoker = req.body.questions.clinicalInfo.everSmoker;
+        doc.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo = req.body.questions.clinicalInfo.otherRelevantClinicalInfo;
+
+        // UIP classification
+        doc.diagnoses.questions.uipClassification.UIP = req.body.questions.uipClassification.UIP;
+        doc.diagnoses.questions.uipClassification.possibleUIP = req.body.questions.uipClassification.possibleUIP;
+        doc.diagnoses.questions.uipClassification.inconsistentUIP = req.body.questions.uipClassification.inconsistentUIP;
+
+        // NSIP classification
+        doc.diagnoses.questions.nsipClassification.notConsideredORtypical.value = req.body.questions.nsipClassification.notConsideredORtypical.value;
+        doc.diagnoses.questions.nsipClassification.yes = req.body.questions.nsipClassification.yes;
+        doc.diagnoses.questions.nsipClassification.possible = req.body.questions.nsipClassification.possible;
+        doc.diagnoses.questions.nsipClassification.suspectFibroticNSIP = req.body.questions.nsipClassification.suspectFibroticNSIP;
+        doc.diagnoses.questions.nsipClassification.previousCT = req.body.questions.nsipClassification.previousCT;
+        doc.diagnoses.questions.nsipClassification.progression = req.body.questions.nsipClassification.progression;
+        doc.diagnoses.questions.nsipClassification.comment = req.body.questions.nsipClassification.comment;
+
+        // Crypto Organising Pneumonia
+        doc.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical = req.body.questions.cryptoOrganisingPneumonia.notConsideredORtypical;
+        doc.diagnoses.questions.cryptoOrganisingPneumonia.yes = req.body.questions.cryptoOrganisingPneumonia.yes;
+        doc.diagnoses.questions.cryptoOrganisingPneumonia.known = req.body.questions.cryptoOrganisingPneumonia.known;
+        doc.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore = req.body.questions.cryptoOrganisingPneumonia.progressonFromBefore;
+
+        // Respiratory Bronchioloitis ILD
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical = req.body.questions.respiratoryBronchioloitisILD.notConsideredORtypical;
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.yes = req.body.questions.respiratoryBronchioloitisILD.yes;
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.known = req.body.questions.respiratoryBronchioloitisILD.known;
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis = req.body.questions.respiratoryBronchioloitisILD.newDiagnosis;
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.severity = req.body.questions.respiratoryBronchioloitisILD.severity;
+        doc.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP = req.body.questions.respiratoryBronchioloitisILD.suspectDIP;
+
+
+        doc.save(function (err) {
+            if (err) return console.log(err + " error saving updated doc");
+            callback(doc);
+        });
+    });
+
+    var callback = function (doc) {
+        res.send(doc);
+    }
+});
+
 app.post('/database/search/reports', function (req, res) {
     models.reportModel.find({}, function (err, docs) {
         if (err) return console.log(err + " search.findReports");

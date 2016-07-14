@@ -7,18 +7,25 @@
         .col-lg-12
             div(class="col-lg-4")
                 h4(class="h4 longName") {{ questions[0].name }}
-                    br
-                    input(type="radio", ng-model="ild.evidence", ng-value="true")
-                    | Yes
-                    input(type="radio", ng-model="ild.evidence", ng-value="false")
-                    | No
-                    br
-                h4(class="h4") {{ questions[1].name }}:
-                div(class="checkboxLabel")
-                    input(type="checkbox", ng-model="knownILD", id="knownILD", ng-checked="knownILD")
+                    div(class="label")
+                        br
+                        input(type="radio", ng-model="ild.evidence", ng-value="true", data-html="true",
+                                title="If yes go to 3", data-toggle="tooltip",
+                                    data-placement="top", tooltip)
+                        | Yes
+                        input(type="radio", ng-model="ild.evidence", ng-value="false", data-html="true",
+                                title="If no form complete", data-toggle="tooltip",
+                                    data-placement="top", tooltip)
+                        | No
+                        br
+                h4(class="h4") 2. {{ questions[1].name }}:
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="knownILD", id="knownILD", ng-checked="knownILD")
                     | Known ILD
+                    br
                     input(type="checkbox", ng-model="knownCTD", id="knownCTD", ng-checked="knownCTD")
                     | Known CTD
+                    br
                     input(type="checkbox", ng-model="everSmoker", id="everSmoker", ng-checked="everSmoker")
                     | Ever Smoker?
 
@@ -31,9 +38,9 @@
                 textarea(class="form-control comment", ng-model="evidenceOfCTD.comment", placeholder="Comment...", id="evidenceOfCTD.comment")
 
             div(class="col-lg-4")
-                h4(class="h4") UIP Classification
+                h4(class="h4") 3. UIP Classification
                 div(class="label")
-                    input(type="checkbox", ng-model="uip", id="uip", ng-checked="uip", data-html="true",
+                    input(type="checkbox", class="firstInList", ng-model="uip", id="uip", ng-checked="uip", data-html="true",
                             title="Reticular pattern, subpleural <br> and peripheral distribution <br> with honeycombing", data-toggle="tooltip",
                                 data-placement="top", tooltip)
                     | Usual Interstitial Pneumonia (UIP)
@@ -48,5 +55,61 @@
                                 data-placement="top", tooltip)
                     | Inconsistent with UIP
 
+                h4(class="h4") 4. Non-Specific Interstitial Pneumonia (NSIP)
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="nsip.notConsideredORtypical", id="nsip.notConsideredORtypical", ng-checked="nsip.notConsideredORtypical")
+                    | Not Considered or typical
+                    input(type="checkbox", ng-model="nsip.yes", id="nsip.yes", ng-checked="nsip.yes")
+                    | Yes
+                    br
+                    input(type="checkbox", ng-model="nsip.possible", id="nsip.possible", ng-checked="nsip.possible")
+                    | Possible
+                    input(type="checkbox", ng-model="nsip.suspectFibroticNSIP", id="nsip.suspectFibroticNSIP",
+                                ng-checked="nsip.suspectFibroticNSIP", data-html="true", title="Significant Fibrosis <br> Honeycombing",
+                                    data-toggle="tooltip", data-placement="top", tooltip)
+                    | Suspect fibrotic NSIP
+                    br
+                    input(type="checkbox", ng-model="nsip.previousCT", id="nsip.previousCT", ng-checked="nsip.previousCT")
+                    | Previous CT?
+                    input(type="checkbox", ng-model="nsip.progression", id="nsip.progression", ng-checked="nsip.progression")
+                    | Progression
+                    textarea(class="form-control comment", placeholder="Comment...", ng-model="nsip.comment", id="nsip.comment", ng-checked="nsip.comment")
+
 
             div(class="col-lg-4")
+                button(ng-click="submit()", class="form-control btn btn-success")
+                    span(class="glyphicon glyphicon-circle-arrow-right")
+                h4(class="h4") 5. Crypto Organising Pneumonia (COP)
+                div(class="label")
+                        input(type="checkbox", class="firstInList", ng-model="cop.notConsideredORtypical",
+                                id="cop.notConsideredORtypical", ng-checked="cop.notConsideredORtypical", data-html="true",
+                                    title="If yes go to 6", data-toggle="tooltip", data-placement="top", tooltip)
+                        | Not Considered or typical
+                        input(type="checkbox", ng-model="cop.yes", id="cop.yes", ng-checked="cop.yes")
+                        | Yes
+                        br
+                        input(type="checkbox", ng-model="cop.known", id="cop.known", ng-checked="cop.known")
+                        | Known
+                        input(type="checkbox", ng-model="cop.progressonFromBefore", id="cop.progressonFromBefore", ng-checked="cop.progressonFromBefore")
+                        | Progression from before
+                        br
+                h4(class="h4") 6. Respiratory Bronchioloitis ILD (RBILD)
+                div(class="label")
+                        input(type="checkbox", class="firstInList", ng-model="rblid.notConsideredORtypical",
+                                id="rblid.notConsideredORtypical", ng-checked="rblid.notConsideredORtypical", data-html="true",
+                                    title="If yes go to 7", data-toggle="tooltip", data-placement="top", tooltip)
+                        | Not Considered or typical
+                        input(type="checkbox", ng-model="rbild.yes", id="rbild.yes", ng-checked="rbild.yes")
+                        | Yes
+                        br
+                        input(type="checkbox", ng-model="rbild.known", id="rbild.known", ng-checked="rbild.known")
+                        | Known
+                        input(type="checkbox", ng-model="rbild.newDiagnosis", id="rbild.newDiagnosis", ng-checked="rbild.newDiagnosis")
+                        | New Diagnosis
+                        br
+                        label Severity:
+                        input(type="text", ng-model="rbild.severity", id="rbild.severity", ng-checked="rbild.severity",
+                                data-html="true", title="Delete as appropriate", data-toggle="tooltip", data-placement="top", tooltip)
+                        br
+                        input(type="checkbox", ng-model="rbild.suspectDIP", id="rbild.suspectDIP", ng-checked="rbild.suspectDIP")
+                        | Suspect DIP

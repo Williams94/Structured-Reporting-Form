@@ -190,7 +190,7 @@ var reportSchema = new mongoose.Schema({
                 everSmoker: Boolean,
                 otherRelevantClinicalInfo: String
             },
-                uipClassification: {
+            uipClassification: {
                 name: String,
                 fullName: String,
                 UIP: Boolean,
