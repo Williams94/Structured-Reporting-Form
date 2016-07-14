@@ -8,9 +8,84 @@
             h2(class="h2") Diagnoses Questions
         .col-lg-12
             div(class="col-lg-4")
+                h4(class="h4") 7. Sarcoidosis
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="sarcoidosis.notConsideredORtypical", id="sarcoidosis.notConsideredORtypical",
+                            ng-checked="sarcoidosis.notConsideredORtypical" ,data-html="true",
+                                title="If yes go to 8", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Not Considered or typical
+                    input(type="checkbox", ng-model="sarcoidosis.known", id="sarcoidosis.known", ng-checked="sarcoidosis.known")
+                    | Known
+                    br
+                    input(type="checkbox", ng-model="sarcoidosis.probable", id="sarcoidosis.probable", ng-checked="sarcoidosis.probable")
+                    | Probable
+                    input(type="checkbox", ng-model="sarcoidosis.possible", id="sarcoidosis.possible", ng-checked="sarcoidosis.possible")
+                    | Possible
+                    br
+                    input(type="checkbox", ng-model="sarcoidosis.extraPulmonaryDisease", id="sarcoidosis.extraPulmonaryDisease", ng-checked="sarcoidosis.extraPulmonaryDisease")
+                    | Extra Pulmonary Disease
+                    br
+                    label Staging
+                    select(type="option", ng-model="sarcoidosis.staging", id="sarcoidosis.staging", ng-checked="sarcoidosis.staging")
+                        option(value=1) I - LN only
+                        option(value=2) II - LN + parenchyma
+                        option(value=3) III - parenchyma only
+                        option(value=4) IV - fibrosis
 
             div(class="col-lg-4")
+                h4(class="h4") 8. Hypersensitivity Pneumonitis (HP)
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="hypersensitivityPneumonitis.notConsideredORtypical",
+                            id="hypersensitivityPneumonitis.notConsideredORtypical", ng-checked="hypersensitivityPneumonitis.notConsideredORtypical",
+                                data-html="true", title="If yes go to 9", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Not Considered or typical
+                    input(type="checkbox", ng-model="hypersensitivityPneumonitis.known", id="hypersensitivityPneumonitis.known",
+                            ng-checked="hypersensitivityPneumonitis.known")
+                    | Known
+                    br
+                    input(type="checkbox", ng-model="hypersensitivityPneumonitis.actueHP", id="hypersensitivityPneumonitis.actueHP",
+                            ng-checked="hypersensitivityPneumonitis.actueHP")
+                    | Acute HP
+                    input(type="checkbox", ng-model="hypersensitivityPneumonitis.subacuteHP", id="hypersensitivityPneumonitis.subacuteHP",
+                            ng-checked="hypersensitivityPneumonitis.subacuteHP")
+                    | Subacute HP
+                    br
+                    input(type="checkbox", ng-model="hypersensitivityPneumonitis.chronicHP", id="hypersensitivityPneumonitis.chronicHP",
+                            ng-checked="hypersensitivityPneumonitis.chronicHP")
+                    | Chronic HP
+                    br
+                    label Clinical Reference To Suspect Antigen:
+                    textarea(class="form-control comment", placeholder="Clinical Reference To Suspect Antigen...", ng-model="hypersensitivityPneumonitis.clinicalRefToSuspectAntigen",
+                                id="hypersensitivityPneumonitis.clinicalRefToSuspectAntigen", ng-checked="hypersensitivityPneumonitis.clinicalRefToSuspectAntigen")
 
 
             div(class="col-lg-4")
+                button(ng-click="submit()", class="form-control btn btn-success")
+                    span(class="glyphicon glyphicon-circle-arrow-right")
+
+                h4(class="h4") 9. Asbestos-related disease
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="asbestosRelatedDisease.notConsideredORtypical",
+                            id="asbestosRelatedDisease.notConsideredORtypical", ng-checked="asbestosRelatedDisease.notConsideredORtypical",
+                                data-html="true", title="If yes go to 10", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Not Considered or typical
+                    input(type="checkbox", ng-model="asbestosRelatedDisease.known", id="asbestosRelatedDisease.known",
+                            ng-checked="asbestosRelatedDisease.known")
+                    | Known
+                    br
+                    input(type="checkbox", ng-model="asbestosRelatedDisease.pleuralPlaques", id="asbestosRelatedDisease.pleuralPlaques",
+                            ng-checked="asbestosRelatedDisease.pleuralPlaques")
+                    | Pleural Plaques
+                    input(type="checkbox", ng-model="asbestosRelatedDisease.pleuralThickening", id="asbestosRelatedDisease.pleuralThickening",
+                            ng-checked="asbestosRelatedDisease.pleuralThickening")
+                    | Pleural Thickening
+                    br
+                    input(type="checkbox", ng-model="asbestosRelatedDisease.asbestosis", id="asbestosRelatedDisease.asbestosis",
+                            ng-checked="asbestosRelatedDisease.asbestosis")
+                    | Asbestosis
+                    br
+                    label Severity:
+                    input(type="text", ng-model="asbestosRelatedDisease.severity", id="asbestosRelatedDisease.severity",
+                            ng-checked="asbestosRelatedDisease.severity", data-html="true", title="Delete as appropriate",
+                                data-toggle="tooltip", data-placement="top", tooltip)
 

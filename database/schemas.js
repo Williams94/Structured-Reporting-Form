@@ -233,12 +233,7 @@ var reportSchema = new mongoose.Schema({
                 known: Boolean,
                 probable: Boolean,
                 possible: Boolean,
-                staging: {
-                    onlyLN: Number,
-                    LNparenchyma: Number,
-                    onlyParenchyma: Number,
-                    fibrosis: Number
-                },
+                staging: Number,
                 extraPulmonaryDisease: Boolean
             },
             hypersensitivityPneumonitis: {

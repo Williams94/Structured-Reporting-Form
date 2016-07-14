@@ -248,8 +248,8 @@ app.post('/database/documents/descriptors', function (req, res) {
 app.post('/database/documents/descriptors1', function (req, res) {
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " searching report for descriptors1");
-	
-        console.log(doc);
+
+        //console.log(doc);
         doc.descriptors.zonalDominance.ccInvolvement.basal = req.body.descriptors.zonalDominance.ccInvolvement.basal;
         doc.descriptors.zonalDominance.ccInvolvement.upper = req.body.descriptors.zonalDominance.ccInvolvement.upper;
         doc.descriptors.zonalDominance.ccInvolvement.middle = req.body.descriptors.zonalDominance.ccInvolvement.middle;
@@ -469,121 +469,135 @@ app.post('/database/documents/descriptors3', function (req, res) {
 });
 
 app.post('/database/documents/diagnoses', function (req, res) {
-    models.reportModel.findById(req.headers.reportid, function (err, doc) {
-        if (err) return console.log(err + " error finding report for descriptors3");
+    console.log(req.headers);
+    if (req.headers.update) {
+        models.reportModel.findById(req.headers.reportid, function (err, doc) {
+            if (err) return console.log(err + " Error searching for doc to update diagnoses");
 
-        // Diagnoses Questions
-        // ILD question
-        doc.diagnoses.questions.ildEvidence.evidence = req.body.diagnoses.questions[0].evidence;
+            doc.save(function (err) {
+                if (err) return console.log(err + " error saving updated doc");
+                callback(doc);
+            });
+        })
 
-        // Clinical Info
-        doc.diagnoses.questions.clinicalInfo.knownILD = req.body.diagnoses.questions[1].knownILD;
-        doc.diagnoses.questions.clinicalInfo.knownCTD = req.body.diagnoses.questions[1].knownCTD;
-        doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence = req.body.diagnoses.questions[1].evidenceOfCTD.evidence;
-        doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment = req.body.diagnoses.questions[1].evidenceOfCTD.comment;
-        doc.diagnoses.questions.clinicalInfo.everSmoker = req.body.diagnoses.questions[1].everSmoker;
-        doc.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo = req.body.diagnoses.questions[1].otherRelevantClinicalInfo;
+    } else {
+        models.reportModel.findById(req.headers.reportid, function (err, doc) {
+            if (err) return console.log(err + " error finding report for descriptors3");
 
-        // UIP classification
-        doc.diagnoses.questions.uipClassification.UIP = req.body.diagnoses.questions[2].UIP;
-        doc.diagnoses.questions.uipClassification.possibleUIP = req.body.diagnoses.questions[2].possibleUIP;
-        doc.diagnoses.questions.uipClassification.inconsistentUIP = req.body.diagnoses.questions[2].inconsistentUIP;
+            // Diagnoses Questions
+            // ILD question
+            doc.diagnoses.questions.ildEvidence.evidence = req.body.diagnoses.questions[0].evidence;
 
-        // NSIP classification
-        doc.diagnoses.questions.nsipClassification.notConsideredORtypical.value = req.body.diagnoses.questions[3].notConsideredORtypical.value;
-        doc.diagnoses.questions.nsipClassification.yes = req.body.diagnoses.questions[3].yes;
-        doc.diagnoses.questions.nsipClassification.possible = req.body.diagnoses.questions[3].possible;
-        doc.diagnoses.questions.nsipClassification.suspectFibroticNSIP = req.body.diagnoses.questions[3].suspectFibroticNSIP;
-        doc.diagnoses.questions.nsipClassification.previousCT = req.body.diagnoses.questions[3].previousCT;
-        doc.diagnoses.questions.nsipClassification.progression = req.body.diagnoses.questions[3].progression;
-        doc.diagnoses.questions.nsipClassification.comment = req.body.diagnoses.questions[3].comment;
+            // Clinical Info
+            doc.diagnoses.questions.clinicalInfo.knownILD = req.body.diagnoses.questions[1].knownILD;
+            doc.diagnoses.questions.clinicalInfo.knownCTD = req.body.diagnoses.questions[1].knownCTD;
+            doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence = req.body.diagnoses.questions[1].evidenceOfCTD.evidence;
+            doc.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment = req.body.diagnoses.questions[1].evidenceOfCTD.comment;
+            doc.diagnoses.questions.clinicalInfo.everSmoker = req.body.diagnoses.questions[1].everSmoker;
+            doc.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo = req.body.diagnoses.questions[1].otherRelevantClinicalInfo;
 
-        // Crypto Organising Pneumonia
-        doc.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical = req.body.diagnoses.questions[4].notConsideredORtypical;
-        doc.diagnoses.questions.cryptoOrganisingPneumonia.yes = req.body.diagnoses.questions[4].yes;
-        doc.diagnoses.questions.cryptoOrganisingPneumonia.known = req.body.diagnoses.questions[4].known;
-        doc.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore = req.body.diagnoses.questions[4].progressonFromBefore;
+            // UIP classification
+            doc.diagnoses.questions.uipClassification.UIP = req.body.diagnoses.questions[2].UIP;
+            doc.diagnoses.questions.uipClassification.possibleUIP = req.body.diagnoses.questions[2].possibleUIP;
+            doc.diagnoses.questions.uipClassification.inconsistentUIP = req.body.diagnoses.questions[2].inconsistentUIP;
 
-        // Respiratory Bronchioloitis ILD
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical = req.body.diagnoses.questions[5].notConsideredORtypical;
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.yes = req.body.diagnoses.questions[5].yes;
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.known = req.body.diagnoses.questions[5].known;
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis = req.body.diagnoses.questions[5].newDiagnosis;
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.severity = req.body.diagnoses.questions[5].severity;
-        doc.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP = req.body.diagnoses.questions[5].suspectDIP;
+            // NSIP classification
+            doc.diagnoses.questions.nsipClassification.notConsideredORtypical.value = req.body.diagnoses.questions[3].notConsideredORtypical.value;
+            doc.diagnoses.questions.nsipClassification.yes = req.body.diagnoses.questions[3].yes;
+            doc.diagnoses.questions.nsipClassification.possible = req.body.diagnoses.questions[3].possible;
+            doc.diagnoses.questions.nsipClassification.suspectFibroticNSIP = req.body.diagnoses.questions[3].suspectFibroticNSIP;
+            doc.diagnoses.questions.nsipClassification.previousCT = req.body.diagnoses.questions[3].previousCT;
+            doc.diagnoses.questions.nsipClassification.progression = req.body.diagnoses.questions[3].progression;
+            doc.diagnoses.questions.nsipClassification.comment = req.body.diagnoses.questions[3].comment;
 
-        // Sarcoidosis
-        doc.diagnoses.questions.sarcoidosis.notConsideredORtypical = req.body.diagnoses.questions[6].notConsideredORtypical;
-        doc.diagnoses.questions.sarcoidosis.known = req.body.diagnoses.questions[6].known;
-        doc.diagnoses.questions.sarcoidosis.probable = req.body.diagnoses.questions[6].probable;
-        doc.diagnoses.questions.sarcoidosis.possible = req.body.diagnoses.questions[6].possible;
-        doc.diagnoses.questions.sarcoidosis.staging.onlyLN = req.body.diagnoses.questions[6].staging.onlyLN;
-        doc.diagnoses.questions.sarcoidosis.staging.LNparenchyma = req.body.diagnoses.questions[6].staging.LNparenchyma;
-        doc.diagnoses.questions.sarcoidosis.staging.onlyParenchyma = req.body.diagnoses.questions[6].staging.onlyParenchyma;
-        doc.diagnoses.questions.sarcoidosis.staging.fibrosis = req.body.diagnoses.questions[6].staging.fibrosis;
-        doc.diagnoses.questions.sarcoidosis.extraPulmonaryDisease = req.body.diagnoses.questions[6].extraPulmonaryDisease;
+            // Crypto Organising Pneumonia
+            doc.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical = req.body.diagnoses.questions[4].notConsideredORtypical;
+            doc.diagnoses.questions.cryptoOrganisingPneumonia.yes = req.body.diagnoses.questions[4].yes;
+            doc.diagnoses.questions.cryptoOrganisingPneumonia.known = req.body.diagnoses.questions[4].known;
+            doc.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore = req.body.diagnoses.questions[4].progressonFromBefore;
 
-        // Hypersensitivity Pneumonitis
-        doc.diagnoses.questions.hypersensitivityPneumonitis.notConsideredORtypical = req.body.diagnoses.questions[7].notConsideredORtypical;
-        doc.diagnoses.questions.hypersensitivityPneumonitis.known = req.body.diagnoses.questions[7].known;
-        doc.diagnoses.questions.hypersensitivityPneumonitis.actueHP = req.body.diagnoses.questions[7].actueHP;
-        doc.diagnoses.questions.hypersensitivityPneumonitis.subacuteHP = req.body.diagnoses.questions[7].subacuteHP;
-        doc.diagnoses.questions.hypersensitivityPneumonitis.chronicHP = req.body.diagnoses.questions[7].chronicHP;
-        doc.diagnoses.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen = req.body.diagnoses.questions[7].clinicalRefToSuspectAntigen;
+            // Respiratory Bronchioloitis ILD
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical = req.body.diagnoses.questions[5].notConsideredORtypical;
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.yes = req.body.diagnoses.questions[5].yes;
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.known = req.body.diagnoses.questions[5].known;
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis = req.body.diagnoses.questions[5].newDiagnosis;
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.severity = req.body.diagnoses.questions[5].severity;
+            doc.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP = req.body.diagnoses.questions[5].suspectDIP;
 
-        // Asbestos Related Disease
-        doc.diagnoses.questions.asbestosRelatedDisease.notConsideredORtypical = req.body.diagnoses.questions[8].notConsideredORtypical;
-        doc.diagnoses.questions.asbestosRelatedDisease.known = req.body.diagnoses.questions[8].known;
-        doc.diagnoses.questions.asbestosRelatedDisease.pleuralPlaques = req.body.diagnoses.questions[8].pleuralPlaques;
-        doc.diagnoses.questions.asbestosRelatedDisease.pleuralThickening = req.body.diagnoses.questions[8].pleuralThickening;
-        doc.diagnoses.questions.asbestosRelatedDisease.asbestosis = req.body.diagnoses.questions[8].asbestosis;
-        doc.diagnoses.questions.asbestosRelatedDisease.severity = req.body.diagnoses.questions[8].severity;
+            // Sarcoidosis
+            doc.diagnoses.questions.sarcoidosis.notConsideredORtypical = req.body.diagnoses.questions[6].notConsideredORtypical;
+            doc.diagnoses.questions.sarcoidosis.known = req.body.diagnoses.questions[6].known;
+            doc.diagnoses.questions.sarcoidosis.probable = req.body.diagnoses.questions[6].probable;
+            doc.diagnoses.questions.sarcoidosis.possible = req.body.diagnoses.questions[6].possible;
+            doc.diagnoses.questions.sarcoidosis.staging.onlyLN = req.body.diagnoses.questions[6].staging.onlyLN;
+            doc.diagnoses.questions.sarcoidosis.staging.LNparenchyma = req.body.diagnoses.questions[6].staging.LNparenchyma;
+            doc.diagnoses.questions.sarcoidosis.staging.onlyParenchyma = req.body.diagnoses.questions[6].staging.onlyParenchyma;
+            doc.diagnoses.questions.sarcoidosis.staging.fibrosis = req.body.diagnoses.questions[6].staging.fibrosis;
+            doc.diagnoses.questions.sarcoidosis.extraPulmonaryDisease = req.body.diagnoses.questions[6].extraPulmonaryDisease;
 
-        // Other ILD
-        doc.diagnoses.questions.otherILD.notConsideredORtypical = req.body.diagnoses.questions[9].notConsideredORtypical;
-        doc.diagnoses.questions.otherILD.other = req.body.diagnoses.questions[9].other;
-        doc.diagnoses.questions.otherILD.comment = req.body.diagnoses.questions[9].comment;
+            // Hypersensitivity Pneumonitis
+            doc.diagnoses.questions.hypersensitivityPneumonitis.notConsideredORtypical = req.body.diagnoses.questions[7].notConsideredORtypical;
+            doc.diagnoses.questions.hypersensitivityPneumonitis.known = req.body.diagnoses.questions[7].known;
+            doc.diagnoses.questions.hypersensitivityPneumonitis.actueHP = req.body.diagnoses.questions[7].actueHP;
+            doc.diagnoses.questions.hypersensitivityPneumonitis.subacuteHP = req.body.diagnoses.questions[7].subacuteHP;
+            doc.diagnoses.questions.hypersensitivityPneumonitis.chronicHP = req.body.diagnoses.questions[7].chronicHP;
+            doc.diagnoses.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen = req.body.diagnoses.questions[7].clinicalRefToSuspectAntigen;
 
-        // AIP
-        doc.diagnoses.questions.otherILD.aip.known = req.body.diagnoses.questions[9].aip.known;
-        doc.diagnoses.questions.otherILD.aip.comparison = req.body.diagnoses.questions[9].aip.comparison;
-        doc.diagnoses.questions.otherILD.aip.newDiagnosis = req.body.diagnoses.questions[9].aip.newDiagnosis;
+            // Asbestos Related Disease
+            doc.diagnoses.questions.asbestosRelatedDisease.notConsideredORtypical = req.body.diagnoses.questions[8].notConsideredORtypical;
+            doc.diagnoses.questions.asbestosRelatedDisease.known = req.body.diagnoses.questions[8].known;
+            doc.diagnoses.questions.asbestosRelatedDisease.pleuralPlaques = req.body.diagnoses.questions[8].pleuralPlaques;
+            doc.diagnoses.questions.asbestosRelatedDisease.pleuralThickening = req.body.diagnoses.questions[8].pleuralThickening;
+            doc.diagnoses.questions.asbestosRelatedDisease.asbestosis = req.body.diagnoses.questions[8].asbestosis;
+            doc.diagnoses.questions.asbestosRelatedDisease.severity = req.body.diagnoses.questions[8].severity;
 
-        // LCH
-        doc.diagnoses.questions.otherILD.lch.known = req.body.diagnoses.questions[9].lch.known;
-        doc.diagnoses.questions.otherILD.lch.comparison = req.body.diagnoses.questions[9].lch.comparison;
-        doc.diagnoses.questions.otherILD.lch.newDiagnosis = req.body.diagnoses.questions[9].lch.newDiagnosis;
+            // Other ILD
+            doc.diagnoses.questions.otherILD.notConsideredORtypical = req.body.diagnoses.questions[9].notConsideredORtypical;
+            doc.diagnoses.questions.otherILD.other = req.body.diagnoses.questions[9].other;
+            doc.diagnoses.questions.otherILD.comment = req.body.diagnoses.questions[9].comment;
 
-        // LAM
-        doc.diagnoses.questions.otherILD.lam.known = req.body.diagnoses.questions[9].lam.known;
-        doc.diagnoses.questions.otherILD.lam.comparison = req.body.diagnoses.questions[9].lam.comparison;
-        doc.diagnoses.questions.otherILD.lam.newDiagnosis = req.body.diagnoses.questions[9].lam.newDiagnosis;
+            // AIP
+            doc.diagnoses.questions.otherILD.aip.known = req.body.diagnoses.questions[9].aip.known;
+            doc.diagnoses.questions.otherILD.aip.comparison = req.body.diagnoses.questions[9].aip.comparison;
+            doc.diagnoses.questions.otherILD.aip.newDiagnosis = req.body.diagnoses.questions[9].aip.newDiagnosis;
 
-        // Cardiovascular Findings
-        doc.diagnoses.questions.cardiovascularFindings.normal = req.body.diagnoses.questions[10].normal;
-        doc.diagnoses.questions.cardiovascularFindings.dilatedRightHeart = req.body.diagnoses.questions[10].dilatedRightHeart;
-        doc.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart = req.body.diagnoses.questions[10].abnormalLeftHeart;
-        doc.diagnoses.questions.cardiovascularFindings.coronaryCalcification = req.body.diagnoses.questions[10].coronaryCalcification;
+            // LCH
+            doc.diagnoses.questions.otherILD.lch.known = req.body.diagnoses.questions[9].lch.known;
+            doc.diagnoses.questions.otherILD.lch.comparison = req.body.diagnoses.questions[9].lch.comparison;
+            doc.diagnoses.questions.otherILD.lch.newDiagnosis = req.body.diagnoses.questions[9].lch.newDiagnosis;
 
-        // Other Incidental Findings
-        doc.diagnoses.questions.otherIncidentalFindings.nilElse = req.body.diagnoses.questions[11].nilElse;
-        doc.diagnoses.questions.otherIncidentalFindings.solitaryPulmonaryNodule = req.body.diagnoses.questions[11].solitaryPulmonaryNodule;
-        doc.diagnoses.questions.otherIncidentalFindings.other = req.body.diagnoses.questions[11].other;
-        doc.diagnoses.questions.otherIncidentalFindings.comment = req.body.diagnoses.questions[11].comment;
+            // LAM
+            doc.diagnoses.questions.otherILD.lam.known = req.body.diagnoses.questions[9].lam.known;
+            doc.diagnoses.questions.otherILD.lam.comparison = req.body.diagnoses.questions[9].lam.comparison;
+            doc.diagnoses.questions.otherILD.lam.newDiagnosis = req.body.diagnoses.questions[9].lam.newDiagnosis;
 
-        // Other Comments
-        doc.diagnoses.questions.otherComments.comment = req.body.diagnoses.questions[12].comment;
+            // Cardiovascular Findings
+            doc.diagnoses.questions.cardiovascularFindings.normal = req.body.diagnoses.questions[10].normal;
+            doc.diagnoses.questions.cardiovascularFindings.dilatedRightHeart = req.body.diagnoses.questions[10].dilatedRightHeart;
+            doc.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart = req.body.diagnoses.questions[10].abnormalLeftHeart;
+            doc.diagnoses.questions.cardiovascularFindings.coronaryCalcification = req.body.diagnoses.questions[10].coronaryCalcification;
+
+            // Other Incidental Findings
+            doc.diagnoses.questions.otherIncidentalFindings.nilElse = req.body.diagnoses.questions[11].nilElse;
+            doc.diagnoses.questions.otherIncidentalFindings.solitaryPulmonaryNodule = req.body.diagnoses.questions[11].solitaryPulmonaryNodule;
+            doc.diagnoses.questions.otherIncidentalFindings.other = req.body.diagnoses.questions[11].other;
+            doc.diagnoses.questions.otherIncidentalFindings.comment = req.body.diagnoses.questions[11].comment;
+
+            // Other Comments
+            doc.diagnoses.questions.otherComments.comment = req.body.diagnoses.questions[12].comment;
 
 
-        doc.save(function (err) {
-            if (err) return console.log(err + " error saving updated doc");
-            callback(doc);
+            doc.save(function (err) {
+                if (err) return console.log(err + " error saving updated doc");
+                callback(doc);
+            });
         });
-    });
 
+    }
     var callback = function (doc) {
         res.send(doc);
     }
+
 });
 
 app.post('/database/documents/diagnoses1', function (req, res) {
@@ -641,6 +655,48 @@ app.post('/database/documents/diagnoses1', function (req, res) {
         res.send(doc);
     }
 });
+
+app.post('/database/documents/diagnoses2', function (req, res) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
+        if (err) return console.log(err + " error finding report for descriptors3");
+
+        // Diagnoses Questions
+        // Sarcoidosis
+        doc.diagnoses.questions.sarcoidosis.notConsideredORtypical = req.body.questions.sarcoidosis.notConsideredORtypical;
+        doc.diagnoses.questions.sarcoidosis.known = req.body.questions.sarcoidosis.known;
+        doc.diagnoses.questions.sarcoidosis.probable = req.body.questions.sarcoidosis.probable;
+        doc.diagnoses.questions.sarcoidosis.possible = req.body.questions.sarcoidosis.possible;
+        doc.diagnoses.questions.sarcoidosis.staging = req.body.questions.sarcoidosis.staging;
+        doc.diagnoses.questions.sarcoidosis.extraPulmonaryDisease = req.body.questions.sarcoidosis.extraPulmonaryDisease;
+
+
+        // Hypersensitivity Pneumonitis
+        doc.diagnoses.questions.hypersensitivityPneumonitis.notConsideredORtypical = req.body.questions.hypersensitivityPneumonitis.notConsideredORtypical;
+        doc.diagnoses.questions.hypersensitivityPneumonitis.known = req.body.questions.hypersensitivityPneumonitis.known;
+        doc.diagnoses.questions.hypersensitivityPneumonitis.actueHP = req.body.questions.hypersensitivityPneumonitis.actueHP;
+        doc.diagnoses.questions.hypersensitivityPneumonitis.subacuteHP = req.body.questions.hypersensitivityPneumonitis.subacuteHP;
+        doc.diagnoses.questions.hypersensitivityPneumonitis.chronicHP = req.body.questions.hypersensitivityPneumonitis.chronicHP;
+        doc.diagnoses.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen = req.body.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen;
+
+        // Asbestos-related disease
+        doc.diagnoses.questions.asbestosRelatedDisease.notConsideredORtypical = req.body.questions.asbestosRelatedDisease.notConsideredORtypical;
+        doc.diagnoses.questions.asbestosRelatedDisease.known = req.body.questions.asbestosRelatedDisease.known;
+        doc.diagnoses.questions.asbestosRelatedDisease.pleuralPlaques = req.body.questions.asbestosRelatedDisease.pleuralPlaques;
+        doc.diagnoses.questions.asbestosRelatedDisease.pleuralThickening = req.body.questions.asbestosRelatedDisease.pleuralThickening;
+        doc.diagnoses.questions.asbestosRelatedDisease.asbestosis = req.body.questions.asbestosRelatedDisease.asbestosis;
+        doc.diagnoses.questions.asbestosRelatedDisease.severity = req.body.questions.asbestosRelatedDisease.severity;
+
+        doc.save(function (err) {
+            if (err) return console.log(err + " error saving updated doc");
+            callback(doc);
+        });
+    });
+
+    var callback = function (doc) {
+        res.send(doc);
+    }
+});
+
 
 app.post('/database/search/reports', function (req, res) {
     models.reportModel.find({}, function (err, docs) {

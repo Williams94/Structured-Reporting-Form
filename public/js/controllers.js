@@ -894,6 +894,7 @@ function diagnosesController1($scope, $http, $log, $location) {
     config = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+            'update': editing,
             'reportid': currentReport._id
         }
     };
@@ -909,7 +910,6 @@ function diagnosesController1($scope, $http, $log, $location) {
 
         $http.post('/database/documents/diagnoses', dataToSend, config).success(function (data, status) {
             console.log(data);
-            //currentReport = data;
 
             // ILD
             $scope.ild = {
@@ -1026,13 +1026,14 @@ function diagnosesController1($scope, $http, $log, $location) {
         config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'Update': editing,
                 'reportid': currentReport._id
             }
         };
 
         $http.post("/database/documents/diagnoses1", data, config).success(function (data, status) {
             console.log(data);
-            currentReport = data;
+            //currentReport = data;
             $location.path('/diagnoses2');
         }).error(function (data, status) {
             $log.log(status)
@@ -1044,6 +1045,83 @@ diagnosesController1.$inject = ['$scope', '$http', '$log', '$location'];
 
 function diagnosesController2($scope, $http, $log, $location) {
 
-    
+    // Sarcoidosis
+    $scope.sarcoidosis = {
+        notConsideredORtypical: currentReport.diagnoses.questions.sarcoidosis.notConsideredORtypical,
+        known: currentReport.diagnoses.questions.sarcoidosis.known,
+        probable: currentReport.diagnoses.questions.sarcoidosis.probable,
+        possible: currentReport.diagnoses.questions.sarcoidosis.possible,
+        staging: currentReport.diagnoses.questions.sarcoidosis.staging,
+        extraPulmonaryDisease: currentReport.diagnoses.questions.sarcoidosis.extraPulmonaryDisease
+    };
+
+    // Hypersensitivity Pneumonitis
+    $scope.hypersensitivityPneumonitis = {
+        notConsideredORtypical: currentReport.diagnoses.questions.hypersensitivityPneumonitis.notConsideredORtypical,
+        known: currentReport.diagnoses.questions.hypersensitivityPneumonitis.known,
+        actueHP: currentReport.diagnoses.questions.hypersensitivityPneumonitis.actueHP,
+        subacuteHP: currentReport.diagnoses.questions.hypersensitivityPneumonitis.subacuteHP,
+        chronicHP: currentReport.diagnoses.questions.hypersensitivityPneumonitis.chronicHP,
+        clinicalRefToSuspectAntigen: currentReport.diagnoses.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen
+    };
+
+    // Asbestos-related disease
+    $scope.asbestosRelatedDisease = {
+        notConsideredORtypical: currentReport.diagnoses.questions.asbestosRelatedDisease.notConsideredORtypical,
+        known: currentReport.diagnoses.questions.asbestosRelatedDisease.known,
+        pleuralPlaques: currentReport.diagnoses.questions.asbestosRelatedDisease.pleuralPlaques,
+        pleuralThickening: currentReport.diagnoses.questions.asbestosRelatedDisease.pleuralThickening,
+        asbestosis: currentReport.diagnoses.questions.asbestosRelatedDisease.asbestosis,
+        severity: currentReport.diagnoses.questions.asbestosRelatedDisease.severity
+    };
+
+    $scope.submit = function () {
+
+        console.log($scope.sarcoidosis.staging);
+
+        var data = $.param({
+            questions: {
+                sarcoidosis: {
+                    notConsideredORtypical: $scope.sarcoidosis.notConsideredORtypical,
+                    known: $scope.sarcoidosis.known,
+                    probable: $scope.sarcoidosis.probable,
+                    possible: $scope.sarcoidosis.possible,
+                    staging: $scope.sarcoidosis.staging,
+                    extraPulmonaryDisease: $scope.sarcoidosis.extraPulmonaryDisease
+                },
+                hypersensitivityPneumonitis: {
+                    notConsideredORtypical: $scope.hypersensitivityPneumonitis.notConsideredORtypical,
+                    known: $scope.hypersensitivityPneumonitis.known,
+                    actueHP: $scope.hypersensitivityPneumonitis.actueHP,
+                    subacuteHP: $scope.hypersensitivityPneumonitis.subacuteHP,
+                    chronicHP: $scope.hypersensitivityPneumonitis.chronicHP,
+                    clinicalRefToSuspectAntigen: $scope.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen
+                },
+                asbestosRelatedDisease: {
+                    notConsideredORtypical: $scope.asbestosRelatedDisease.notConsideredORtypical,
+                    known: $scope.asbestosRelatedDisease.known,
+                    pleuralPlaques: $scope.asbestosRelatedDisease.pleuralPlaques,
+                    pleuralThickening: $scope.asbestosRelatedDisease.pleuralThickening,
+                    asbestosis: $scope.asbestosRelatedDisease.asbestosis,
+                    severity: $scope.asbestosRelatedDisease.severity
+                }
+            }
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'reportid': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/diagnoses2", data, config).success(function (data, status) {
+            console.log(data);
+            currentReport = data;
+            $location.path('/diagnoses3');
+        }).error(function (data, status) {
+            $log.log(status)
+        });
+    }
 }
 diagnosesController2.$inject = ['$scope', '$http', '$log', '$location'];
