@@ -496,8 +496,6 @@ function descriptorsController1($scope, $http, $log, $location) {
     $scope.tb2None = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.none;
     $scope.tb2Comment = currentReport.descriptors.parenchymalDescriptors.peribronchovascularComponent.tractionBronchiolectasis.comment;
 
-    console.log(currentReport._id);
-
     $scope.submit = function () {
         //document.getElementById('submitDetails').value = "Submitting...";
 
@@ -883,93 +881,123 @@ function printController1($scope, $http, $log, $location) {
     };
 
     $scope.submit = function () {
-        $location.path('/diagnoses1');
-    }
 
+        // As long as the user is creating a new report then the blank details will be filled in
+        if (!editing) {
+            console.log("Not editing");
+
+            // http to get empty diagnoses data from api to fill in new report with blank diagnoses
+            $http({method: 'GET', url: '/api/diagnoses'}).success(function (questions, status, headers) {
+
+                config = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                        'reportid': currentReport._id
+                    }
+                };
+
+                console.log(currentReport._id);
+
+                data = $.param(questions);
+
+                $http.post('/database/documents/diagnoses/newReport', data, config).success(function (data, status) {
+                    console.log("Diagnoses created for new report: ");
+                    console.log(data);
+                    currentReport = data;
+
+                    $location.path('/diagnoses1');
+
+                }).error(function (data, status) {
+                    $log.log(status);
+                });
+
+            }).error(function (data, status) {
+                $log.log(status);
+            });
+
+            // Otherwise if editing then just get the report with its previous answers
+        } else {
+
+            console.log("Editing");
+
+            config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                    'reportid': currentReport._id
+                }
+            };
+
+            data = $.param({
+                test: "test"
+            });
+
+            $http.post('/database/documents/diagnoses', data, config).success(function (data, status) {
+                console.log("Current report: ");
+                console.log(data);
+                currentReport = data;
+
+                $location.path('/diagnoses1');
+
+            }).error(function (data, status) {
+                $log.log(status);
+            });
+
+        }
+    }
 }
 printController1.$inject = ['$scope', '$http', '$log', '$location'];
 
 function diagnosesController1($scope, $http, $log, $location) {
 
-    config = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-            'update': editing,
-            'reportid': currentReport._id
-        }
+    // ILD
+    $scope.ild = {
+        evidence: currentReport.diagnoses.questions.ildEvidence.evidence
     };
 
-    $http({method: 'GET', url: '/api/diagnoses'}).success(function (questions, status, headers) {
-        //console.log(data);
-        $scope.questions = questions.diagnoses.questions;
+    // Clinical Info
+    $scope.knownILD = currentReport.diagnoses.questions.clinicalInfo.knownILD;
+    $scope.knownCTD = currentReport.diagnoses.questions.clinicalInfo.knownCTD;
+    $scope.evidenceOfCTD = {
+        name: "Evidence of CTD",
+        evidence: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
+        comment: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment
+    };
+    $scope.everSmoker = currentReport.diagnoses.questions.clinicalInfo.everSmoker;
+    $scope.otherRelevantClinicalInfo = currentReport.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo;
 
-        // Question Names
-        $scope.clinicalInfoNames = Object.getOwnPropertyNames(questions.diagnoses.questions[1]);
+    // UIP Classification
+    $scope.uip = currentReport.diagnoses.questions.uipClassification.UIP;
+    $scope.possibleUIP = currentReport.diagnoses.questions.uipClassification.possibleUIP;
+    $scope.inconsistentUIP = currentReport.diagnoses.questions.uipClassification.inconsistentUIP;
 
-        var dataToSend = $.param(questions);
+    // NSIP
+    $scope.nsip = {
+        notConsideredORtypical: currentReport.diagnoses.questions.nsipClassification.notConsideredORtypical.value,
+        yes: currentReport.diagnoses.questions.nsipClassification.yes,
+        possible: currentReport.diagnoses.questions.nsipClassification.possible,
+        suspectFibroticNSIP: currentReport.diagnoses.questions.nsipClassification.suspectFibroticNSIP,
+        previousCT: currentReport.diagnoses.questions.nsipClassification.previousCT,
+        progression: currentReport.diagnoses.questions.nsipClassification.progression,
+        comment: currentReport.diagnoses.questions.nsipClassification.comment
+    };
 
-        $http.post('/database/documents/diagnoses', dataToSend, config).success(function (data, status) {
-            console.log(data);
+    // COP
+    $scope.cop = {
+        notConsideredORtypical: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical,
+        yes: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.yes,
+        known: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.known,
+        progressonFromBefore: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore
+    };
 
-            // ILD
-            $scope.ild = {
-                evidence: currentReport.diagnoses.questions.ildEvidence.evidence
-            };
-
-            // Clinical Info
-            $scope.knownILD = currentReport.diagnoses.questions.clinicalInfo.knownILD;
-            $scope.knownCTD = currentReport.diagnoses.questions.clinicalInfo.knownCTD;
-            $scope.evidenceOfCTD = {
-                name: $scope.questions[1].evidenceOfCTD.name,
-                evidence: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
-                comment: currentReport.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment
-            };
-            $scope.everSmoker = currentReport.diagnoses.questions.clinicalInfo.everSmoker;
-            $scope.otherRelevantClinicalInfo = currentReport.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo;
-
-            // UIP Classification
-            $scope.uip = currentReport.diagnoses.questions.uipClassification.UIP;
-            $scope.possibleUIP = currentReport.diagnoses.questions.uipClassification.possibleUIP;
-            $scope.inconsistentUIP = currentReport.diagnoses.questions.uipClassification.inconsistentUIP;
-
-            // NSIP
-            $scope.nsip = {
-                notConsideredORtypical: currentReport.diagnoses.questions.nsipClassification.notConsideredORtypical.value,
-                yes: currentReport.diagnoses.questions.nsipClassification.yes,
-                possible: currentReport.diagnoses.questions.nsipClassification.possible,
-                suspectFibroticNSIP: currentReport.diagnoses.questions.nsipClassification.suspectFibroticNSIP,
-                previousCT: currentReport.diagnoses.questions.nsipClassification.previousCT,
-                progression: currentReport.diagnoses.questions.nsipClassification.progression,
-                comment: currentReport.diagnoses.questions.nsipClassification.comment
-            };
-
-            // COP
-            $scope.cop = {
-                notConsideredORtypical: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical,
-                yes: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.yes,
-                known: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.known,
-                progressonFromBefore: currentReport.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore
-            };
-
-            //RBILD
-            $scope.rbild = {
-                notConsideredORtypical: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical.notConsideredORtypical,
-                yes: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.yes,
-                known: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.known,
-                newDiagnosis: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis,
-                severity: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.severity,
-                suspectDIP: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP
-            };
-
-
-        }).error(function (data, status) {
-            $log.log(status);
-        });
-
-    }).error(function (data, status, headers, config) {
-        $log.log(status);
-        $scope.descriptors = 'Error!'
-    });
+    //RBILD
+    $scope.rbild = {
+        notConsideredORtypical: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical.notConsideredORtypical,
+        yes: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.yes,
+        known: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.known,
+        newDiagnosis: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis,
+        severity: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.severity,
+        suspectDIP: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP
+    };
 
 
     $scope.submit = function () {

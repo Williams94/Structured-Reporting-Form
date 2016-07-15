@@ -6,7 +6,7 @@
             h2(class="h2") Diagnoses Questions
         .col-lg-12
             div(class="col-lg-4")
-                h4(class="h4 longName") {{ questions[0].name }}
+                h4(class="h4 longName") Is there evidence of Interstitial Lung Disease (ILD)?
                     div(class="label")
                         br
                         input(type="radio", ng-model="ild.evidence", ng-value="true", data-html="true",
@@ -18,7 +18,7 @@
                                     data-placement="top", tooltip)
                         | No
                         br
-                h4(class="h4") 2. {{ questions[1].name }}:
+                h4(class="h4") 2. Clinical Information provided:
                 div(class="label")
                     input(type="checkbox", class="firstInList", ng-model="knownILD", id="knownILD", ng-checked="knownILD")
                     | Known ILD
@@ -57,7 +57,8 @@
 
                 h4(class="h4") 4. Non-Specific Interstitial Pneumonia (NSIP)
                 div(class="label")
-                    input(type="checkbox", class="firstInList", ng-model="nsip.notConsideredORtypical", id="nsip.notConsideredORtypical", ng-checked="nsip.notConsideredORtypical")
+                    input(type="checkbox", class="firstInList", ng-model="nsip.notConsideredORtypical", id="nsip.notConsideredORtypical", ng-checked="nsip.notConsideredORtypical",
+                            data-html="true",title="If yes go to 5", data-toggle="tooltip", data-placement="top", tooltip)
                     | Not Considered or typical
                     input(type="checkbox", ng-model="nsip.yes", id="nsip.yes", ng-checked="nsip.yes")
                     | Yes
