@@ -568,8 +568,6 @@ function descriptorsController1($scope, $http, $log, $location) {
             }
         };
 
-        console.log(config.headers.reportid);
-
         $http.post("/database/documents/descriptors1", data, config).success(function (data, status) {
             console.log(data);
             $location.path('/descriptors2');
@@ -896,8 +894,6 @@ function printController1($scope, $http, $log, $location) {
                     }
                 };
 
-                console.log(currentReport._id);
-
                 data = $.param(questions);
 
                 $http.post('/database/documents/diagnoses/newReport', data, config).success(function (data, status) {
@@ -991,7 +987,7 @@ function diagnosesController1($scope, $http, $log, $location) {
 
     //RBILD
     $scope.rbild = {
-        notConsideredORtypical: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical.notConsideredORtypical,
+        notConsideredORtypical: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical,
         yes: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.yes,
         known: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.known,
         newDiagnosis: currentReport.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis,
@@ -1035,10 +1031,10 @@ function diagnosesController1($scope, $http, $log, $location) {
                     comment: $scope.nsip.comment
                 },
                 cryptoOrganisingPneumonia: {
-                    notConsideredORtypical: $scope.rbild.notConsideredORtypical,
-                    yes: $scope.rbild.yes,
-                    known: $scope.rbild.known,
-                    progressonFromBefore: $scope.rbild.progressonFromBefore
+                    notConsideredORtypical: $scope.cop.notConsideredORtypical,
+                    yes: $scope.cop.yes,
+                    known: $scope.cop.known,
+                    progressonFromBefore: $scope.cop.progressonFromBefore
                 },
                 respiratoryBronchioloitisILD: {
                     notConsideredORtypical: $scope.rbild.notConsideredORtypical,
