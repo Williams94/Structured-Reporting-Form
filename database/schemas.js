@@ -7,7 +7,7 @@ var reportSchema = new mongoose.Schema({
     author: {firstName: String, lastName: String},
     created: String,
     level: String,
-    mdt: {regular: Boolean},
+    mdt: Boolean,
     referringPhysician: String,
     caseID: Number,
     descriptors: {

@@ -696,6 +696,58 @@ app.post('/database/documents/diagnoses2', function (req, res) {
     }
 });
 
+app.post('/database/documents/diagnoses3', function (req, res) {
+    models.reportModel.findById(req.headers.reportid, function (err, doc) {
+        if (err) return console.log(err + " error finding report for diagnoses3");
+
+        // Diagnoses Questions
+        // Other ILD
+        doc.diagnoses.questions.otherILD.notConsideredORtypical = req.body.questions.otherILD.notConsideredORtypical;
+        doc.diagnoses.questions.otherILD.other = req.body.questions.otherILD.other;
+        doc.diagnoses.questions.otherILD.comment = req.body.questions.otherILD.comment;
+
+        // AIP
+        doc.diagnoses.questions.otherILD.aip.known = req.body.questions.otherILD.aip.known;
+        doc.diagnoses.questions.otherILD.aip.comparison = req.body.questions.otherILD.aip.comparison;
+        doc.diagnoses.questions.otherILD.aip.newDiagnosis = req.body.questions.otherILD.aip.newDiagnosis;
+
+        // LCH
+        doc.diagnoses.questions.otherILD.lch.known = req.body.questions.otherILD.lch.known;
+        doc.diagnoses.questions.otherILD.lch.comparison = req.body.questions.otherILD.lch.comparison;
+        doc.diagnoses.questions.otherILD.lch.newDiagnosis = req.body.questions.otherILD.lch.newDiagnosis;
+
+        // LAM
+        doc.diagnoses.questions.otherILD.lam.known = req.body.questions.otherILD.lam.known;
+        doc.diagnoses.questions.otherILD.lam.comparison = req.body.questions.otherILD.lam.comparison;
+        doc.diagnoses.questions.otherILD.lam.newDiagnosis = req.body.questions.otherILD.lam.newDiagnosis;
+
+        // Cardiovascular Findings
+        doc.diagnoses.questions.cardiovascularFindings.normal = req.body.questions.cardiovascularFindings.normal;
+        doc.diagnoses.questions.cardiovascularFindings.dilatedRightHeart = req.body.questions.cardiovascularFindings.dilatedRightHeart;
+        doc.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart = req.body.questions.cardiovascularFindings.abnormalLeftHeart;
+        doc.diagnoses.questions.cardiovascularFindings.coronaryCalcification = req.body.questions.cardiovascularFindings.coronaryCalcification;
+
+        // Other Incidental Findings
+        doc.diagnoses.questions.otherIncidentalFindings.nilElse = req.body.questions.otherIncidentalFindings.nilElse;
+        doc.diagnoses.questions.otherIncidentalFindings.solitaryPulmonaryNodule = req.body.questions.otherIncidentalFindings.solitaryPulmonaryNodule;
+        doc.diagnoses.questions.otherIncidentalFindings.other = req.body.questions.otherIncidentalFindings.other;
+        doc.diagnoses.questions.otherIncidentalFindings.comment = req.body.questions.otherIncidentalFindings.comment;
+
+        // Other Comments
+        doc.diagnoses.questions.otherComments.comment = req.body.questions.otherComments.comment;
+
+
+        doc.save(function (err) {
+            if (err) return console.log(err + " error saving updated doc for diagnoses3");
+            callback(doc);
+        });
+    });
+
+    var callback = function (doc) {
+        res.send(doc);
+    }
+});
+
 
 app.post('/database/search/reports', function (req, res) {
     models.reportModel.find({}, function (err, docs) {

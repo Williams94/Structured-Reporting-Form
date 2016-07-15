@@ -128,9 +128,7 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.firstName = "";
         $scope.lastName = "";
         $scope.level = "";
-        $scope.mdt = {
-            regular: false
-        };
+        $scope.mdt = false;
         $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
         $scope.referringPhysician = "";
         $scope.caseID = caseID;
@@ -1101,8 +1099,6 @@ function diagnosesController2($scope, $http, $log, $location) {
 
     $scope.submit = function () {
 
-        console.log($scope.sarcoidosis.staging);
-
         var data = $.param({
             questions: {
                 sarcoidosis: {
@@ -1149,3 +1145,114 @@ function diagnosesController2($scope, $http, $log, $location) {
     }
 }
 diagnosesController2.$inject = ['$scope', '$http', '$log', '$location'];
+
+function diagnosesController3($scope, $http, $log, $location) {
+
+    $scope.otherILD = {
+        notConsideredORtypical: currentReport.diagnoses.questions.otherILD.notConsideredORtypical,
+        other: currentReport.diagnoses.questions.otherILD.other,
+        comment: currentReport.diagnoses.questions.otherILD.comment
+    };
+
+    $scope.aip = {
+        known: currentReport.diagnoses.questions.otherILD.aip.known,
+        comparison: currentReport.diagnoses.questions.otherILD.aip.comparison,
+        newDiagnosis: currentReport.diagnoses.questions.otherILD.aip.newDiagnosis
+    };
+
+    $scope.lch = {
+        known: currentReport.diagnoses.questions.otherILD.lch.known,
+        comparison: currentReport.diagnoses.questions.otherILD.lch.comparison,
+        newDiagnosis: currentReport.diagnoses.questions.otherILD.lch.newDiagnosis
+    };
+
+    $scope.lam = {
+        known: currentReport.diagnoses.questions.otherILD.lam.known,
+        comparison: currentReport.diagnoses.questions.otherILD.lam.comparison,
+        newDiagnosis: currentReport.diagnoses.questions.otherILD.lam.newDiagnosis
+    };
+
+    $scope.cardiovascularFindings = {
+        normal: currentReport.diagnoses.questions.cardiovascularFindings.normal,
+        dilatedRightHeart: currentReport.diagnoses.questions.cardiovascularFindings.dilatedRightHeart,
+        abnormalLeftHeart: currentReport.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart,
+        coronaryCalcification: currentReport.diagnoses.questions.cardiovascularFindings.coronaryCalcification
+    };
+
+    $scope.cardiovascularFindings = {
+        normal: currentReport.diagnoses.questions.cardiovascularFindings.normal,
+        dilatedRightHeart: currentReport.diagnoses.questions.cardiovascularFindings.dilatedRightHeart,
+        abnormalLeftHeart: currentReport.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart,
+        coronaryCalcification: currentReport.diagnoses.questions.cardiovascularFindings.coronaryCalcification
+    };
+
+    $scope.otherIncidentalFindings = {
+        nilElse: currentReport.diagnoses.questions.otherIncidentalFindings.nilElse,
+        solitaryPulmonaryNodule: currentReport.diagnoses.questions.otherIncidentalFindings.solitaryPulmonaryNodule,
+        other: currentReport.diagnoses.questions.otherIncidentalFindings.other,
+        comment: currentReport.diagnoses.questions.otherIncidentalFindings.comment
+    };
+
+    $scope.otherComments = {
+        comment: currentReport.diagnoses.questions.otherComments.comment
+    };
+
+    $scope.submit = function () {
+
+        var data = $.param({
+            questions: {
+                otherILD: {
+                    notConsideredORtypical: $scope.otherILD.notConsideredORtypical,
+                    aip: {
+                        known: $scope.aip.known,
+                        comparison: $scope.aip.comparison,
+                        newDiagnosis: $scope.aip.newDiagnosis
+                    },
+                    lch: {
+                        known: $scope.lch.known,
+                        comparison: $scope.lch.comparison,
+                        newDiagnosis: $scope.lch.newDiagnosis
+                    },
+                    lam: {
+                        known: $scope.lam.known,
+                        comparison: $scope.lam.comparison,
+                        newDiagnosis: $scope.lam.newDiagnosis
+                    },
+                    other: $scope.otherILD.other,
+                    comment: $scope.otherILD.comment
+                },
+                cardiovascularFindings: {
+                    normal: $scope.cardiovascularFindings.normal,
+                    dilatedRightHeart: $scope.cardiovascularFindings.dilatedRightHeart,
+                    abnormalLeftHeart: $scope.cardiovascularFindings.abnormalLeftHeart,
+                    coronaryCalcification: $scope.cardiovascularFindings.coronaryCalcification
+                },
+                otherIncidentalFindings: {
+                    nilElse: $scope.otherIncidentalFindings.nilElse,
+                    solitaryPulmonaryNodule: $scope.otherIncidentalFindings.solitaryPulmonaryNodule,
+                    other: $scope.otherIncidentalFindings.other,
+                    comment: $scope.otherIncidentalFindings.comment
+                },
+                otherComments: {
+                    comment: $scope.otherComments.comment
+                }
+            }
+        });
+
+        config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'reportid': currentReport._id
+            }
+        };
+
+        $http.post("/database/documents/diagnoses3", data, config).success(function (data, status) {
+            console.log(data);
+            currentReport = data;
+            $location.path('/print2');
+        }).error(function (data, status) {
+            $log.log(status)
+        });
+    }
+}
+diagnosesController3.$inject = ['$scope', '$http', '$log', '$location'];

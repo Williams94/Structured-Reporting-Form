@@ -1,0 +1,93 @@
+//
+   Created by rbwilliams on 15/07/2016.
+.jumbotron
+    .row
+        .col-lg-12
+            h2(class="h2") Diagnoses Questions
+        .col-lg-12
+            div(class="col-lg-4")
+                h4(class="h4") 10. Other ILD
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="otherILD.notConsideredORtypical",
+                            id="otherILD.notConsideredORtypical", ng-checked="otherILD.notConsideredORtypical",
+                                data-html="true", title="If yes go to 11", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Not Considered or typical
+                    br
+                    label Other:
+                    textarea(class="form-control comment", placeholder="Other...", ng-model="otherILD.other",
+                                id="otherILD.other", ng-checked="otherILD.other")
+                    label Other:
+                    textarea(class="form-control comment", placeholder="Other...", ng-model="otherILD.comment",
+                                id="otherILD.comment", ng-checked="otherILD.comment")
+
+                h4 Acute Interstitial Pneumonia (AIP):
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="aip.known", id="aip.known", ng-checked="aip.known")
+                    | Known
+                    input(type="checkbox", ng-model="aip.comparison", id="aip.comparison", ng-checked="aip.comparison")
+                    | Comparison
+                    input(type="checkbox", ng-model="aip.newDiagnosis", id="aip.newDiagnosis", ng-checked="aip.newDiagnosis")
+                    | New Diagnosis
+
+                h4 Langerhans CellHistocytosis (LCH):
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="lch.known", id="lch.known", ng-checked="lch.known")
+                    | Known
+                    input(type="checkbox", ng-model="lch.comparison", id="lch.comparison", ng-checked="lch.comparison")
+                    | Comparison
+                    input(type="checkbox", ng-model="lch.newDiagnosis", id="lch.newDiagnosis", ng-checked="lch.newDiagnosis")
+                    | New Diagnosis
+
+                h4 Lymphangioleiomyomatosis (LAM):
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="lam.known", id="lam.known", ng-checked="lam.known")
+                    | Known
+                    input(type="checkbox", ng-model="lam.comparison", id="lam.comparison", ng-checked="lam.comparison")
+                    | Comparison
+                    input(type="checkbox", ng-model="lam.newDiagnosis", id="lam.newDiagnosis", ng-checked="lam.newDiagnosis")
+                    | New Diagnosis
+
+            div(class="col-lg-4")
+                h4(class="h4") 11. Cardiovascular Findings:
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="cardiovascularFindings.normal", id="cardiovascularFindings.normal", ng-checked="cardiovascularFindings.normal",
+                    data-html="true", title="If yes go to 12", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Normal
+                    input(type="checkbox", ng-model="cardiovascularFindings.dilatedRightHeart", id="cardiovascularFindings.dilatedRightHeart", ng-checked="cardiovascularFindings.dilatedRightHeart")
+                    | Dilated Right Heart
+                    br
+                    input(type="checkbox", ng-model="cardiovascularFindings.abnormalLeftHeart", id="cardiovascularFindings.abnormalLeftHeart", ng-checked="cardiovascularFindings.abnormalLeftHeart")
+                    | Abnormal Left Heart
+                    br
+                    input(type="checkbox", ng-model="cardiovascularFindings.coronaryCalcification", id="cardiovascularFindings.coronaryCalcification", ng-checked="cardiovascularFindings.coronaryCalcification")
+                    | Coronary Calcification
+
+                h4(class="h4") 12. Other Incidental Findings:
+                div(class="label")
+                    input(type="checkbox", class="firstInList", ng-model="otherIncidentalFindings.nilElse", id="otherIncidentalFindings.nilElse", ng-checked="otherIncidentalFindings.nilElse",
+                    data-html="true", title="If yes go to 13", data-toggle="tooltip", data-placement="top", tooltip)
+                    | Nil Else
+                    input(type="checkbox", ng-model="otherIncidentalFindings.solitaryPulmonaryNodule", id="otherIncidentalFindings.solitaryPulmonaryNodule", ng-checked="otherIncidentalFindings.solitaryPulmonaryNodule")
+                    | Solitary Pulmonary Nodule
+                    br
+                    input(type="checkbox", ng-model="otherIncidentalFindings.other", id="otherIncidentalFindings.other", ng-checked="otherIncidentalFindings.other")
+                    | Other
+                    br
+                    label Comment:
+                    textarea(class="form-control comment", placeholder="Other...", ng-model="otherIncidentalFindings.comment",
+                    id="otherIncidentalFindings.comment", ng-checked="otherIncidentalFindings.comment")
+
+
+            div(class="col-lg-4")
+                button(ng-click="submit()", class="form-control btn btn-success")
+                    span(class="glyphicon glyphicon-circle-arrow-right")
+
+                h4(class="h4") 13. Other:
+                dic(class="label")
+                    label Comment:
+                    textarea(class="form-control comment", placeholder="Other Comments...", ng-model="otherComments.comment",
+                                id="otherComments.comment", ng-checked="otherComments.comment")
+
+
+
+
