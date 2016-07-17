@@ -26,7 +26,7 @@
                     label(class="reportLabel2", ng-repeat="(key, value) in ifPresent", ng-if="value") {{ key | capitalize}}: {{ value }}
 
             div(class="col-lg-4", id="partial7EndCol")
-                button(ng-click="submit()", class="form-control btn btn-success") Continue
+                button(ng-click="submit()", id="descriptorsReportEndColButton", class="form-control btn btn-success") Continue
                     span(class="glyphicon glyphicon-circle-arrow-right")
 
                 div(class="endCol4")

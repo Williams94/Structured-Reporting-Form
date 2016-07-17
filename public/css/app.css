@@ -272,6 +272,10 @@ h2.reportTitle {
     margin-left: -10px;
 }
 
+#descriptorsReportEndColButton {
+    margin-left: -7px;
+}
+
 /* csss for partial8.jade with diagnoses first set of questions */
 input[type=radio] {
     display: inline;
@@ -306,3 +310,6 @@ input[type=radio] {
     margin-left: -8px;
 }
 
+#diagnosesEndColButton {
+   margin-left: -10px;
+}
