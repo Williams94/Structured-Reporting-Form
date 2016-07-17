@@ -133,6 +133,10 @@ tr td:hover {
 }
 
 /* partial3.jade css for html form */
+.glyphicon {
+    margin-left: 5px;
+}
+
 #dateCreated {
     background-color: #F0F0F0;
 }
@@ -141,9 +145,9 @@ tr td:hover {
     margin-top: 70px;
 }
 
-#deleteButton {
+/*#deleteButton {
     margin-top: 150px;
-}
+}*/
 
 .level2 {
     margin-left: 10px;
@@ -260,7 +264,7 @@ h2.reportTitle {
 }
 
 #partial7EndCol {
-    margin-left: -25px;
+    margin-left: -16.5px;
 }
 
 #descriptorsReportButton {
@@ -288,5 +292,17 @@ input[type=radio] {
 .ildCheckboxes {
     margin: 5px 5px 5px 5px;
     margin-bottom: 10px;
+}
+
+#diagnosesEndCol {
+    margin-left: -25px;
+}
+
+#diagnosesEndCol3 {
+    margin-left: -16px;
+}
+
+#diagnosesEndCol4 {
+    margin-left: -8px;
 }
 
