@@ -6,11 +6,95 @@
             h2(class="h2") Diagnoses Report
         .col-lg-12
             div(class="col-lg-4")
+                h2(class="reportTitle") 1. Evidence of ILD?
+                    label(class="reportLabel") {{ diagnoses.ildEvidence.evidence }}
+
+                div(ng-if="diagnoses.ildEvidence.evidence")
+                    h2(class="reportTitle") 2. Clinical Info:
+                    h4(class="reportSectionsH4", ng-repeat="(key, value) in diagnoses.clinicalInfo", ng-if="key != 'evidenceOfCTD'")
+                        label(class="reportLabel", ng-if="key != 'evidenceOfCTD'") {{ key | capitalize }}: {{ value }}
+                    h4(class="reportSectionsH4", ng-repeat="(key, value) in diagnoses.clinicalInfo.evidenceOfCTD") Evidence of CTD
+                            label(class="reportLabel", ng-if="key != 'name'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 3. UIP Classification:
+                    br
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.uipClassification") {{ key | capitalize }}: {{ value }}
+                        br
+
+                h2(class="reportTitle", ng-if="!diagnoses.ildEvidence.evidence") 4. NSIP Classification:
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.nsipClassification.notConsideredORtypical") Not Considered or Typical: {{ value }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.nsipClassification",
+                            ng-if="!diagnoses.nsipClassification.notConsideredORtypical.value && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle", ng-if="!diagnoses.ildEvidence.evidence") 5. Crypto Organising Pneumonia
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.cryptoOrganisingPneumonia.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.cryptoOrganisingPneumonia",
+                            ng-if="!diagnoses.cryptoOrganisingPneumonia.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle", ng-if="!diagnoses.ildEvidence.evidence") 6. Respiratory Bronchioloitis ILD
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.respiratoryBronchioloitisILD.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.respiratoryBronchioloitisILD",
+                            ng-if="!diagnoses.respiratoryBronchioloitisILD.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
 
 
             div(class="col-lg-4 mdCol4")
+                h2(class="reportTitle", ng-if="diagnoses.ildEvidence.evidence") 4. NSIP Classification:
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.nsipClassification.notConsideredORtypical") Not Considered or Typical: {{ value }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.nsipClassification",
+                            ng-if="!diagnoses.nsipClassification.notConsideredORtypical.value && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle", ng-if="diagnoses.ildEvidence.evidence") 5. Crypto Organising Pneumonia
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.cryptoOrganisingPneumonia.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.cryptoOrganisingPneumonia",
+                            ng-if="!diagnoses.cryptoOrganisingPneumonia.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle", ng-if="diagnoses.ildEvidence.evidence") 6. Respiratory Bronchioloitis ILD
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.respiratoryBronchioloitisILD.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.respiratoryBronchioloitisILD",
+                            ng-if="!diagnoses.respiratoryBronchioloitisILD.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 7. Sarcoidosis
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.sarcoidosis.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.sarcoidosis",
+                            ng-if="!diagnoses.sarcoidosis.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 8. Hypersensitivity Pneumonitis
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.hypersensitivityPneumonitis.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.hypersensitivityPneumonitis",
+                            ng-if="!diagnoses.hypersensitivityPneumonitis.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle", ng-if="!diagnoses.ildEvidence.evidence") 9. Asbestos Related Disease
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.asbestosRelatedDisease.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.asbestosRelatedDisease",
+                            ng-if="!diagnoses.asbestosRelatedDisease.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
 
 
             div(class="col-lg-4", id="partial7EndCol")
                 a(href="/view1", id="diagnosesEndCol4", class="form-control btn btn-success") Finish
                     span(class="glyphicon glyphicon-circle-arrow-right")
+
+                h2(class="reportTitle", ng-if="diagnoses.ildEvidence.evidence") 9. Asbestos Related Disease
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.asbestosRelatedDisease.notConsideredORtypical }}
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.asbestosRelatedDisease",
+                            ng-if="!diagnoses.asbestosRelatedDisease.notConsideredORtypical && key != 'notConsideredORtypical'") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 10. Other ILD
+                    label(class="reportLabel") Not Considered or Typical: {{ diagnoses.otherILD.notConsideredORtypical }}
+                    label(class="reportLabel") Other: {{ diagnoses.otherILD.other }}
+                    label(class="reportLabel") Comment: {{ diagnoses.otherILD.comment }}
+                    div(ng-if="!diagnoses.otherILD.notConsideredORtypical")
+                        h4(class="reportSectionsH4") Acute Interstitial Pneumonia (AIP)
+                        label(class="reportLabel", ng-repeat="(key, value) in diagnoses.otherILD.aip") {{ key | capitalize }}: {{ value }}
+                        h4(class="reportSectionsH4") Langerhans CellHistocytosis (LCH)
+                        label(class="reportLabel", ng-repeat="(key, value) in diagnoses.otherILD.lch") {{ key | capitalize }}: {{ value }}
+                        h4(class="reportSectionsH4") Lymphangioleiomyomatosis (LAM)
+                        label(class="reportLabel", ng-repeat="(key, value) in diagnoses.otherILD.lam") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 11. Cardiovascular Findings
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.cardiovascularFindings") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 12. Other Incidental Findings
+                    label(class="reportLabel", ng-repeat="(key, value) in diagnoses.otherIncidentalFindings") {{ key | capitalize }}: {{ value }}
+
+                h2(class="reportTitle") 13. Other
+                    label(class="reportLabel") {{ diagnoses.otherComments.comment }}

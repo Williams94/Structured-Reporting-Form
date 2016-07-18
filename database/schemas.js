@@ -294,7 +294,8 @@ var reportSchema = new mongoose.Schema({
             },
             otherComments: {
                 name: String,
-                comment: String
+                comment: String,
+                secondOpinion: Boolean
             }
         }
     }

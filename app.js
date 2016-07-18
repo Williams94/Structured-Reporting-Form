@@ -573,6 +573,8 @@ app.post('/database/documents/diagnoses/newReport', function (req, res) {
 
         // Other Comments
         doc.diagnoses.questions.otherComments.comment = req.body.diagnoses.questions[12].comment;
+        doc.diagnoses.questions.otherComments.secondOpinion = false;
+
 
 
         doc.save(function (err) {
@@ -735,7 +737,9 @@ app.post('/database/documents/diagnoses3', function (req, res) {
 
         // Other Comments
         doc.diagnoses.questions.otherComments.comment = req.body.questions.otherComments.comment;
+        doc.diagnoses.questions.otherComments.secondOpinion = req.body.questions.otherComments.secondOpinion;
 
+        console.log(req.body.questions.otherComments.secondOpinion);
 
         doc.save(function (err) {
             if (err) return console.log(err + " error saving updated doc for diagnoses3");

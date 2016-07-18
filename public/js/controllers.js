@@ -1206,7 +1206,8 @@ function diagnosesController3($scope, $http, $log, $location) {
     };
 
     $scope.otherComments = {
-        comment: currentReport.diagnoses.questions.otherComments.comment
+        comment: currentReport.diagnoses.questions.otherComments.comment,
+        secondOpinion: currentReport.diagnoses.questions.otherComments.secondOpinion
     };
 
     $scope.submit = function () {
@@ -1246,10 +1247,13 @@ function diagnosesController3($scope, $http, $log, $location) {
                     comment: $scope.otherIncidentalFindings.comment
                 },
                 otherComments: {
-                    comment: $scope.otherComments.comment
+                    comment: $scope.otherComments.comment,
+                    secondOpinion: $scope.otherComments.secondOpinion
                 }
             }
         });
+
+        console.log($scope.otherComments.secondOpinion);
 
         config = {
             headers: {
@@ -1285,35 +1289,6 @@ function printController2($scope, $http, $log, $location) {
     };
 
 
-    $scope.showIf = function (obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (obj[key] && obj.name != "Nodular Abnormalities" && key != 'name' && key != 'none' && obj[key] != '[object Object]') {
-                    return true;
-                } else if (obj[key] == '[object Object]') {
-                    //console.log(key + ": " + JSON.stringify(obj[key]));
-                }
-            }
-        }
-    };
 
-    $scope.findTrueValues = function (obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (obj[key] && key != 'name' && obj[key] != '[object Object]'
-                    && key != 'peribronchovascularComponent' && key != 'nodularAbnormalities' && isNaN(key)) {
-                    //console.log(key + ": " + obj[key]);
-                    return key + ": " + obj[key];
-                } else if (obj[key] == '[object Object]') {
-                    for (var k in obj[key]) {
-                        if (obj[key].hasOwnProperty(k)) {
-                            //console.log(k + ": " + obj[k]);
-                        }
-                    }
-                }
-
-            }
-        }
-    };
 }
 printController2.$inject = ['$scope', '$http', '$log', '$location'];
