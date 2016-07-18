@@ -97,4 +97,5 @@
                     label(class="reportLabel", ng-repeat="(key, value) in diagnoses.otherIncidentalFindings") {{ key | capitalize }}: {{ value }}
 
                 h2(class="reportTitle") 13. Other
-                    label(class="reportLabel") {{ diagnoses.otherComments.comment }}
+                    label(class="reportLabel") Comment: {{ diagnoses.otherComments.comment }}
+                    label(class="reportLabel") Second Opinion Needed? {{ diagnoses.otherComments.secondOpinion }}

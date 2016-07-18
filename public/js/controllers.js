@@ -26,18 +26,53 @@ function MyCtrl1($scope, $http, $log, $location) {
     // Provides case data but could use http for external case data
     $scope.collection = [{
         caseID: 1,
-        referringPhysician: "Dr. Jones",
+        referringPhysician: "n/a",
         date: "20/06/2016 15:30",
         patient: "xxxxx xxxxx"
     }, {
         caseID: 2,
-        referringPhysician: "Dr. Stephenson",
+        referringPhysician: "n/a",
         date: "24/06/2016 11:20",
         patient: "xxxxx xxxxx"
     }, {
         caseID: 3,
-        referringPhysician: "Dr. Davies",
+        referringPhysician: "n/a",
         date: "26/06/2016 12:55",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 4,
+        referringPhysician: "n/a",
+        date: "27/06/2016 11:36",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 5,
+        referringPhysician: "n/a",
+        date: "28/06/2016 08:25",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 6,
+        referringPhysician: "n/a",
+        date: "29/06/2016 20:30",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 7,
+        referringPhysician: "n/a",
+        date: "30/06/2016 19:51",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 8,
+        referringPhysician: "n/a",
+        date: "01/07/2016 17:42",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 9,
+        referringPhysician: "n/a",
+        date: "02/07/2016 15:15",
+        patient: "xxxxx xxxxx"
+    }, {
+        caseID: 10,
+        referringPhysician: "n/a",
+        date: "03/07/2016 10:30",
         patient: "xxxxx xxxxx"
     }];
 
