@@ -310,7 +310,8 @@ exports.diagnoses = function (req, res) {
                     },
                     {
                         name: "Other/Comment",
-                        comment: ""
+                        comment: "",
+                        secondOpinion: false
                     }
                 ]
 

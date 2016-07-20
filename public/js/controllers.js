@@ -146,6 +146,21 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.descriptors = 'Error!'
     });
 
+    var diagnoses;
+
+    // Gets diagnoses from /routes/api/diagnoses for question names used on the client-side
+    $http({method: 'GET', url: '/api/diagnoses'}).success(function (data, status, headers, config) {
+
+        diagnoses = data.diagnoses;
+
+        console.log(diagnoses);
+
+    }).error(function (data, status, headers, config) {
+        $log.log(status);
+        $scope.descriptors = 'Error!'
+    });
+
+
     $scope.editing = editing;
 
     var date = new Date();
@@ -160,8 +175,8 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.referringPhysician = currentReport.referringPhysician;
         $scope.caseID = currentReport.caseID;
     } else {
-        $scope.firstName = "David";
-        $scope.lastName = "Szapiro";
+        $scope.firstName = "";
+        $scope.lastName = "";
         $scope.level = "";
         $scope.mdt = false;
         $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
@@ -395,7 +410,134 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
                             }
                         ]
                     }
-                ]
+                ],
+                diagnoses: {
+                    questions: {
+                        ildEvidence: {
+                            name: diagnoses.questions[0].name,
+                            evidence: diagnoses.questions[0].evidence
+                        },
+                        clinicalInfo: {
+                            name: diagnoses.questions[1].name,
+                            knownILD: diagnoses.questions[1].knownILD,
+                            knownCTD: diagnoses.questions[1].knownCTD,
+                            evidenceOfCTD: {
+                                name: diagnoses.questions[1].evidenceOfCTD.name,
+                                evidence: diagnoses.questions[1].evidenceOfCTD.evidence,
+                                comment: diagnoses.questions[1].evidenceOfCTD.comment
+                            },
+                            everSmoker: diagnoses.questions[1].everSmoker,
+                            otherRelevantClinicalInfo: diagnoses.questions[1].otherRelevantClinicalInfo
+                        },
+                        uipClassification: {
+                            name: diagnoses.questions[2].name,
+                            fullName: diagnoses.questions[2].fullName,
+                            UIP: diagnoses.questions[2].UIP,
+                            possibleUIP: diagnoses.questions[2].possibleUIP,
+                            inconsistentUIP: diagnoses.questions[2].inconsistentUIP
+                        },
+                        nsipClassification: {
+                            name: diagnoses.questions[3].name,
+                            fullName: diagnoses.questions[3].fullName,
+                            notConsideredORtypical: {
+                                value: diagnoses.questions[3].notConsideredORtypical.value,
+                                iftrue: diagnoses.questions[3].notConsideredORtypical.iftrue
+                            },
+                            yes: diagnoses.questions[3].yes,
+                            possible: diagnoses.questions[3].possible,
+                            suspectFibroticNSIP: diagnoses.questions[3].suspectFibroticNSIP,
+                            previousCT: diagnoses.questions[3].previousCT,
+                            progression: diagnoses.questions[3].progression,
+                            comment: diagnoses.questions[3].comment
+                        },
+                        cryptoOrganisingPneumonia: {
+                            name: diagnoses.questions[4].name,
+                            notConsideredORtypical: diagnoses.questions[4].notConsideredORtypical,
+                            yes: diagnoses.questions[4].yes,
+                            known: diagnoses.questions[4].known,
+                            progressonFromBefore: diagnoses.questions[4].progressonFromBefore
+                        },
+                        respiratoryBronchioloitisILD: {
+                            name: diagnoses.questions[5].name,
+                            notConsideredORtypical: diagnoses.questions[5].notConsideredORtypical,
+                            yes: diagnoses.questions[5].yes,
+                            known: diagnoses.questions[5].known,
+                            newDiagnosis: diagnoses.questions[5].newDiagnosis,
+                            severity: diagnoses.questions[5].severity,
+                            suspectDIP: diagnoses.questions[5].suspectDIP
+                        },
+                        sarcoidosis: {
+                            name: diagnoses.questions[6].name,
+                            notConsideredORtypical: diagnoses.questions[6].notConsideredORtypical,
+                            known: diagnoses.questions[6].known,
+                            probable: diagnoses.questions[6].probable,
+                            possible: diagnoses.questions[6].possible,
+                            staging: diagnoses.questions[6].staging,
+                            extraPulmonaryDisease: diagnoses.questions[6].extraPulmonaryDisease
+                        },
+                        hypersensitivityPneumonitis: {
+                            name: diagnoses.questions[7].name,
+                            notConsideredORtypical: diagnoses.questions[7].notConsideredORtypical,
+                            known: diagnoses.questions[7].known,
+                            actueHP: diagnoses.questions[7].actueHP,
+                            subacuteHP: diagnoses.questions[7].subacuteHP,
+                            chronicHP: diagnoses.questions[7].chronicHP,
+                            clinicalRefToSuspectAntigen: diagnoses.questions[7].clinicalRefToSuspectAntigen
+                        },
+                        asbestosRelatedDisease: {
+                            name: diagnoses.questions[8].name,
+                            notConsideredORtypical: diagnoses.questions[8].notConsideredORtypical,
+                            known: diagnoses.questions[8].known,
+                            pleuralPlaques: diagnoses.questions[8].pleuralPlaques,
+                            pleuralThickening: diagnoses.questions[8].pleuralThickening,
+                            asbestosis: diagnoses.questions[8].asbestosis,
+                            severity: diagnoses.questions[8].severity
+                        },
+                        otherILD: {
+                            name: diagnoses.questions[9].name,
+                            notConsideredORtypical: diagnoses.questions[9].notConsideredORtypical,
+                            aip: {
+                                name: diagnoses.questions[9].aip.name,
+                                known: diagnoses.questions[9].aip.known,
+                                comparison: diagnoses.questions[9].aip.comparison,
+                                newDiagnosis: diagnoses.questions[9].aip.newDiagnosis
+                            },
+                            lch: {
+                                name: diagnoses.questions[9].lch.name,
+                                known: diagnoses.questions[9].lch.known,
+                                comparison: diagnoses.questions[9].lch.comparison,
+                                newDiagnosis: diagnoses.questions[9].lch.newDiagnosis
+                            },
+                            lam: {
+                                name: diagnoses.questions[9].lam.name,
+                                known: diagnoses.questions[9].lam.known,
+                                comparison: diagnoses.questions[9].lam.comparison,
+                                newDiagnosis: diagnoses.questions[9].lam.newDiagnosis
+                            },
+                            other: diagnoses.questions[9].other,
+                            comment: diagnoses.questions[9].comment
+                        },
+                        cardiovascularFindings: {
+                            name: diagnoses.questions[10].name,
+                            normal: diagnoses.questions[10].normal,
+                            dilatedRightHeart: diagnoses.questions[10].dilatedRightHeart,
+                            abnormalLeftHeart: diagnoses.questions[10].abnormalLeftHeart,
+                            coronaryCalcification: diagnoses.questions[10].coronaryCalcification
+                        },
+                        otherIncidentalFindings: {
+                            name: diagnoses.questions[11].name,
+                            nilElse: diagnoses.questions[11].nilElse,
+                            solitaryPulmonaryNodule: diagnoses.questions[11].solitaryPulmonaryNodule,
+                            other: diagnoses.questions[11].other,
+                            comment: diagnoses.questions[11].comment
+                        },
+                        otherComments: {
+                            name: diagnoses.questions[12].name,
+                            comment: diagnoses.questions[12].comment,
+                            secondOpinion: diagnoses.questions[12].secondOpinion
+                        }
+                    }
+                }
             });
 
             config = {
@@ -408,7 +550,8 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
             // User details are sent to server side in app.js using http POST request
             $http.post("/database/documents/saveNew", data, config).success(function (data, status) {
                 currentReport = data;
-                console.log("Saved report: " + data);
+                console.log("Saved report: ");
+                console.log(data);
                 $location.path('/descriptors');
             }).error(function (data, status, headers, config) {
                 $log.log(status);
@@ -490,7 +633,7 @@ function descriptorsController1($scope, $http, $log, $location) {
     /************ Bound variables ***************/
     /**** Zonal Dominance ******/
         // Cranio-caudal Involvement bound variables
-    $scope.basal = currentReport.descriptors.zonalDominance.ccInvolvement.basal;
+    $scope.basal = currentReport.descriptors.zonalDominance.ccInvolvement.basal; // Need to use cookie here
     $scope.upper = currentReport.descriptors.zonalDominance.ccInvolvement.upper;
     $scope.middle = currentReport.descriptors.zonalDominance.ccInvolvement.middle;
     $scope.ccNone = currentReport.descriptors.zonalDominance.ccInvolvement.none;
@@ -929,7 +1072,7 @@ function printController1($scope, $http, $log, $location) {
         if (!editing) {
             console.log("Not editing");
 
-            // http to get empty diagnoses data from api to fill in new report with blank diagnoses
+            /*// http to get empty diagnoses data from api to fill in new report with blank diagnoses
             $http({method: 'GET', url: '/api/diagnoses'}).success(function (questions, status, headers) {
 
                 config = {
@@ -954,7 +1097,7 @@ function printController1($scope, $http, $log, $location) {
 
             }).error(function (data, status) {
                 $log.log(status);
-            });
+            });*/
 
             // Otherwise if editing then just get the report with its previous answers
         } else {

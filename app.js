@@ -224,12 +224,141 @@ app.post('/database/documents/saveNew', function (req, res) {
                     }
                 }
             }
+        },
+        diagnoses: {
+            questions: {
+          ildEvidence: {
+                    name: req.body.diagnoses.questions.ildEvidence.name,
+                    evidence: req.body.diagnoses.questions.ildEvidence.evidence
+                },
+                clinicalInfo: {
+                    name: req.body.diagnoses.questions.clinicalInfo.name,
+                    knownILD: req.body.diagnoses.questions.clinicalInfo.knownILD,
+                    knownCTD: req.body.diagnoses.questions.clinicalInfo.knownCTD,
+                    evidenceOfCTD: {
+                        name: req.body.diagnoses.questions.clinicalInfo.evidenceOfCTD.name,
+                        evidence: req.body.diagnoses.questions.clinicalInfo.evidenceOfCTD.evidence,
+                        comment: req.body.diagnoses.questions.clinicalInfo.evidenceOfCTD.comment
+                    },
+                    everSmoker: req.body.diagnoses.questions.clinicalInfo.everSmoker,
+                    otherRelevantClinicalInfo: req.body.diagnoses.questions.clinicalInfo.otherRelevantClinicalInfo
+                },
+                uipClassification: {
+                    name: req.body.diagnoses.questions.uipClassification.name,
+                    fullName: req.body.diagnoses.questions.uipClassification.fullName,
+                    UIP: req.body.diagnoses.questions.uipClassification.UIP,
+                    possibleUIP: req.body.diagnoses.questions.uipClassification.possibleUIP,
+                    inconsistentUIP: req.body.diagnoses.questions.uipClassification.inconsistentUIP
+                },
+                nsipClassification: {
+                    name: req.body.diagnoses.questions.nsipClassification.name,
+                    fullName: req.body.diagnoses.questions.nsipClassification.fullName,
+                    notConsideredORtypical: {
+                        value: req.body.diagnoses.questions.nsipClassification.notConsideredORtypical.value,
+                        iftrue: req.body.diagnoses.questions.nsipClassification.notConsideredORtypical.iftrue
+                    },
+                    yes: req.body.diagnoses.questions.nsipClassification.yes,
+                    possible: req.body.diagnoses.questions.nsipClassification.possible,
+                    suspectFibroticNSIP: req.body.diagnoses.questions.nsipClassification.suspectFibroticNSIP,
+                    previousCT: req.body.diagnoses.questions.nsipClassification.previousCT,
+                    progression: req.body.diagnoses.questions.nsipClassification.progression,
+                    comment: req.body.diagnoses.questions.nsipClassification.comment
+                },
+                cryptoOrganisingPneumonia: {
+                    name: req.body.diagnoses.questions.cryptoOrganisingPneumonia.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.cryptoOrganisingPneumonia.notConsideredORtypical,
+                    yes: req.body.diagnoses.questions.cryptoOrganisingPneumonia.yes,
+                    known: req.body.diagnoses.questions.cryptoOrganisingPneumonia.known,
+                    progressonFromBefore: req.body.diagnoses.questions.cryptoOrganisingPneumonia.progressonFromBefore
+                },
+                respiratoryBronchioloitisILD: {
+                    name: req.body.diagnoses.questions.respiratoryBronchioloitisILD.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.respiratoryBronchioloitisILD.notConsideredORtypical,
+                    yes: req.body.diagnoses.questions.respiratoryBronchioloitisILD.yes,
+                    known: req.body.diagnoses.questions.respiratoryBronchioloitisILD.known,
+                    newDiagnosis: req.body.diagnoses.questions.respiratoryBronchioloitisILD.newDiagnosis,
+                    severity: req.body.diagnoses.questions.respiratoryBronchioloitisILD.severity,
+                    suspectDIP: req.body.diagnoses.questions.respiratoryBronchioloitisILD.suspectDIP
+                },
+                sarcoidosis: {
+                    name: req.body.diagnoses.questions.sarcoidosis.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.sarcoidosis.notConsideredORtypical,
+                    known: req.body.diagnoses.questions.sarcoidosis.known,
+                    probable: req.body.diagnoses.questions.sarcoidosis.probable,
+                    possible: req.body.diagnoses.questions.sarcoidosis.possible,
+                    staging: req.body.diagnoses.questions.sarcoidosis.staging,
+                    extraPulmonaryDisease: req.body.diagnoses.questions.sarcoidosis.extraPulmonaryDisease
+                },
+                hypersensitivityPneumonitis: {
+                    name: req.body.diagnoses.questions.hypersensitivityPneumonitis.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.hypersensitivityPneumonitis.notConsideredORtypical,
+                    known: req.body.diagnoses.questions.hypersensitivityPneumonitis.known,
+                    actueHP: req.body.diagnoses.questions.hypersensitivityPneumonitis.actueHP,
+                    subacuteHP: req.body.diagnoses.questions.hypersensitivityPneumonitis.subacuteHP,
+                    chronicHP: req.body.diagnoses.questions.hypersensitivityPneumonitis.chronicHP,
+                    clinicalRefToSuspectAntigen: req.body.diagnoses.questions.hypersensitivityPneumonitis.clinicalRefToSuspectAntigen
+                },
+                asbestosRelatedDisease: {
+                    name: req.body.diagnoses.questions.asbestosRelatedDisease.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.asbestosRelatedDisease.notConsideredORtypical,
+                    known: req.body.diagnoses.questions.asbestosRelatedDisease.known,
+                    pleuralPlaques: req.body.diagnoses.questions.asbestosRelatedDisease.pleuralPlaques,
+                    pleuralThickening: req.body.diagnoses.questions.asbestosRelatedDisease.pleuralThickening,
+                    asbestosis: req.body.diagnoses.questions.asbestosRelatedDisease.asbestosis,
+                    severity: req.body.diagnoses.questions.asbestosRelatedDisease.severity
+                },
+                otherILD: {
+                    name: req.body.diagnoses.questions.otherILD.name,
+                    notConsideredORtypical: req.body.diagnoses.questions.otherILD.notConsideredORtypical,
+                    aip: {
+                        name: req.body.diagnoses.questions.otherILD.aip.name,
+                        known: req.body.diagnoses.questions.otherILD.aip.known,
+                        comparison: req.body.diagnoses.questions.otherILD.aip.comparison,
+                        newDiagnosis: req.body.diagnoses.questions.otherILD.aip.newDiagnosis
+                    },
+                    lch: {
+                        name: req.body.diagnoses.questions.otherILD.lch.name,
+                        known: req.body.diagnoses.questions.otherILD.lch.known,
+                        comparison: req.body.diagnoses.questions.otherILD.lch.comparison,
+                        newDiagnosis: req.body.diagnoses.questions.otherILD.lch.newDiagnosis
+                    },
+                    lam: {
+                        name: req.body.diagnoses.questions.otherILD.lam.name,
+                        known: req.body.diagnoses.questions.otherILD.lam.known,
+                        comparison: req.body.diagnoses.questions.otherILD.lam.comparison,
+                        newDiagnosis: req.body.diagnoses.questions.otherILD.lam.newDiagnosis
+                    },
+                    other: req.body.diagnoses.questions.otherILD.other,
+                    comment: req.body.diagnoses.questions.otherILD.comment
+                },
+                cardiovascularFindings: {
+                    name: req.body.diagnoses.questions.cardiovascularFindings.name,
+                    normal: req.body.diagnoses.questions.cardiovascularFindings.normal,
+                    dilatedRightHeart: req.body.diagnoses.questions.cardiovascularFindings.dilatedRightHeart,
+                    abnormalLeftHeart: req.body.diagnoses.questions.cardiovascularFindings.abnormalLeftHeart,
+                    coronaryCalcification: req.body.diagnoses.questions.cardiovascularFindings.coronaryCalcification
+                },
+                otherIncidentalFindings: {
+                    name: req.body.diagnoses.questions.otherIncidentalFindings.name,
+                    nilElse: req.body.diagnoses.questions.otherIncidentalFindings.nilElse,
+                    solitaryPulmonaryNodule: req.body.diagnoses.questions.otherIncidentalFindings.solitaryPulmonaryNodule,
+                    other: req.body.diagnoses.questions.otherIncidentalFindings.other,
+                    comment: req.body.diagnoses.questions.otherIncidentalFindings.comment
+                },
+                otherComments: {
+                    name: req.body.diagnoses.questions.otherComments.name,
+                    comment: req.body.diagnoses.questions.otherComments.comment,
+                    secondOpinion: req.body.diagnoses.questions.otherComments.secondOpinion
+                }
+            }
         }
     });
 
+    //console.log(reportDoc);
+
     reportDoc.save(function (err, doc) {
         if (err) {
-            console.log(err);
+            console.log(err + " error trying to save new report");
         }
         callback(doc);
     });
@@ -469,11 +598,11 @@ app.post('/database/documents/descriptors3', function (req, res) {
     }
 });
 
-app.post('/database/documents/diagnoses/newReport', function (req, res) {
+/*app.post('/database/documents/diagnoses/newReport', function (req, res) {
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " error finding report for new report diagnoses");
 
-        console.log(doc);
+        //console.log(doc);
 
         // Diagnoses Questions
         // ILD question
@@ -586,10 +715,10 @@ app.post('/database/documents/diagnoses/newReport', function (req, res) {
     var callback = function (doc) {
         res.send(doc);
     }
-});
+});*/
 
 app.post('/database/documents/diagnoses', function (req, res) {
-    console.log(req.headers.reportid);
+    //console.log(req.headers.reportid);
     models.reportModel.findById(req.headers.reportid, function (err, doc) {
         if (err) return console.log(err + " Error searching for doc diagnoses");
 
@@ -739,7 +868,7 @@ app.post('/database/documents/diagnoses3', function (req, res) {
         doc.diagnoses.questions.otherComments.comment = req.body.questions.otherComments.comment;
         doc.diagnoses.questions.otherComments.secondOpinion = req.body.questions.otherComments.secondOpinion;
 
-        console.log(req.body.questions.otherComments.secondOpinion);
+        //console.log(req.body.questions.otherComments.secondOpinion);
 
         doc.save(function (err) {
             if (err) return console.log(err + " error saving updated doc for diagnoses3");
