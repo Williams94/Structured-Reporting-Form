@@ -160,8 +160,8 @@ function newReportCtrl($scope, $http, $log, $timeout, $location) {
         $scope.referringPhysician = currentReport.referringPhysician;
         $scope.caseID = currentReport.caseID;
     } else {
-        $scope.firstName = "";
-        $scope.lastName = "";
+        $scope.firstName = "David";
+        $scope.lastName = "Szapiro";
         $scope.level = "";
         $scope.mdt = false;
         $scope.dateCreated = date.getDate() + "/0" + (date.getMonth() + 1) + "/" + date.getFullYear();
