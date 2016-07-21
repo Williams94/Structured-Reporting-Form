@@ -314,3 +314,7 @@ input[type=radio] {
 #diagnosesEndColButton {
    margin-left: -10px;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

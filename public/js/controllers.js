@@ -23,6 +23,8 @@ function AppCtrl($scope, $http, $log) {
 function MyCtrl1($scope, $http, $log, $location) {
     editing = false;
 
+    $scope.reportsReady = false;
+
     // Provides case data but could use http for external case data
     $scope.collection = [{
         caseID: 1,
@@ -94,6 +96,7 @@ function MyCtrl1($scope, $http, $log, $location) {
 
     $http.post("/database/search/reports").success(function (data, status) {
         console.log("Reports successfully retrieved " + data);
+	$scope.reportsReady = true;
         $scope.reports = data;
     }).error(function (data, status, headers, config) {
         $log.log(status);
@@ -1071,6 +1074,7 @@ function printController1($scope, $http, $log, $location) {
         // As long as the user is creating a new report then the blank details will be filled in
         if (!editing) {
             console.log("Not editing");
+            $location.path('/diagnoses1');
 
             /*// http to get empty diagnoses data from api to fill in new report with blank diagnoses
             $http({method: 'GET', url: '/api/diagnoses'}).success(function (questions, status, headers) {
